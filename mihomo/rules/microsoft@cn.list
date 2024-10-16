@@ -70,13 +70,6 @@ DOMAIN,wl.dlservice.microsoft.com
 DOMAIN,wscont1.apps.microsoft.com
 DOMAIN,wscont2.apps.microsoft.com
 DOMAIN,xb.dlservice.microsoft.com
-DOMAIN-SUFFIX,microsoftreactor.cn
-DOMAIN-SUFFIX,microsoftreactor.com.cn
-DOMAIN-SUFFIX,reactorms.com.cn
-DOMAIN,www.microsoft.com
-DOMAIN-SUFFIX,microsoftnews.cn
-DOMAIN-SUFFIX,msn.cn
-DOMAIN-SUFFIX,xboxlive.cn
 DOMAIN-SUFFIX,21vbc.com
 DOMAIN-SUFFIX,21vbluecloud.com
 DOMAIN-SUFFIX,21vbluecloud.net
@@ -140,3 +133,10 @@ DOMAIN-SUFFIX,cn.mm.bing.net
 DOMAIN-SUFFIX,ditu.live.com
 DOMAIN,bj1.api.bing.com
 DOMAIN,emoi-cncdn.bing.com
+DOMAIN-SUFFIX,microsoftreactor.cn
+DOMAIN-SUFFIX,microsoftreactor.com.cn
+DOMAIN-SUFFIX,reactorms.com.cn
+DOMAIN,www.microsoft.com
+DOMAIN-SUFFIX,microsoftnews.cn
+DOMAIN-SUFFIX,msn.cn
+DOMAIN-SUFFIX,xboxlive.cn
