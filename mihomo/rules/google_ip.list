@@ -68,6 +68,7 @@ IP-CIDR,46.19.170.0/24,no-resolve
 IP-CIDR,46.235.152.0/21,no-resolve
 IP-CIDR,50.202.50.0/24,no-resolve
 IP-CIDR,50.202.95.0/24,no-resolve
+IP-CIDR,50.218.248.0/24,no-resolve
 IP-CIDR,50.218.250.0/23,no-resolve
 IP-CIDR,50.218.252.0/24,no-resolve
 IP-CIDR,52.119.11.0/24,no-resolve
@@ -95,6 +96,7 @@ IP-CIDR,66.170.109.0/24,no-resolve
 IP-CIDR,66.249.64.0/19,no-resolve
 IP-CIDR,67.199.248.0/24,no-resolve
 IP-CIDR,67.219.245.0/24,no-resolve
+IP-CIDR,67.219.248.0/24,no-resolve
 IP-CIDR,69.48.216.0/24,no-resolve
 IP-CIDR,69.48.232.0/23,no-resolve
 IP-CIDR,70.32.128.0/19,no-resolve
@@ -371,6 +373,7 @@ IP-CIDR,156.77.176.0/23,no-resolve
 IP-CIDR,156.93.224.0/23,no-resolve
 IP-CIDR,158.51.129.0/24,no-resolve
 IP-CIDR,159.137.32.0/20,no-resolve
+IP-CIDR,160.30.211.0/24,no-resolve
 IP-CIDR,161.38.56.0/23,no-resolve
 IP-CIDR,161.38.58.0/24,no-resolve
 IP-CIDR,161.38.184.0/24,no-resolve
@@ -414,7 +417,6 @@ IP-CIDR,172.217.0.0/16,no-resolve
 IP-CIDR,172.253.0.0/16,no-resolve
 IP-CIDR,173.194.0.0/16,no-resolve
 IP-CIDR,173.255.112.0/20,no-resolve
-IP-CIDR,176.116.16.0/24,no-resolve
 IP-CIDR,176.126.58.0/24,no-resolve
 IP-CIDR,178.249.140.0/23,no-resolve
 IP-CIDR,185.25.28.0/23,no-resolve
@@ -517,6 +519,7 @@ IP-CIDR,200.196.208.0/24,no-resolve
 IP-CIDR,202.14.19.0/24,no-resolve
 IP-CIDR,202.92.198.0/23,no-resolve
 IP-CIDR,202.92.212.0/24,no-resolve
+IP-CIDR,202.181.132.0/22,no-resolve
 IP-CIDR,202.250.28.0/24,no-resolve
 IP-CIDR,203.0.168.0/23,no-resolve
 IP-CIDR,203.4.188.0/22,no-resolve
@@ -537,6 +540,7 @@ IP-CIDR,208.66.40.0/24,no-resolve
 IP-CIDR,208.67.156.0/22,no-resolve
 IP-CIDR,208.68.108.0/22,no-resolve
 IP-CIDR,208.76.24.0/22,no-resolve
+IP-CIDR,208.76.69.0/24,no-resolve
 IP-CIDR,208.76.215.0/24,no-resolve
 IP-CIDR,208.81.188.0/22,no-resolve
 IP-CIDR,208.86.170.0/23,no-resolve
@@ -717,6 +721,7 @@ IP-CIDR6,2606:3dc0:80::/42,no-resolve
 IP-CIDR6,2606:3dc0:880::/41,no-resolve
 IP-CIDR6,2606:73c0::/32,no-resolve
 IP-CIDR6,2606:f4c0:2000::/35,no-resolve
+IP-CIDR6,2607:1c0:241:40::/60,no-resolve
 IP-CIDR6,2607:1c0:300::/40,no-resolve
 IP-CIDR6,2607:f8b0::/32,no-resolve
 IP-CIDR6,2620:0:1000::/40,no-resolve
