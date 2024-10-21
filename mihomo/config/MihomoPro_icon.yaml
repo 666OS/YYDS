@@ -297,12 +297,16 @@ dns:
     - "+.miwifi.com"
     - "+.safebrowsing.apple"
     - "+.mihomos.us.kg"
+    #游戏
+    - "*.battle.net"
+    - "*.blizzard.com"
+    - blizzard.gcdn.cloudn.co
 
   # DNS 默认服务器
   # 只能使用纯 IP 地址，可使用加密 DNS
   default-nameserver:
+    - 116.228.111.118
     - 223.5.5.5
-    - 119.29.29.29
 
   # DNS 主要域名配置
   # 支持 UDP，TCP，DoT，DoH，DoQ
