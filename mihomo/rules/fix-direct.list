@@ -1,0 +1,43 @@
+# 类型：修正直连
+# 作者：666
+# 日期：2024年10月8日
+
+# TV
+DOMAIN-SUFFIX,speedtest.cn
+DOMAIN,ottsdk.itv.video
+
+# 公共 NTP 服务
+DOMAIN-SUFFIX,ntp.org
+DST-PORT,123
+
+# 游戏下载
+DOMAIN,gst.prod.dl.playstation.net
+DOMAIN-SUFFIX,steamcontent.com
+
+# 常见的代理工具
+PROCESS-NAME,v2ray
+PROCESS-NAME,Surge
+PROCESS-NAME,ss-local
+PROCESS-NAME,privoxy
+PROCESS-NAME,trojan
+PROCESS-NAME,trojan-go
+PROCESS-NAME,naive
+PROCESS-NAME,CloudflareWARP
+PROCESS-NAME,p4pclient
+PROCESS-NAME,Thunder
+PROCESS-NAME,DownloadService
+PROCESS-NAME,qbittorrent
+PROCESS-NAME,Transmission
+PROCESS-NAME,fdm
+PROCESS-NAME,aria2c
+PROCESS-NAME,Folx
+PROCESS-NAME,NetTransport
+PROCESS-NAME,uTorrent
+PROCESS-NAME,WebTorrent
+
+# 其它
+DOMAIN-SUFFIX,mihomos.us.kg
+DOMAIN-SUFFIX,synology.com
+DOMAIN-SUFFIX,quickconnect.to
+DOMAIN-SUFFIX,cocopilot.org
+PROCESS-NAME,zerotier-one
