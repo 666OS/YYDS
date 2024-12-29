@@ -1,0 +1,59 @@
+# 名称: 直连修正
+
+payload:
+  # DST-PORT
+  - DST-PORT,123
+
+  # DOMAIN
+  - DOMAIN,gst.prod.dl.playstation.net
+  - DOMAIN,linux.do
+  - DOMAIN,ottsdk.itv.video
+
+  # DOMAIN-SUFFIX
+  - DOMAIN-SUFFIX,alice.ws
+  - DOMAIN-SUFFIX,apple-dns.cn
+  - DOMAIN-SUFFIX,archive.org
+  - DOMAIN-SUFFIX,coverartarchive.org
+  - DOMAIN-SUFFIX,cocopilot.org
+  - DOMAIN-SUFFIX,czzyvideo.com
+  - DOMAIN-SUFFIX,ghp.ci
+  - DOMAIN-SUFFIX,icloud.com.cn
+  - DOMAIN-SUFFIX,iqiyis.com
+  - DOMAIN-SUFFIX,istoreos.com
+  - DOMAIN-SUFFIX,kelee.one
+  - DOMAIN-SUFFIX,mihomos.us.kg
+  - DOMAIN-SUFFIX,musicbrainz.org
+  - DOMAIN-SUFFIX,ntp.org
+  - DOMAIN-SUFFIX,oaifree.com
+  - DOMAIN-SUFFIX,quickconnect.to
+  - DOMAIN-SUFFIX,speedtest.cn
+  - DOMAIN-SUFFIX,steamcontent.com
+  - DOMAIN-SUFFIX,synology.com
+  - DOMAIN-SUFFIX,cloudstudio.work
+  - DOMAIN-SUFFIX,follow.is
+  - DOMAIN-SUFFIX,cloudstudio.work
+  - DOMAIN-SUFFIX,ngrok-free.app
+  - DOMAIN-SUFFIX,gradio.live
+  - DOMAIN-SUFFIX,vscode-cdn.net
+  - DOMAIN-SUFFIX,openrouter.ai
+  
+  # PROCESS-NAME
+  - PROCESS-NAME,aria2c
+  - PROCESS-NAME,CloudflareWARP
+  - PROCESS-NAME,DownloadService
+  - PROCESS-NAME,fdm
+  - PROCESS-NAME,Folx
+  - PROCESS-NAME,naive
+  - PROCESS-NAME,NetTransport
+  - PROCESS-NAME,p4pclient
+  - PROCESS-NAME,privoxy
+  - PROCESS-NAME,qbittorrent
+  - PROCESS-NAME,Surge
+  - PROCESS-NAME,Thunder
+  - PROCESS-NAME,trojan
+  - PROCESS-NAME,trojan-go
+  - PROCESS-NAME,Transmission
+  - PROCESS-NAME,uTorrent
+  - PROCESS-NAME,v2ray
+  - PROCESS-NAME,WebTorrent
+  - PROCESS-NAME,zerotier-one

@@ -1,0 +1,140 @@
+# >>=====================================<<
+# ||                                     ||
+# ||      ██████╗  ██████╗  ██████╗      ||
+# ||     ██╔════╝ ██╔════╝ ██╔════╝      ||
+# ||     ███████╗ ███████╗ ███████╗      ||
+# ||     ██╔═══██╗██╔═══██╗██╔═══██╗     ||
+# ||     ╚██████╔╝╚██████╔╝╚██████╔╝     ||
+# ||      ╚═════╝  ╚═════╝  ╚═════╝      ||
+# ||                                     ||
+# >>=====================================<<
+# 名称: OneTouch 一键连 v1.9
+# 日期: 2024年12月4日
+# 地址: https://github.com/666OS
+# 频道: https://t.me/Pinched666
+
+PProviders: &PProviders {type: http, interval: 86400, health-check: {enable: true, url: 'https://www.gstatic.com/generate_204', interval: 300}, filter: '^(?!.*(群|邀请|返利|循环|官网|客服|网站|网址|获取|订阅|流量|到期|机场|下次|版本|官址|备用|过期|已用|联系|邮箱|工单|贩卖|通知|倒卖|防止|国内|地址|频道|无法|说明|使用|提示|特别|访问|支持|教程|关注|更新|作者|加入|USE|USED|TOTAL|EXPIRE|EMAIL|Panel|Channel|Author))'}
+UrlTest: &UrlTest {type: url-test, interval: 60, tolerance: 20, lazy: true, url: 'https://www.gstatic.com/generate_204', disable-udp: false, timeout: 2000, max-failed-times: 3, hidden: true, include-all: true}
+FallBack: &FallBack {type: fallback, interval: 60, lazy: true, url: 'https://www.gstatic.com/generate_204', disable-udp: false, timeout: 2000, max-failed-times: 3, hidden: false}
+FilterHK: &FilterHK '(?i)港|香港|🇭🇰|HK|Hong|HKG'
+FilterTW: &FilterTW '(?i)台|台湾|🇼🇸|🇹🇼|TW|tai|TPE|TSA|KHH'
+FilterSG: &FilterSG '(?i)坡|新加坡|🇸🇬|SG|Sing|SIN|XSP'
+FilterJP: &FilterJP '(?i)日|日本|🇯🇵|JP|Japan|NRT|HND|KIX|CTS|FUK'
+FilterKR: &FilterKR '(?i)韩|韩国|🇰🇷|韓|韓國|首尔|南朝鲜|KR|KOR|Korea|South'
+FilterUS: &FilterUS '(?i)美|美国|🇺🇸|US|USA|JFK|LAX|ORD|ATL|DFW|SFO|MIA|SEA|IAD'
+SelectFB: &SelectFB {type: select, proxies: [故障转移, 香港自动, 台湾自动, 新加坡自动, 日本自动, 韩国自动, 美国自动]}
+SelectSG: &SelectSG {type: select, proxies: [新加坡自动, 一键连, 故障转移, 台湾自动, 日本自动, 韩国自动, 美国自动]}
+SelectOne: &SelectOne {type: select, proxies: [一键连, 故障转移, 香港自动, 台湾自动, 新加坡自动, 日本自动, 韩国自动, 美国自动]}
+
+# 填写订阅,名称不能重复
+proxy-providers:
+  机场A: {<<: *PProviders, url: '机场订阅地址', override: {additional-prefix: '[A] '}}
+  机场B: {<<: *PProviders, url: '机场订阅地址', override: {additional-prefix: '[B] '}}
+
+mode: rule
+mixed-port: 7890
+ipv6: true
+allow-lan: true
+unified-delay: true
+tcp-concurrent: true
+log-level: warning
+bind-address: "*"
+external-controller: 0.0.0.0:9090
+external-ui: ui
+find-process-mode: 'off'
+global-client-fingerprint: chrome
+profile:
+  store-selected: true
+  store-fake-ip: true
+  
+sniffer:
+  enable: true
+  override-destination: false
+  force-dns-mapping: true
+  parse-pure-ip: true
+  skip-domain: ['+.googlevideo.com']
+  
+tun:
+  enable: true
+  stack: gvisor
+  dns-hijack:
+    - any:53
+  auto-route: true
+  auto-redirect: false
+  auto-detect-interface: true
+  mtu: 1500
+  strict-route: false
+  route-exclude-address: []
+
+dns:
+  enable: true
+  ipv6: true
+  respect-rules: false
+  enhanced-mode: fake-ip
+  fake-ip-range: 198.18.0.1/16
+  fake-ip-filter:
+    - +.lan
+    - +.local
+    - time.*.com
+    - ntp.*.com
+    - rule-set:cn_domain
+    - +.market.xiaomi.com
+    - +.googlevideo.comn
+    - +.push.apple.com
+  default-nameserver:
+    - 119.29.29.29
+    - 180.184.1.1
+    - 223.5.5.5
+  nameserver:
+    - https://dns.alidns.com/dns-query
+    - https://doh.pub/dns-query
+  nameserver-policy:
+    '+.googlevideo.com': https://dns64.dns.google/dns-query
+
+proxies:
+  - {name: 直连, type: direct, udp: true, icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Direct.png}
+
+proxy-groups:
+  - {name: 一键连,        <<: *SelectFB, include-all: true, icon: https://raw.githubusercontent.com/666OS/YYDS/main/mihomo/image/mihomo.png}
+  - {name: 故障转移,      <<: *FallBack, proxies: [香港自动, 台湾自动, 新加坡自动, 日本自动, 韩国自动, 美国自动], icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/ULB.png}
+  - {name: 抖快书定位,     type: select, proxies: [直连, 香港自动, 台湾自动, 新加坡自动, 日本自动, 韩国自动, 美国自动], icon: https://raw.githubusercontent.com/lige47/QuanX-icon-rule/main/icon/ip.png}
+  - {name: AI平台,        <<: *SelectSG, include-all: true, icon: https://raw.githubusercontent.com/lige47/QuanX-icon-rule/main/icon/ChatGPT-green.png}
+  - {name: Speedtest,    type: select, include-all: true, icon: https://raw.githubusercontent.com/Orz-3/mini/master/Color/Speedtest.png}  
+  - {name: 香港自动,      <<: *UrlTest, filter: *FilterHK, icon: https://fastly.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Hong_Kong.png}
+  - {name: 台湾自动,      <<: *UrlTest, filter: *FilterTW, icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/TW.png}
+  - {name: 新加坡自动,    <<: *UrlTest, filter: *FilterSG, icon: https://fastly.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Singapore.png}
+  - {name: 日本自动,      <<: *UrlTest, filter: *FilterJP, icon: https://fastly.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Japan.png}
+  - {name: 韩国自动,      <<: *UrlTest, filter: *FilterKR, icon: https://fastly.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Korea.png}
+  - {name: 美国自动,      <<: *UrlTest, filter: *FilterUS, icon: https://fastly.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/United_States.png}
+
+rule-providers: 
+  XPTV:                 {type: http, interval: 86400, behavior: classical, format: yaml, url: https://github.com/666OS/YYDS/raw/main/mihomo/rules/XPTV.yaml}
+  fix-direct:           {type: http, interval: 86400, behavior: classical, format: yaml, url: https://github.com/666OS/YYDS/raw/main/mihomo/rules/fix-direct.yaml}
+  speedtest:            {type: http, interval: 86400, behavior: classical, format: yaml, url: https://github.com/666OS/YYDS/raw/main/mihomo/rules/speedtest.yaml}
+  category-ai-chat-!cn: {type: http, interval: 86400, behavior: domain, format: mrs, url: https://github.com/666OS/YYDS/raw/main/mihomo/rules/category-ai-chat-!cn.mrs}
+  private_domain:       {type: http, interval: 86400, behavior: domain, format: mrs, url: https://github.com/666OS/YYDS/raw/main/mihomo/rules/private.mrs}
+  cn_domain:            {type: http, interval: 86400, behavior: domain, format: mrs, url: https://github.com/666OS/YYDS/raw/main/mihomo/rules/cn.mrs}
+  private_ip:           {type: http, interval: 86400, behavior: ipcidr, format: mrs, url: https://github.com/666OS/YYDS/raw/main/mihomo/rules/private_ip.mrs}
+  cn_ip:                {type: http, interval: 86400, behavior: ipcidr, format: mrs, url: https://github.com/666OS/YYDS/raw/main/mihomo/rules/cn_ip.mrs}
+
+rules: 
+  # 抖音修改IP
+  - DOMAIN-SUFFIX,amemv.com,抖快书定位
+  - DOMAIN-SUFFIX,douyinvod.com,抖快书定位
+  # 快手修改IP
+  - DOMAIN-SUFFIX,gifshow.com,抖快书定位
+  - DOMAIN-SUFFIX,apissl.ksapisrv.com,抖快书定位
+  # 小红书修改IP
+  - DOMAIN-SUFFIX,edith.xiaohongshu.com,抖快书定位
+  # 常用必备
+  - DST-PORT,123,DIRECT
+  - IP-CIDR,95.161.76.100/31,REJECT-DROP,no-resolve
+  - RULE-SET,fix-direct,直连
+  - RULE-SET,XPTV,直连
+  - RULE-SET,private_ip,直连,no-resolve
+  - RULE-SET,speedtest,Speedtest
+  - RULE-SET,category-ai-chat-!cn,AI平台
+  - RULE-SET,cn_domain,直连
+  - DOMAIN-REGEX,^[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)+$,一键连
+  - RULE-SET,cn_ip,直连,no-resolve
+  - MATCH,一键连
