@@ -46,13 +46,13 @@ DOMAIN,ut.taobao.com,REJECT,extended-matching,pre-matching
 IP-CIDR,203.107.1.1/24,REJECT,no-resolve
 
 #>拼多多
-AND,((URL-REGEX,^http:\/\/.+\/(d|d4)\?), (USER-AGENT,*com.xunmeng.pinduoduo*)),REJECT
-DOMAIN,titan.pinduoduo.com,REJECT,extended-matching
-DOMAIN,ta-a.pinduoduo.com,REJECT,extended-matching
-DOMAIN,ta.pinduoduo.com,REJECT,extended-matching
-DOMAIN,th-a.pinduoduo.com,REJECT,extended-matching
-DOMAIN,th-b.pinduoduo.com,REJECT,extended-matching
-DOMAIN,th.pinduoduo.com,REJECT,extended-matching
+AND,((URL-REGEX,^http:\/\/.+\/(d|d4)\?), (USER-AGENT,*com.xunmeng.pinduoduo*)),REJECT-NO-DROP
+DOMAIN,titan.pinduoduo.com,REJECT-NO-DROP,extended-matching,pre-matching
+DOMAIN,ta-a.pinduoduo.com,REJECT-NO-DROP,extended-matching,pre-matching
+DOMAIN,ta.pinduoduo.com,REJECT-NO-DROP,extended-matching,pre-matching
+DOMAIN,th-a.pinduoduo.com,REJECT-NO-DROP,extended-matching,pre-matching
+DOMAIN,th-b.pinduoduo.com,REJECT-NO-DROP,extended-matching,pre-matching
+DOMAIN,th.pinduoduo.com,REJECT-NO-DROP,extended-matching,pre-matching
 
 #>航旅纵横
 URL-REGEX,^http?:\/\/(discardrp|startup)\.umetrip\.com\/gateway\/api\/umetrip\/native,REJECT,extended-matching
