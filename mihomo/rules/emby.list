@@ -1,8 +1,7 @@
 # 规则名称: Emby
-# 规则统计: 166
+# 规则统计: 164
 
 DOMAIN,195.201.86.86
-DOMAIN,aca.misakaf.org
 DOMAIN,cc.coemn.com
 DOMAIN,cminf.sfcat.link
 DOMAIN,cuinf.sfcat.link
@@ -113,7 +112,6 @@ DOMAIN-SUFFIX,lyrebirdemby.com
 DOMAIN-SUFFIX,magpie.cyou
 DOMAIN-SUFFIX,magpiecdn.tech
 DOMAIN-SUFFIX,mcjoker.xyz
-DOMAIN-SUFFIX,misakaf.org
 DOMAIN-SUFFIX,misty.ltd
 DOMAIN-SUFFIX,mius.uk
 DOMAIN-SUFFIX,mjjemby.org
