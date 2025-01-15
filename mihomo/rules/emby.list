@@ -1,5 +1,5 @@
 # 规则名称: Emby
-# 规则统计: 164
+# 规则统计: 163
 
 DOMAIN,195.201.86.86
 DOMAIN,cc.coemn.com
@@ -24,6 +24,7 @@ DOMAIN-SUFFIX,agahk.odysseyplus.site
 DOMAIN-SUFFIX,agan2.vip
 DOMAIN-SUFFIX,agasg.odysseyplus.site
 DOMAIN-SUFFIX,agon.cf
+DOMAIN-SUFFIX,as174.de
 DOMAIN-SUFFIX,az-hk.embyclub.com
 DOMAIN-SUFFIX,azsgp.embyclub.com
 DOMAIN-SUFFIX,baisi.pro
@@ -48,7 +49,6 @@ DOMAIN-SUFFIX,em.ssky.me
 DOMAIN-SUFFIX,emby-cf.plusmedia.site
 DOMAIN-SUFFIX,emby-sg.plusmedia.site
 DOMAIN-SUFFIX,emby.aiyowei.ml
-DOMAIN-SUFFIX,emby.as174.com
 DOMAIN-SUFFIX,emby.bid
 DOMAIN-SUFFIX,emby.cjpc.cc
 DOMAIN-SUFFIX,emby.cl
@@ -98,7 +98,6 @@ DOMAIN-SUFFIX,gtlx.org
 DOMAIN-SUFFIX,gugumedia.link
 DOMAIN-SUFFIX,happyav.eu.org
 DOMAIN-SUFFIX,hovervan.org
-DOMAIN-SUFFIX,hxd.as174.com
 DOMAIN-SUFFIX,i109.com
 DOMAIN-SUFFIX,ii00.cc
 DOMAIN-SUFFIX,imetyou.top
