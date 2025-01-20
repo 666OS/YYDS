@@ -1,5 +1,5 @@
 // 引用地址：https://kelee.one/Resource/Script/PinDuoDuo/PinDuoDuo_remove_ads.js
-// 更新时间：2025-01-19 08:56:20
+// 更新时间：2025-01-20 08:53:30
 // 脚本引用 https://raw.githubusercontent.com/RuCu6/Loon/refs/heads/main/Scripts/pdd.js
 // 2024-11-06 04:20
 
