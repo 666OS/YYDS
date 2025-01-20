@@ -243,10 +243,10 @@ rule-providers:
     url: https://git.mihomos.us.kg/https://github.com/666OS/YYDS/raw/main/mihomo/rules/XPTV.yaml 
   fix-direct:
     <<: *ClassicalYaml
-    url: https://git.mihomos.us.kg/https://github.com/666OS/YYDS/raw/main/mihomo/rules/fix-direct.yaml
+    url: https://gh-proxy.com/github.com/saladdays2024/YYDS/blob/main/mihomo/rules/fix-direct.yaml
   speedtest:
     <<: *ClassicalYaml
-    url: https://git.mihomos.us.kg/https://github.com/666OS/YYDS/raw/main/mihomo/rules/speedtest.yaml 
+    url: https://git.mihomos.us.kg/https://github.com/666OS/YYDS/raw/main/mihomo/rules/speedtest.yaml
   emby:
     <<: *ClassicalText
     url: https://git.mihomos.us.kg/https://github.com/666OS/YYDS/raw/main/mihomo/rules/emby.list   
