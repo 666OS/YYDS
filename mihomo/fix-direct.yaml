@@ -9,7 +9,8 @@ payload:
   - DOMAIN,linux.do
   - DOMAIN,ottsdk.itv.video
   - DOMAIN,mihomos.us.kg
-
+  - DOMAIN,saladdays.us.kg
+  
   # DOMAIN-SUFFIX
   - DOMAIN-SUFFIX,alice.ws
   - DOMAIN-SUFFIX,apple-dns.cn
