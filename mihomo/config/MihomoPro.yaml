@@ -244,6 +244,9 @@ rule-providers:
   fix-direct:
     <<: *ClassicalYaml
     url: https://raw.githubusercontent.com/saladdays2024/YYDS/refs/heads/main/mihomo/fix-direct.yaml
+  myrule:
+    <<: *ClassicalText
+    url: https://raw.githubusercontent.com/saladdays2024/YYDS/refs/heads/main/mihomo/myrule.list
   speedtest:
     <<: *ClassicalYaml
     url: https://git.mihomos.us.kg/https://github.com/666OS/YYDS/raw/main/mihomo/rules/speedtest.yaml
@@ -389,6 +392,7 @@ rules:
   # 域名路由
   - RULE-SET,fix-direct,直连
   - RULE-SET,XPTV,直连
+  - RULE-SET,myrule,国外网站
   - RULE-SET,private_ip,国内网站,no-resolve
   - RULE-SET,speedtest,网速测试
   - RULE-SET,openai,ChatGPT
