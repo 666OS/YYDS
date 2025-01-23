@@ -10,6 +10,7 @@ payload:
   - DOMAIN,ottsdk.itv.video
   - DOMAIN,mihomos.us.kg
   - DOMAIN,saladdays.us.kg
+  - DOMAIN,saladdays1.us.kg
   
   # DOMAIN-SUFFIX
   - DOMAIN-SUFFIX,alice.ws
