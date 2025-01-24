@@ -21,7 +21,7 @@ PProviders: &PProviders {type: http, interval: 86400, health-check: {enable: tru
 FilterHK: &FilterHK '(?i)港|香港|🇭🇰|HK|Hong|HKG'
 FilterTW: &FilterTW '(?i)台|台湾|🇼🇸|🇹🇼|TW|tai|TPE|TSA|KHH'
 FilterSG: &FilterSG '(?i)坡|新加坡|🇸🇬|SG|Sing|SIN|XSP'
-FilterJP: &FilterJP '(?i)日|日本|🇯🇵|JP|Japan|NRT|HND|KIX|CTS|FUK'
+FilterJP: &FilterJP '(?i)日本|🇯🇵|JP|Japan|NRT|HND|KIX|CTS|FUK'
 FilterKR: &FilterKR '(?i)韩|韩国|🇰🇷|韓|韓國|首尔|南朝鲜|KR|KOR|Korea|South'
 FilterUS: &FilterUS '(?i)美|美国|🇺🇸|US|USA|JFK|LAX|ORD|ATL|DFW|SFO|MIA|SEA|IAD'
 FilterEU: &FilterEU '(?i)(🇧🇪|🇨🇿|🇩🇰|🇫🇮|🇫🇷|🇩🇪|🇮🇪|🇮🇹|🇱🇹|🇱🇺|🇳🇱|🇵🇱|🇸🇪|🇬🇧|CDG|FRA|AMS|MAD|BCN|FCO|MUC|BRU)'
