@@ -9,7 +9,8 @@ payload:
   - DOMAIN,linux.do
   - DOMAIN,ottsdk.itv.video
   - DOMAIN,mihomos.us.kg
-
+  - DOMAIN,gh.xrgzs.top
+  
   # DOMAIN-SUFFIX
   - DOMAIN-SUFFIX,alice.ws
   - DOMAIN-SUFFIX,apple-dns.cn
@@ -37,6 +38,8 @@ payload:
   - DOMAIN-SUFFIX,gradio.live
   - DOMAIN-SUFFIX,vscode-cdn.net
   - DOMAIN-SUFFIX,openrouter.ai
+  - DOMAIN-SUFFIX,shiroka.top
+  - DOMAIN-SUFFIX,youguess.site
   
   # PROCESS-NAME
   - PROCESS-NAME,aria2c
@@ -58,3 +61,9 @@ payload:
   - PROCESS-NAME,v2ray
   - PROCESS-NAME,WebTorrent
   - PROCESS-NAME,zerotier-one
+  - PROCESS-NAME,xray
+  - PROCESS-NAME,sing-box
+  - PROCESS-NAME,karingService
+  - PROCESS-NAME,FlClashCore
+  - PROCESS-NAME,BitComet
+  - PROCESS-NAME,BitComet_x64
