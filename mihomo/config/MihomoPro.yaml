@@ -286,9 +286,6 @@ rule-providers:
   onedrive:
     <<: *DomainMrs
     url: https://git.mihomos.us.kg/https://github.com/666OS/YYDS/raw/main/mihomo/rules/onedrive.mrs
-  microsoft@cn:
-    <<: *DomainMrs
-    url: https://git.mihomos.us.kg/https://github.com/666OS/YYDS/raw/main/mihomo/rules/microsoft@cn.mrs
   microsoft:
     <<: *DomainMrs
     url: https://git.mihomos.us.kg/https://github.com/666OS/YYDS/raw/main/mihomo/rules/microsoft.mrs
@@ -404,7 +401,7 @@ rules:
   - RULE-SET,tiktok,TikTok
   - RULE-SET,github,Github
   - RULE-SET,onedrive,微软服务
-  - RULE-SET,microsoft@cn,国内网站
+
   - RULE-SET,microsoft,微软服务
   - RULE-SET,instagram,脸书服务
   - RULE-SET,facebook,脸书服务
