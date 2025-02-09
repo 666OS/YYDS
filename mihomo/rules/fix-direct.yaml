@@ -10,6 +10,7 @@ payload:
   - DOMAIN,ottsdk.itv.video
   - DOMAIN,mihomos.us.kg
   - DOMAIN,gh.xrgzs.top
+  - DOMAIN,aliapp.org
   
   # DOMAIN-SUFFIX
   - DOMAIN-SUFFIX,alice.ws
