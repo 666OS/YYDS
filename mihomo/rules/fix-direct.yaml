@@ -12,6 +12,9 @@ payload:
   - DOMAIN,gh.xrgzs.top
   - DOMAIN,aliapp.org
   
+  # DOMAIN-KEYWORD
+  - DOMAIN-KEYWORD,wogg
+  
   # DOMAIN-SUFFIX
   - DOMAIN-SUFFIX,alice.ws
   - DOMAIN-SUFFIX,apple-dns.cn
