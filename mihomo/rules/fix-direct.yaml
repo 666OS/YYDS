@@ -11,6 +11,10 @@ payload:
   - DOMAIN,mihomos.us.kg
   - DOMAIN,gh.xrgzs.top
   - DOMAIN,aliapp.org
+  - DOMAIN,easytomessage.com
+  - DOMAIN,sis.jpush.io
+  - DOMAIN,fooview.com
+  - DOMAIN,talk.bz.getui.net
   
   # DOMAIN-KEYWORD
   - DOMAIN-KEYWORD,wogg
