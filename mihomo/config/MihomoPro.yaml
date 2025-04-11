@@ -117,7 +117,7 @@ proxies:
 # 策略组 
 proxy-groups:
   - {name: 默认代理,   <<: *SelectFB, icon: https://github.com/Koolson/Qure/raw/master/IconSet/Color/Static.png}
-  - {name: AI平台,    <<: *SelectUS, icon: https://github.com/Koolson/Qure/raw/master/IconSet/Color/AI.png}
+  - {name: AI平台,    <<: *SelectUS, include-all: true, filter: *FilterAll, icon: https://github.com/Koolson/Qure/raw/master/IconSet/Color/AI.png}
   - {name: Emby,     <<: *SelectProxy, icon: https://github.com/Koolson/Qure/raw/master/IconSet/Color/Emby.png}
   - {name: YouTube,  <<: *SelectProxy, icon: https://github.com/Koolson/Qure/raw/master/IconSet/Color/YouTube.png}
   - {name: NetFlix,  <<: *SelectProxy, icon: https://github.com/Koolson/Qure/raw/master/IconSet/Color/Netflix.png}
@@ -127,7 +127,7 @@ proxy-groups:
   - {name: 社交平台,  <<: *SelectProxy, icon: https://github.com/Koolson/Qure/raw/master/IconSet/Color/PBS.png}
   - {name: 货币平台,  <<: *SelectSG, icon: https://raw.githubusercontent.com/Orz-3/mini/master/Alpha/Bitcloud.png}
   - {name: 游戏平台,  <<: *SelectProxy, icon: https://github.com/Koolson/Qure/raw/master/IconSet/Color/Game.png}
-  - {name: 网速测试,  <<: *SelectProxy, icon: https://github.com/Koolson/Qure/raw/master/IconSet/Color/Speedtest.png}
+  - {name: 网速测试,  <<: *SelectProxy, include-all: true, filter: *FilterAll, icon: https://github.com/Koolson/Qure/raw/master/IconSet/Color/Speedtest.png}
   # 公司
   - {name: 微软服务,  <<: *SelectProxy, icon: https://github.com/Koolson/Qure/raw/master/IconSet/Color/Microsoft.png}
   - {name: 谷歌服务,  <<: *SelectProxy, icon: https://github.com/Koolson/Qure/raw/master/IconSet/Color/Google_Search.png}
