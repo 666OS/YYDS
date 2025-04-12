@@ -91,6 +91,7 @@ proxy-groups:
   - {name: 美国自动,   <<: *UrlTest, filter: *FilterUS, icon: https://github.com/Koolson/Qure/raw/master/IconSet/Color/United_States.png}
 
 rule-providers: 
+  download:         {type: http, interval: 86400, behavior: classical, format: yaml, url: https://git.imee.me/https://github.com/666OS/YYDS/raw/main/mihomo/rules/download.yaml}
   fix-direct:       {type: http, interval: 86400, behavior: classical, format: yaml, url: https://git.imee.me/https://github.com/666OS/YYDS/raw/main/mihomo/rules/fix-direct.yaml}
   XPTV:             {type: http, interval: 86400, behavior: classical, format: yaml, url: https://git.imee.me/https://github.com/666OS/YYDS/raw/main/mihomo/rules/XPTV.yaml}
   category-ai-!cn:  {type: http, interval: 86400, behavior: domain, format: mrs, url: https://git.imee.me/https://github.com/666OS/YYDS/raw/main/mihomo/rules/category-ai-!cn.mrs}
@@ -107,6 +108,7 @@ rule-providers:
 
 rules: 
   - DST-PORT,123,直连
+  - RULE-SET,download,直连
   - RULE-SET,category-ai-!cn,AI平台
   - RULE-SET,youtube,国际媒体
   - RULE-SET,spotify,国际媒体

@@ -179,6 +179,7 @@ proxy-groups:
 
 # 远程规则集
 rule-providers: 
+  download:                  {<<: *ClassicalYaml, url: https://git.imee.me/https://github.com/666OS/YYDS/raw/main/mihomo/rules/download.yaml}
   location_ip:               {<<: *ClassicalYaml, url: https://git.imee.me/https://github.com/666OS/YYDS/raw/main/mihomo/rules/location_ip.yaml}
   XPTV:                      {<<: *ClassicalYaml, url: https://git.imee.me/https://github.com/666OS/YYDS/raw/main/mihomo/rules/XPTV.yaml}
   fix-direct:                {<<: *ClassicalYaml, url: https://git.imee.me/https://github.com/666OS/YYDS/raw/main/mihomo/rules/fix-direct.yaml}
@@ -232,6 +233,7 @@ rules:
   # 域名路由
   - RULE-SET,fix-direct,直连
   - RULE-SET,XPTV,直连
+  - RULE-SET,download,直连
   - RULE-SET,location_ip,抖快书定位
   - RULE-SET,speedtest,网速测试
   - RULE-SET,openai,AI平台
