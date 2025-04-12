@@ -108,15 +108,15 @@ rule-providers:
 
 rules: 
   - DST-PORT,123,直连
-  - RULE-SET,download,直连
   - RULE-SET,category-ai-!cn,AI平台
   - RULE-SET,youtube,国际媒体
   - RULE-SET,spotify,国际媒体
   - RULE-SET,netflix,国际媒体
   - RULE-SET,disney,国际媒体
   - RULE-SET,hbo,国际媒体
-  - RULE-SET,geolocation-!cn,一键连
   - RULE-SET,cn_domain,直连
+  - RULE-SET,download,直连
+  - RULE-SET,geolocation-!cn,一键连
   # IP规则
   - RULE-SET,private_ip,直连,no-resolve
   - RULE-SET,cn_ip,直连,no-resolve

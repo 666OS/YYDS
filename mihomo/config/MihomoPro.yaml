@@ -233,7 +233,6 @@ rules:
   # 域名路由
   - RULE-SET,fix-direct,直连
   - RULE-SET,XPTV,直连
-  - RULE-SET,download,直连
   - RULE-SET,location_ip,抖快书定位
   - RULE-SET,speedtest,网速测试
   - RULE-SET,openai,AI平台
@@ -264,6 +263,7 @@ rules:
   - RULE-SET,Line,社交平台
   - RULE-SET,category-social-media-!cn,社交平台
   - RULE-SET,cn_domain,国内网站
+  - RULE-SET,download,直连
   - RULE-SET,geolocation-!cn,国外网站
   # IP路由
   - RULE-SET,private_ip,国内网站,no-resolve
