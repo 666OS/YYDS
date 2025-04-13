@@ -32,6 +32,7 @@ payload:
   - DOMAIN-SUFFIX,ngrok-free.app
   - DOMAIN-SUFFIX,gradio.live
   - DOMAIN-SUFFIX,tempmail.plus
+  - DOMAIN-SUFFIX,imee.me
 
   # PROCESS-NAME
   - PROCESS-NAME,aria2c
