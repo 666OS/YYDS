@@ -1,0 +1,129 @@
+# >>=====================================<<
+# ||                                     ||
+# ||      ██████╗  ██████╗  ██████╗      ||
+# ||     ██╔════╝ ██╔════╝ ██╔════╝      ||
+# ||     ███████╗ ███████╗ ███████╗      ||
+# ||     ██╔═══██╗██╔═══██╗██╔═══██╗     ||
+# ||     ╚██████╔╝╚██████╔╝╚██████╔╝     ||
+# ||      ╚═════╝  ╚═════╝  ╚═════╝      ||
+# ||                                     ||
+# >>=====================================<<
+# 名称: OneTouch 一键连 v3
+# 日期: 2025 年 4 月 12 日
+# 地址: https://github.com/666OS
+# 频道: https://t.me/Pinched666
+
+PProviders: &PProviders {type: http, interval: 86400, health-check: {enable: true, url: 'https://www.gstatic.com/generate_204', interval: 300}, filter: '^(?!.*(群|邀请|返利|循环|官网|客服|网站|网址|获取|订阅|流量|到期|机场|下次|版本|官址|备用|过期|已用|联系|邮箱|工单|贩卖|通知|倒卖|防止|国内|地址|频道|无法|说明|使用|提示|特别|访问|支持|教程|关注|更新|作者|加入|USE|USED|TOTAL|EXPIRE|EMAIL|Panel|Channel|Author))'}
+UrlTest: &UrlTest {type: url-test, interval: 30, tolerance: 20, lazy: true, url: 'https://www.gstatic.com/generate_204', disable-udp: false, timeout: 2000, max-failed-times: 3, hidden: true, include-all: true, proxies: [REJECT]}
+FallBack: &FallBack {type: fallback, interval: 30, lazy: true, url: 'https://www.gstatic.com/generate_204', disable-udp: false, timeout: 2000, max-failed-times: 3, hidden: false}
+FilterHK: &FilterHK '^(?=.*(?i)(港|🇭🇰|HK|Hong|HKG))(?!.*(排除1|排除2|5x)).*$'
+FilterSG: &FilterSG '^(?=.*(?i)(坡|🇸🇬|SG|Sing|SIN|XSP))(?!.*(排除1|排除2|5x)).*$'
+FilterJP: &FilterJP '^(?=.*(?i)(日|🇯🇵|JP|Japan|NRT|HND|KIX|CTS|FUK))(?!.*(排除1|排除2|5x)).*$'
+FilterKR: &FilterKR '^(?=.*(?i)(韩|🇰🇷|韓|首尔|南朝鲜|KR|KOR|Korea|South))(?!.*(排除1|排除2|5x)).*$'
+FilterUS: &FilterUS '^(?=.*(?i)(美|🇺🇸|US|USA|JFK|LAX|ORD|ATL|DFW|SFO|MIA|SEA|IAD))(?!.*(排除1|排除2|5x)).*$'
+FilterTW: &FilterTW '^(?=.*(?i)(台|🇼🇸|🇹🇼|TW|tai|TPE|TSA|KHH))(?!.*(排除1|排除2|5x)).*$'
+FilterEU: &FilterEU '^(?=.*(?i)(奥|比|保|克罗地亚|塞|捷|丹|爱沙|芬|法|德|希|匈|爱尔|意|拉|立|卢|马其它|荷|波|葡|罗|斯洛伐|斯洛文|西|瑞|英|🇧🇪|🇨🇿|🇩🇰|🇫🇮|🇫🇷|🇩🇪|🇮🇪|🇮🇹|🇱🇹|🇱🇺|🇳🇱|🇵🇱|🇸🇪|🇬🇧|CDG|FRA|AMS|MAD|BCN|FCO|MUC|BRU))(?!.*(排除1|排除2|5x)).*$'
+FilterOther: &FilterOther '^(?!.*(直连|美|港|坡|台|新|日|韩|奥|比|保|克罗地亚|塞|捷|丹|爱沙|芬|法|德|希|匈|爱尔|意|拉|立|卢|马其它|荷|波|葡|罗|斯洛伐|斯洛文|西|瑞|英|🇭🇰|🇼🇸|🇹🇼|🇸🇬|🇯🇵|🇰🇷|🇺🇸|🇬🇧|🇦🇹|🇧🇪|🇨🇿|🇩🇰|🇫🇮|🇫🇷|🇩🇪|🇮🇪|🇮🇹|🇱🇹|🇱🇺|🇳🇱|🇵🇱|🇸🇪|HK|TW|SG|JP|KR|US|GB|CDG|FRA|AMS|MAD|BCN|FCO|MUC|BRU|HKG|TPE|TSA|KHH|SIN|XSP|NRT|HND|KIX|CTS|FUK|JFK|LAX|ORD|ATL|DFW|SFO|MIA|SEA|IAD|LHR|LGW))'
+FilterAll: &FilterAll '^(?!.*(直连|群|邀请|返利|循环|官网|客服|网站|网址|获取|订阅|流量|到期|机场|下次|版本|官址|备用|过期|已用|联系|邮箱|工单|贩卖|通知|倒卖|防止|国内|地址|频道|无法|说明|使用|提示|特别|访问|支持|教程|关注|更新|作者|加入|USE|USED|TOTAL|EXPIRE|EMAIL|Panel|Channel|Author))'
+SelectFB: &SelectFB {type: select, proxies: [故障转移, 香港自动, 台湾自动, 新加坡自动, 日本自动, 韩国自动, 美国自动]}
+SelectUS: &SelectUS {type: select, proxies: [美国自动, 台湾自动, 新加坡自动, 日本自动, 韩国自动]}
+SelectOne: &SelectOne {type: select, proxies: [一键连, 故障转移, 香港自动, 台湾自动, 新加坡自动, 日本自动, 韩国自动, 美国自动]}
+
+# 填写订阅,名称不能重复
+proxy-providers:
+  机场A: {<<: *PProviders, url: '机场订阅地址', override: {additional-prefix: '[A] '}}
+  机场B: {<<: *PProviders, url: '机场订阅地址', override: {additional-prefix: '[B] '}}
+
+mode: rule
+mixed-port: 7890
+ipv6: true
+allow-lan: true
+unified-delay: true
+tcp-concurrent: true
+log-level: warning
+bind-address: "*"
+external-controller: 0.0.0.0:9090
+external-ui: ui
+find-process-mode: 'off'
+global-client-fingerprint: chrome
+profile:
+  store-selected: true
+  store-fake-ip: true
+  
+sniffer:
+  enable: true
+  override-destination: false
+  force-dns-mapping: true
+  parse-pure-ip: true
+  
+tun:
+  enable: true
+  stack: gvisor
+  dns-hijack:
+    - any:53
+  auto-route: true
+  auto-redirect: false
+  auto-detect-interface: true
+  mtu: 1500
+  strict-route: false
+  route-exclude-address: []
+
+dns:
+  enable: true
+  ipv6: true
+  respect-rules: false
+  enhanced-mode: fake-ip
+  fake-ip-range: 198.18.0.1/16
+  fake-ip-filter: [+.lan, +.local, time.*.com, ntp.*.com, rule-set:cn_domain, +.market.xiaomi.com, +.push.apple.com]
+  default-nameserver: [119.29.29.29, 180.184.1.1, 223.5.5.5]
+  nameserver: [https://dns.alidns.com/dns-query, https://doh.pub/dns-query]
+
+proxies:
+  - {name: 直连, type: direct, udp: true, icon: https://git.imee.me/https://github.com/Koolson/Qure/raw/master/IconSet/Color/Direct.png}
+
+proxy-groups:
+  - {name: 一键连,     <<: *SelectFB, include-all: true, icon: https://git.imee.me/https://github.com/666OS/YYDS/raw/main/mihomo/image/mihomo.png}
+  - {name: 故障转移,   <<: *FallBack, proxies: [香港自动, 台湾自动, 新加坡自动, 日本自动, 韩国自动, 美国自动], icon: https://git.imee.me/https://github.com/Koolson/Qure/raw/master/IconSet/Color/ULB.png}
+  - {name: AI平台,    <<: *SelectUS, include-all: true, icon: https://git.imee.me/https://github.com/Koolson/Qure/raw/master/IconSet/Color/AI.png}
+  - {name: 国际媒体,   <<: *SelectOne, icon: https://git.imee.me/https://github.com/Koolson/Qure/raw/master/IconSet/Color/DomesticMedia.png}
+  - {name: 香港自动,   <<: *UrlTest, filter: *FilterHK, icon: https://git.imee.me/https://github.com/Koolson/Qure/raw/master/IconSet/Color/Hong_Kong.png}
+  - {name: 台湾自动,   <<: *UrlTest, filter: *FilterTW, icon: https://git.imee.me/https://github.com/Koolson/Qure/raw/master/IconSet/Color/Taiwan.png}
+  - {name: 新加坡自动, <<: *UrlTest, filter: *FilterSG, icon: https://git.imee.me/https://github.com/Koolson/Qure/raw/master/IconSet/Color/Singapore.png}
+  - {name: 日本自动,   <<: *UrlTest, filter: *FilterJP, icon: https://git.imee.me/https://github.com/Koolson/Qure/raw/master/IconSet/Color/Japan.png}
+  - {name: 韩国自动,   <<: *UrlTest, filter: *FilterKR, icon: https://git.imee.me/https://github.com/Koolson/Qure/raw/master/IconSet/Color/Korea.png}
+  - {name: 美国自动,   <<: *UrlTest, filter: *FilterUS, icon: https://git.imee.me/https://github.com/Koolson/Qure/raw/master/IconSet/Color/United_States.png}
+
+rule-providers: 
+  download:         {type: http, interval: 86400, behavior: classical, format: yaml, url: https://git.imee.me/https://github.com/666OS/YYDS/raw/main/mihomo/rules/download.yaml}
+  fix-direct:       {type: http, interval: 86400, behavior: classical, format: yaml, url: https://git.imee.me/https://github.com/666OS/YYDS/raw/main/mihomo/rules/fix-direct.yaml}
+  XPTV:             {type: http, interval: 86400, behavior: classical, format: yaml, url: https://git.imee.me/https://github.com/666OS/YYDS/raw/main/mihomo/rules/XPTV.yaml}
+  category-ai-!cn:  {type: http, interval: 86400, behavior: domain, format: mrs, url: https://git.imee.me/https://github.com/666OS/YYDS/raw/main/mihomo/rules/category-ai-!cn.mrs}
+  geolocation-!cn:  {type: http, interval: 86400, behavior: domain, format: mrs, url: https://git.imee.me/https://github.com/666OS/YYDS/raw/main/mihomo/rules/geolocation-!cn.mrs}
+  youtube:          {type: http, interval: 86400, behavior: domain, format: mrs, url: https://git.imee.me/https://github.com/666OS/YYDS/raw/main/mihomo/rules/youtube.mrs}
+  spotify:          {type: http, interval: 86400, behavior: domain, format: mrs, url: https://git.imee.me/https://github.com/666OS/YYDS/raw/main/mihomo/rules/spotify.mrs}
+  netflix:          {type: http, interval: 86400, behavior: domain, format: mrs, url: https://git.imee.me/https://github.com/666OS/YYDS/raw/main/mihomo/rules/netflix.mrs}
+  disney:           {type: http, interval: 86400, behavior: domain, format: mrs, url: https://git.imee.me/https://github.com/666OS/YYDS/raw/main/mihomo/rules/disney.mrs}
+  hbo:              {type: http, interval: 86400, behavior: domain, format: mrs, url: https://git.imee.me/https://github.com/666OS/YYDS/raw/main/mihomo/rules/hbo.mrs}
+  private_domain:   {type: http, interval: 86400, behavior: domain, format: mrs, url: https://git.imee.me/https://github.com/666OS/YYDS/raw/main/mihomo/rules/private.mrs}
+  cn_domain:        {type: http, interval: 86400, behavior: domain, format: mrs, url: https://git.imee.me/https://github.com/666OS/YYDS/raw/main/mihomo/rules/cn.mrs}
+  cn_ip:            {type: http, interval: 86400, behavior: ipcidr, format: mrs, url: https://git.imee.me/https://github.com/666OS/YYDS/raw/main/mihomo/rules/cn_ip.mrs}
+  private_ip:       {type: http, interval: 86400, behavior: ipcidr, format: mrs, url: https://git.imee.me/https://github.com/666OS/YYDS/raw/main/mihomo/rules/private_ip.mrs}
+
+rules: 
+  - DST-PORT,123,直连
+  - RULE-SET,category-ai-!cn,AI平台
+  - RULE-SET,youtube,国际媒体
+  - RULE-SET,spotify,国际媒体
+  - RULE-SET,netflix,国际媒体
+  - RULE-SET,disney,国际媒体
+  - RULE-SET,hbo,国际媒体
+  - RULE-SET,download,直连
+  - RULE-SET,cn_domain,直连
+  - RULE-SET,geolocation-!cn,一键连
+  # IP规则
+  - RULE-SET,private_ip,直连,no-resolve
+  - RULE-SET,cn_ip,直连,no-resolve
+  # Fix Direct
+  - RULE-SET,fix-direct,直连
+  - RULE-SET,XPTV,直连
+  - MATCH,一键连
