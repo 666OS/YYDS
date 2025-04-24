@@ -143,6 +143,7 @@ rule-providers:
 rules: 
   - DST-PORT,123,直连
   - DOMAIN-SUFFIX,imee.me,直连
+  - DOMAIN-SUFFIX,hongxingyunmovie.vip,国际媒体
   - RULE-SET,telegram,电报消息
   - RULE-SET,category-ai-!cn,AI平台
   - RULE-SET,youtube,国际媒体
