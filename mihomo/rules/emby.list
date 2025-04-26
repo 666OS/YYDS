@@ -1,5 +1,5 @@
 # 规则名称: Emby
-# 规则统计: 179
+# 规则统计: 182
 
 DOMAIN,2pfdml.mobaiemby.site
 DOMAIN,cc.coemn.com
@@ -135,6 +135,7 @@ DOMAIN-SUFFIX,nivod4.tv
 DOMAIN-SUFFIX,ntrrr.am.sb
 DOMAIN-SUFFIX,nvidia.rip
 DOMAIN-SUFFIX,ohhhh.org
+DOMAIN-SUFFIX,onyra.cc
 DOMAIN-SUFFIX,ouonet.org
 DOMAIN-SUFFIX,pilipili.club
 DOMAIN-SUFFIX,pilipiliultra.com
@@ -169,6 +170,8 @@ DOMAIN-SUFFIX,uuuoo.cc
 DOMAIN-SUFFIX,wiri.tk
 DOMAIN-SUFFIX,xiaoyi.one
 DOMAIN-SUFFIX,xmsl.org
+DOMAIN-SUFFIX,younoyes.com
+DOMAIN-SUFFIX,yunti.online
 DOMAIN-SUFFIX,zi0.icu
 DOMAIN-SUFFIX,zox.show
 IP-CIDR,152.53.67.239/32,no-resolve
