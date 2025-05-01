@@ -15,7 +15,7 @@
 
 1. 下载脚本到OpenWrt设备并运行
    ```
-   wget -O smartcore.sh --no-check-certificate https://github.com/666OS/YYDS/raw/main/JS/smartcore.sh && chmod +x smartcore.sh
+   wget -O smartcore.sh --no-check-certificate https://github.com/666OS/YYDS/raw/main/JS/smartcore.sh && chmod +x smartcore.sh && ./smartcore.sh
    ```
 2. 运行脚本：`./smartcore.sh`
 
