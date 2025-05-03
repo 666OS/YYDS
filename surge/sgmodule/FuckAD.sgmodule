@@ -58,7 +58,6 @@ DOMAIN,th.pinduoduo.com,REJECT-NO-DROP,extended-matching,pre-matching
 URL-REGEX,^http?:\/\/(discardrp|startup)\.umetrip\.com\/gateway\/api\/umetrip\/native,REJECT,extended-matching
 
 #>小红书
-AND,((PROTOCOL,QUIC), (OR,((IP-CIDR,110.40.0.0/16,no-resolve), (IP-CIDR,101.227.133.99/32,no-resolve), (IP-CIDR,140.207.56.254/32,no-resolve), (IP-CIDR,119.45.0.0/16,no-resolve), (IP-CIDR,47.97.0.0/16,no-resolve), (IP-CIDR,81.69.0.0/16,no-resolve), (IP-CIDR,114.55.236.88/32,no-resolve), (IP-CIDR,1.13.12.27/32,no-resolve)))),REJECT
 AND,((PROTOCOL,QUIC), (DOMAIN-SUFFIX,xiaohongshu.com,extended-matching)),REJECT
 
 #>高德地图
