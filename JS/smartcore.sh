@@ -27,30 +27,164 @@ NC='\033[0m' # 无颜色
 detect_arch() {
   ARCH=$(uname -m)
   log "检测到系统架构: $ARCH"
+  
+  # 可以配置的源代码仓库
+  SOURCE_REPO="vernesong/mihomo" # vernesong镜像版本
+  # SOURCE_REPO="MetaCubeX/mihomo"  # 原始版本
+  log "使用源代码仓库: $SOURCE_REPO"
 
-  # 根据架构确定下载文件
+  # 获取版本号部分，用于构建下载URL
+  VERSION_TAG="Prerelease-Alpha"
+  OS="linux"
+  
+  # 远程版本号(将在check_remote_version中设置)
+  REMOTE_VERSION_HASH=""
+  
+  # 是否使用兼容版本
+  USE_COMPATIBLE=""
+  # 是否使用特定Go版本
+  USE_GO_VERSION=""
+  
+  # 检查CPU支持情况（对于amd64架构）
+  if [ "$ARCH" = "x86_64" ] || [ "$ARCH" = "amd64" ]; then
+    # 检查CPU是否支持特定指令集
+    log "检查CPU指令集支持情况..."
+    
+    # 检查CPU是否支持AVX指令
+    if grep -q "avx" /proc/cpuinfo 2>/dev/null; then
+      log "CPU支持AVX指令集"
+    else
+      log "CPU不支持AVX指令集，建议使用兼容版本"
+      # 自动选择兼容版本
+      USE_COMPATIBLE="-compatible"
+    fi
+    
+    # 检查系统glibc版本（如果低于特定版本，可能需要兼容版本）
+    if [ -x "$(command -v ldd)" ]; then
+      GLIBC_VERSION=$(ldd --version | head -n1 | grep -o '[0-9]\+\.[0-9]\+$' || echo "")
+      if [ -n "$GLIBC_VERSION" ]; then
+        log "系统glibc版本: $GLIBC_VERSION"
+        # 如果glibc版本低于2.27，自动选择兼容版本
+        if [ "$(echo "$GLIBC_VERSION < 2.27" | bc 2>/dev/null)" = "1" ]; then
+          log "glibc版本低于2.27，建议使用兼容版本"
+          USE_COMPATIBLE="-compatible"
+        fi
+      fi
+    fi
+  fi
+
+  # 根据架构确定下载文件前缀
   case "$ARCH" in
     "x86_64"|"amd64")
-      CLASH_URL="https://github.com/vernesong/OpenClash/releases/download/mihomo/clash-linux-amd64.tar.gz"
-      CLASH_FILENAME="clash-linux-amd64.tar.gz"
+      ARCH_NAME="amd64"
+      # 对于x86_64，有多种可选变体
+      
+      # 如果是交互式终端，允许用户选择变体
+      if [ -t 0 ] && [ -z "$AUTO_MODE" ]; then
+        echo
+        echo "检测到x86_64架构，请选择要下载的版本变体:"
+        echo "1. 标准版本 (mihomo-linux-amd64)"
+        echo "2. 兼容版本 (mihomo-linux-amd64-compatible)"
+        echo "3. Go 1.20版本 (mihomo-linux-amd64-go120)"
+        echo "4. Go 1.23版本 (mihomo-linux-amd64-go123)"
+        echo "5. 兼容Go 1.20版本 (mihomo-linux-amd64-compatible-go120)"
+        echo "6. 兼容Go 1.23版本 (mihomo-linux-amd64-compatible-go123)"
+        printf "请输入选项 [1-6] (默认: 1): "
+        read -r variant_choice
+        
+        case "$variant_choice" in
+          2)
+            USE_COMPATIBLE="-compatible"
+            ;;
+          3)
+            USE_GO_VERSION="-go120"
+            ;;
+          4)
+            USE_GO_VERSION="-go123"
+            ;;
+          5)
+            USE_COMPATIBLE="-compatible"
+            USE_GO_VERSION="-go120"
+            ;;
+          6)
+            USE_COMPATIBLE="-compatible"
+            USE_GO_VERSION="-go123"
+            ;;
+          *)
+            # 默认或无效选择时使用标准版本
+            ;;
+        esac
+      fi
+      ;;
+    "i386"|"i686"|"x86")
+      ARCH_NAME="386"
+      # 对于386架构，有多种可选变体
+      
+      # 如果是交互式终端，允许用户选择变体
+      if [ -t 0 ] && [ -z "$AUTO_MODE" ]; then
+        echo
+        echo "检测到x86_32架构，请选择要下载的版本变体:"
+        echo "1. 标准版本 (mihomo-linux-386)"
+        echo "2. Go 1.20版本 (mihomo-linux-386-go120)"
+        echo "3. Go 1.23版本 (mihomo-linux-386-go123)"
+        echo "4. Softfloat版本 (mihomo-linux-386-softfloat)"
+        printf "请输入选项 [1-4] (默认: 1): "
+        read -r variant_choice
+        
+        case "$variant_choice" in
+          2)
+            USE_GO_VERSION="-go120"
+            ;;
+          3)
+            USE_GO_VERSION="-go123"
+            ;;
+          4)
+            USE_GO_VERSION="-softfloat"
+            ;;
+          *)
+            # 默认或无效选择时使用标准版本
+            ;;
+        esac
+      fi
       ;;
     "aarch64"|"arm64")
-      CLASH_URL="https://github.com/vernesong/OpenClash/releases/download/mihomo/clash-linux-arm64.tar.gz"
-      CLASH_FILENAME="clash-linux-arm64.tar.gz"
+      ARCH_NAME="arm64"
+      # arm64只有标准版本
       ;;
     "armv7l"|"armv7"|"arm")
-      CLASH_URL="https://github.com/vernesong/OpenClash/releases/download/mihomo/clash-linux-armv7.tar.gz"
-      CLASH_FILENAME="clash-linux-armv7.tar.gz"
+      ARCH_NAME="armv7"
+      # armv7只有标准版本
       ;;
     "mips"|"mipsel")
-      CLASH_URL="https://github.com/vernesong/OpenClash/releases/download/mihomo/clash-linux-mipsle.tar.gz"
-      CLASH_FILENAME="clash-linux-mipsle.tar.gz"
+      ARCH_NAME="mipsle"
+      # mipsle只有标准版本
       ;;
     *)
       log "错误: 不支持的系统架构: $ARCH"
       exit 1
       ;;
   esac
+  
+  # 构建文件基本名称前缀
+  if [ -n "$USE_COMPATIBLE" ] && [ -n "$USE_GO_VERSION" ]; then
+    # 既是兼容版本又是特定Go版本
+    CLASH_BASE_FILENAME="mihomo-${OS}-${ARCH_NAME}${USE_COMPATIBLE}${USE_GO_VERSION}"
+  elif [ -n "$USE_COMPATIBLE" ]; then
+    # 只是兼容版本
+    CLASH_BASE_FILENAME="mihomo-${OS}-${ARCH_NAME}${USE_COMPATIBLE}"
+  elif [ -n "$USE_GO_VERSION" ]; then
+    # 只是特定Go版本
+    CLASH_BASE_FILENAME="mihomo-${OS}-${ARCH_NAME}${USE_GO_VERSION}"
+  else
+    # 标准版本
+    CLASH_BASE_FILENAME="mihomo-${OS}-${ARCH_NAME}"
+  fi
+  
+  log "文件基础名称: $CLASH_BASE_FILENAME"
+  
+  # 更新下载基础URL
+  BASE_URL="https://github.com/${SOURCE_REPO}/releases/download/${VERSION_TAG}"
+  log "下载基础URL: $BASE_URL"
 }
 
 # 获取当前内核信息
@@ -69,6 +203,9 @@ get_current_info() {
     CORE_INFO=$(echo "$VERSION_FULL" | head -n 1 | awk '{print $1, $2, $3}')
     SYS_INFO=$(echo "$VERSION_FULL" | head -n 1 | cut -d' ' -f4-)
     
+    # 保存完整版本号以供其他函数使用
+    CURRENT_VERSION=$(echo "$CORE_INFO" | grep -o 'alpha-[0-9a-zA-Z]*' || echo "")
+    
     echo "$CORE_INFO"
     echo "$SYS_INFO"
     echo "安装于: $INSTALL_DATE"
@@ -81,39 +218,55 @@ get_current_info() {
 check_remote_version() {
   log "检查远程版本信息..."
   
-  # 先尝试获取本地版本号
+  # 获取本地版本号
   LOCAL_VERSION=""
   if [ -f "${CORE_DIR}/clash_meta" ] && [ -x "${CORE_DIR}/clash_meta" ]; then
-    LOCAL_VERSION_FULL=$("${CORE_DIR}/clash_meta" -v 2>/dev/null || echo "")
-    LOCAL_VERSION=$(echo "$LOCAL_VERSION_FULL" | head -n 1 | grep -o 'alpha(smart)-g[0-9a-f]*' || echo "")
-    log "本地版本号: $LOCAL_VERSION"
+    # 如果CURRENT_VERSION已经设置（由get_current_info设置），则优先使用它
+    if [ -n "$CURRENT_VERSION" ]; then
+      LOCAL_VERSION="$CURRENT_VERSION"
+    else
+      # 否则尝试直接从可执行文件获取
+      LOCAL_VERSION_FULL=$("${CORE_DIR}/clash_meta" -v 2>/dev/null || echo "")
+      LOCAL_VERSION=$(echo "$LOCAL_VERSION_FULL" | head -n 1 | grep -o 'alpha-[0-9a-zA-Z]*' || echo "")
+    fi
+    # 仅在调试时记录日志，不直接显示
+    [ "$DEBUG_MODE" = "1" ] && log "本地版本: $LOCAL_VERSION"
   fi
   
-  # 直接从GitHub页面获取最新版本号
-  log "获取远程版本信息..."
-  TEMP_PAGE="${DOWNLOAD_DIR}/mihomo_page.html"
+  # 直接从vernesong仓库获取版本信息
+  TEMP_VERSION="${DOWNLOAD_DIR}/mihomo_version.txt"
   
-  if curl -s --connect-timeout 10 --max-time 15 "https://github.com/vernesong/OpenClash/releases/tag/mihomo" > "$TEMP_PAGE"; then
-    # 根据上次运行的结果，直接使用成功率最高的方法3
-    REMOTE_VERSION=$(grep -o 'alpha(smart)-g[0-9a-f]*' "$TEMP_PAGE" | head -1 || echo "")
+  VERSION_URL="https://github.com/vernesong/mihomo/releases/download/Prerelease-Alpha/version.txt"
+  if curl -s -L --connect-timeout 10 --max-time 15 "$VERSION_URL" > "$TEMP_VERSION"; then
+    # 读取版本号
+    REMOTE_VERSION=$(cat "$TEMP_VERSION" | tr -d '\r\n')
     
-    # 如果简单提取失败，再尝试更复杂的方法
-    if [ -z "$REMOTE_VERSION" ]; then
-      # 尝试从版本标记中提取
-      REMOTE_VERSION=$(grep -o 'Version: alpha(smart)-g[0-9a-f]*' "$TEMP_PAGE" | head -1 | sed 's/Version: //' || echo "")
-    fi
-    
-    # 清理临时文件
-    rm -f "$TEMP_PAGE"
-    
-    # 如果提取到版本号
     if [ -n "$REMOTE_VERSION" ]; then
-      log "远程版本号: $REMOTE_VERSION"
+      # 仅在调试时记录日志，不直接显示
+      [ "$DEBUG_MODE" = "1" ] && log "远程版本: $REMOTE_VERSION"
+      
+      # 提取哈希值部分(不打印)
+      REMOTE_VERSION_HASH=$(echo "$REMOTE_VERSION" | sed 's/alpha-//')
+      
+      # 构建完整下载URL和文件名
+      CLASH_FILENAME="${CLASH_BASE_FILENAME}-${REMOTE_VERSION}.gz"
+      CLASH_URL="${BASE_URL}/${CLASH_FILENAME}"
+      log "下载URL: $CLASH_URL"
+      
+      # 检查URL是否有效
+      if curl -s -L --head --fail "$CLASH_URL" >/dev/null; then
+        log "URL验证成功"
+      else
+        log "警告: URL验证失败，但仍将尝试下载"
+      fi
+      
+      # 清理临时文件
+      rm -f "$TEMP_VERSION"
       
       # 设置全局变量以供后台检查使用
       REMOTE_VERSION_INFO="$REMOTE_VERSION"
       
-      # 显示版本信息
+      # 只显示一次版本信息
       echo "远程版本: $REMOTE_VERSION"
       echo "本地版本: $LOCAL_VERSION"
       
@@ -128,12 +281,13 @@ check_remote_version() {
       fi
     else
       log "无法提取远程版本号"
+      rm -f "$TEMP_VERSION"
       REMOTE_VERSION_INFO=""
       UPDATE_AVAILABLE=""
       return 2  # 提取失败
     fi
   else
-    log "无法访问GitHub发布页面，请检查网络连接"
+    log "无法访问版本信息，请检查网络连接"
     REMOTE_VERSION_INFO=""
     UPDATE_AVAILABLE=""
     return 2  # 访问失败
@@ -144,19 +298,44 @@ check_remote_version() {
 update_core() {
   log "开始更新OpenClash Smart内核..."
   
+  # 检查必要的变量是否已设置
+  if [ -z "$CLASH_FILENAME" ] || [ -z "$CLASH_URL" ]; then
+    # 如果变量未设置，检查远程版本以获取信息
+    check_result=$(check_remote_version)
+    ret_val=$?
+    
+    # 返回值为1表示当前已是最新版本，无需更新
+    if [ $ret_val -eq 1 ]; then
+      log "当前已是最新版本，无需更新"
+      return 0
+    # 返回值为2表示获取失败
+    elif [ $ret_val -eq 2 ]; then
+      log "错误: 无法获取下载信息"
+      return 1
+    fi
+    # 返回值为0表示有更新，继续执行
+  fi
+  
+  # 再次检查变量
+  if [ -z "$CLASH_FILENAME" ] || [ -z "$CLASH_URL" ]; then
+    log "错误: 下载文件名或URL未设置"
+    return 1
+  fi
+  
   # 创建必要的目录
   mkdir -p "$CORE_DIR"
   mkdir -p "$DOWNLOAD_DIR"
 
   # 下载内核文件
   echo -ne "下载内核中..."
-  # 使用安静模式下载，隐藏下载细节
-  if wget -q --show-progress --progress=bar:force:noscroll -O "${DOWNLOAD_DIR}/${CLASH_FILENAME}" "$CLASH_URL"; then
+  # 使用最基本的wget参数
+  if wget -q -O "${DOWNLOAD_DIR}/${CLASH_FILENAME}" "$CLASH_URL" 2>/dev/null; then
     echo "完成"
   else
     echo "失败"
     echo -ne "尝试其他方式下载..."
-    if curl -s -L --progress-bar -o "${DOWNLOAD_DIR}/${CLASH_FILENAME}" "$CLASH_URL"; then
+    # 使用最基本的curl参数
+    if curl -s -L -o "${DOWNLOAD_DIR}/${CLASH_FILENAME}" "$CLASH_URL" 2>/dev/null; then
       echo "完成"
     else
       log "错误: 无法下载内核文件，请检查网络连接"
@@ -167,7 +346,7 @@ update_core() {
   # 解压文件
   echo -ne "解压内核文件..."
   mkdir -p "${DOWNLOAD_DIR}/clash_temp"
-  if tar -xzf "${DOWNLOAD_DIR}/${CLASH_FILENAME}" -C "${DOWNLOAD_DIR}/clash_temp" >/dev/null 2>&1; then
+  if gzip -d -c "${DOWNLOAD_DIR}/${CLASH_FILENAME}" > "${DOWNLOAD_DIR}/clash_temp/clash"; then
     echo "完成"
   else
     echo "失败"
@@ -360,7 +539,7 @@ show_initial_menu() {
 show_changelog() {
   TEMP_PAGE="${DOWNLOAD_DIR}/mihomo_changelog.html"
   
-  if curl -s --connect-timeout 10 --max-time 15 "https://github.com/vernesong/OpenClash/releases/tag/mihomo" > "$TEMP_PAGE"; then
+  if curl -s --connect-timeout 10 --max-time 15 "https://github.com/${SOURCE_REPO}/releases" > "$TEMP_PAGE"; then
     echo "版本变更信息:"
     echo "-------------"
     grep -A 15 "## Changelog" "$TEMP_PAGE" | head -n 15 | sed 's/<[^>]*>//g' || echo "未找到变更日志"
@@ -393,32 +572,34 @@ background_check() {
   log "后台检查更新..."
   detect_arch
   
-  # 先尝试获取本地版本号
+  # 获取本地版本号
   LOCAL_VERSION=""
   if [ -f "${CORE_DIR}/clash_meta" ] && [ -x "${CORE_DIR}/clash_meta" ]; then
-    LOCAL_VERSION_FULL=$("${CORE_DIR}/clash_meta" -v 2>/dev/null || echo "")
-    LOCAL_VERSION=$(echo "$LOCAL_VERSION_FULL" | head -n 1 | grep -o 'alpha(smart)-g[0-9a-f]*' || echo "")
-    log "本地版本号: $LOCAL_VERSION"
+    # 如果CURRENT_VERSION已经设置（由get_current_info设置），则优先使用它
+    if [ -n "$CURRENT_VERSION" ]; then
+      LOCAL_VERSION="$CURRENT_VERSION"
+    else
+      # 否则尝试直接从可执行文件获取
+      LOCAL_VERSION_FULL=$("${CORE_DIR}/clash_meta" -v 2>/dev/null || echo "")
+      LOCAL_VERSION=$(echo "$LOCAL_VERSION_FULL" | head -n 1 | grep -o 'alpha-[0-9a-zA-Z]*' || echo "")
+    fi
+    # 仅在调试时记录日志
+    [ "$DEBUG_MODE" = "1" ] && log "本地版本: $LOCAL_VERSION"
   fi
   
-  # 不使用check_remote_version，直接实现检查逻辑以便更好控制变量
-  TEMP_PAGE="${DOWNLOAD_DIR}/mihomo_page.html"
+  # 直接从vernesong仓库获取版本信息
+  TEMP_VERSION="${DOWNLOAD_DIR}/mihomo_version.txt"
   
-  if curl -s --connect-timeout 10 --max-time 15 "https://github.com/vernesong/OpenClash/releases/tag/mihomo" > "$TEMP_PAGE"; then
-    # 提取版本号
-    REMOTE_VERSION=$(grep -o 'alpha(smart)-g[0-9a-f]*' "$TEMP_PAGE" | head -1 || echo "")
+  VERSION_URL="https://github.com/vernesong/mihomo/releases/download/Prerelease-Alpha/version.txt"
+  if curl -s -L --connect-timeout 10 --max-time 15 "$VERSION_URL" > "$TEMP_VERSION"; then
+    # 读取版本号
+    REMOTE_VERSION=$(cat "$TEMP_VERSION" | tr -d '\r\n')
     
-    # 如果简单提取失败，再尝试更复杂的方法
-    if [ -z "$REMOTE_VERSION" ]; then
-      REMOTE_VERSION=$(grep -o 'Version: alpha(smart)-g[0-9a-f]*' "$TEMP_PAGE" | head -1 | sed 's/Version: //' || echo "")
-    fi
-    
-    # 清理临时文件
-    rm -f "$TEMP_PAGE"
-    
-    # 如果提取到版本号
     if [ -n "$REMOTE_VERSION" ]; then
-      log "后台检查获取到远程版本号: $REMOTE_VERSION"
+      # 提取哈希值部分(不打印)
+      REMOTE_VERSION_HASH=$(echo "$REMOTE_VERSION" | sed 's/alpha-//')
+      # 仅在结果输出时显示
+      [ "$DEBUG_MODE" = "1" ] && log "远程版本: $REMOTE_VERSION"
       
       # 将状态保存到文件，以便主进程获取
       echo "$REMOTE_VERSION" > "${DOWNLOAD_DIR}/smartcore_remote_version.txt"
@@ -439,8 +620,11 @@ background_check() {
       echo "" > "${DOWNLOAD_DIR}/smartcore_update_available.txt"
       return 2  # 提取失败
     fi
+    
+    # 清理临时文件
+    rm -f "$TEMP_VERSION"
   else
-    log "无法访问GitHub发布页面，请检查网络连接"
+    log "无法访问版本信息，请检查网络连接"
     echo "" > "${DOWNLOAD_DIR}/smartcore_remote_version.txt"
     echo "" > "${DOWNLOAD_DIR}/smartcore_update_available.txt"
     return 2  # 访问失败
@@ -453,16 +637,25 @@ main() {
   UPDATE_AVAILABLE=""
   REMOTE_VERSION_INFO=""
   
+  # 默认关闭调试模式
+  DEBUG_MODE=""
+  
   # 检查命令行参数
   if [ "$1" = "--auto" ] || [ "$1" = "-a" ]; then
     # 自动更新模式
+    AUTO_MODE="1"
     auto_update
     exit $?
+  elif [ "$1" = "--debug" ] || [ "$1" = "-d" ]; then
+    # 调试模式
+    DEBUG_MODE="1"
+    log "开启调试模式"
   elif [ "$1" = "--help" ] || [ "$1" = "-h" ]; then
     # 显示帮助信息
     echo "用法: $0 [选项]"
     echo "选项:"
     echo "  -a, --auto    自动检查并更新内核"
+    echo "  -d, --debug   显示调试信息"
     echo "  -h, --help    显示此帮助信息"
     echo "  无参数        显示交互式菜单"
     exit 0
@@ -514,6 +707,7 @@ main() {
     done
   else
     # 非交互式模式下直接更新
+    AUTO_MODE="1"
     auto_update
   fi
 }
