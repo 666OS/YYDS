@@ -1,8 +1,9 @@
 # 规则名称: Emby
-# 规则统计: 186
+# 规则统计: 187
 
 DOMAIN,2pfdml.mobaiemby.site
 DOMAIN,cc.coemn.com
+DOMAIN,cdn1.nebula-media.org
 DOMAIN,cf-cdn1.nebula-media.org
 DOMAIN,cminf.sfcat.link
 DOMAIN,cuinf.sfcat.link
