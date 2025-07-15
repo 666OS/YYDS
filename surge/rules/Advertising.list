@@ -519,6 +519,7 @@ DOMAIN-SUFFIX,tjqonline.cn
 DOMAIN-SUFFIX,tnkfactory.com
 DOMAIN-SUFFIX,tns-counter.ru
 DOMAIN-SUFFIX,topitme.com
+DOMAIN-SUFFIX,touch-moblie.com
 DOMAIN-SUFFIX,tradplusad.com
 DOMAIN-SUFFIX,traffichunt.com
 DOMAIN-SUFFIX,trafficjunky.net
@@ -599,6 +600,7 @@ DOMAIN-SUFFIX,wx16999.com
 DOMAIN-SUFFIX,xapads.com
 DOMAIN-SUFFIX,xchmai.com
 DOMAIN-SUFFIX,xdrig.com
+DOMAIN-SUFFIX,xdrun.com
 DOMAIN-SUFFIX,xiaohuau.xyz
 DOMAIN-SUFFIX,xlviirdr.com
 DOMAIN-SUFFIX,xmlwizard.com
@@ -769,6 +771,7 @@ IP-CIDR,101.227.200.28/32,no-resolve
 IP-CIDR,124.192.153.42/32,no-resolve
 # ------
 # > ByteDance
+DOMAIN-SUFFIX,pangolin-dsp-toutiao.com
 DOMAIN-SUFFIX,pangolin-sdk-toutiao.com
 DOMAIN-SUFFIX,pangolin-sdk-toutiao1.com
 DOMAIN-SUFFIX,pangolin-sdk-toutiao-b.com
@@ -952,10 +955,12 @@ DOMAIN-SUFFIX,alitui.weibo.com
 DOMAIN-SUFFIX,beacon.sina.com.cn
 DOMAIN,adimg.uve.weibo.com
 DOMAIN,adimg.vue.weibo.com
-DOMAIN,u1.img.mobile.sina.cn
+DOMAIN,adstrategy.biz.weibo.com
+DOMAIN,bootpreload.uve.weibo.com
 DOMAIN,sax.sina.com.cn
-DOMAIN,saxs.sina.com.cn
 DOMAIN,saxn.sina.com.cn
+DOMAIN,saxs.sina.com.cn
+DOMAIN,u1.img.mobile.sina.cn
 # > SOHU
 DOMAIN-SUFFIX,ad.sohu.com
 DOMAIN-SUFFIX,ads.sohu.com
