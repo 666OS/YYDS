@@ -10,8 +10,8 @@
 # >>=====================================<<
 # 名称: OneSmartPro 一键智能代理
 # 地址: https://github.com/666OS/YYDS
-# 版本: v1.0.0
-# 作者: 666OS
+# 版本: v1.0.1
+# 作者: YYDS666
 # 更新: 2025-07-18
 # 频道: https://t.me/Pinched666
 # 描述: 基于Mihomo的智能代理配置，提供四层架构智能路由和全场景规则集
@@ -58,9 +58,9 @@ proxy-providers:
 
 # ==================== 监听器 ====================
 listeners:
-  # Shadowsocks监听器 - 远程连接 需防火墙通信规则开放对应用端口，端口和密码，使用时请修改
-  - {name: SS-IN,  type: shadowsocks, listen: '::', port: 10000, udp: true, password: 随机密码, cipher: aes-256-gcm}
-  # Mixed监听器 - 分地区专用端口
+  # Shadowsocks监听器 - 代理节点 玩法：远程连接家庭网络，端口和密码，使用时请修改
+  - {name: SS-IN,  type: shadowsocks, listen: '::', port: 10000, udp: true, password: Xf3#Lp9WqZ, cipher: aes-256-gcm}
+  # Mixed监听器 - 分地区专用端口 玩法：本地浏览器插件或手机APP配置代理，实现分地区访问
   - {name: MIXED-SG, type: mixed, port: 50000, proxy: 美国智能}
   - {name: MIXED-US, type: mixed, port: 50001, proxy: 狮城智能}
   - {name: MIXED-TW, type: mixed, port: 50002, proxy: 台湾智能}
@@ -170,7 +170,7 @@ proxy-groups:
   - {name: 国内流量,  <<: *SelectDC, icon: https://git.imee.me/https://github.com/Koolson/Qure/raw/master/IconSet/Color/China.png}
   - {name: 兜底流量,  <<: *SelectHQ, icon: https://git.imee.me/https://github.com/Koolson/Qure/raw/master/IconSet/Color/Final.png}
 
-  # 线路特性层 - Fallback故障转移，按特性优化线路选择，使用时默认，也可修改
+  # 线路特性层 - Fallback故障转移，按特性优化线路选择，建议修改位置顺序发挥线路优势
   - {name: 高质量线路,  <<: *BaseFB, proxies: [美国智能, 香港智能, 台湾智能, 日本智能, 狮城智能, 韩国智能, 欧洲智能, 直接连接], icon: https://git.imee.me/https://github.com/Koolson/Qure/raw/master/IconSet/Color/Round_Robin_1.png}
   - {name: 低延迟线路,  <<: *BaseFB, proxies: [香港智能, 台湾智能, 日本智能, 狮城智能, 韩国智能, 美国智能, 欧洲智能, 直接连接], icon: https://git.imee.me/https://github.com/Koolson/Qure/raw/master/IconSet/Color/Round_Robin_1.png}
   - {name: 大带宽线路,  <<: *BaseFB, proxies: [香港智能, 台湾智能, 日本智能, 狮城智能, 韩国智能, 美国智能, 欧洲智能, 直接连接], icon: https://git.imee.me/https://github.com/Koolson/Qure/raw/master/IconSet/Color/Round_Robin_1.png}
