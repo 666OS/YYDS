@@ -1,7 +1,6 @@
 # 规则名称: Emby
-# 规则统计: 193
+# 规则统计: 192
 
-DOMAIN,2pfdml.mobaiemby.site
 DOMAIN,cc.coemn.com
 DOMAIN,cdn1.nebula-media.org
 DOMAIN,cf-cdn1.nebula-media.org
@@ -9,6 +8,7 @@ DOMAIN,cminf.sfcat.link
 DOMAIN,cuinf.sfcat.link
 DOMAIN,emby-cdn1.nebula-media.org
 DOMAIN,emby.nebula-media.org
+DOMAIN,mcdn.mobaiemby.site
 DOMAIN,notnetflix.cos.cat
 DOMAIN,starharn-cf.nebula-media.org
 DOMAIN,starharn.nebula-media.org
@@ -59,7 +59,6 @@ DOMAIN-SUFFIX,e.degyax.one
 DOMAIN-SUFFIX,ednovas.org
 DOMAIN-SUFFIX,em.ssky.me
 DOMAIN-SUFFIX,emby-cf.plusmedia.site
-DOMAIN-SUFFIX,emby-myg-de.vfing.de
 DOMAIN-SUFFIX,emby-sg.plusmedia.site
 DOMAIN-SUFFIX,emby.aiyowei.ml
 DOMAIN-SUFFIX,emby.bid
