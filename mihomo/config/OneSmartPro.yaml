@@ -10,9 +10,9 @@
 # >>=====================================<<
 # 名称: OneSmartPro 一键智能代理
 # 地址: https://github.com/666OS/YYDS
-# 版本: v1.0.1
+# 版本: v1.2.0
 # 作者: YYDS666
-# 更新: 2025-07-18
+# 更新: 2025 年 8 月 1 日
 # 频道: https://t.me/Pinched666
 # 描述: 基于Mihomo的智能代理配置，提供四层架构智能路由和全场景规则集
 #       集成Smart算法自动选择最优节点，支持故障转移和负载均衡
@@ -53,8 +53,8 @@ proxy-providers:
   优质服务商: {<<: *BaseProvider, url: '优质订阅源地址', override: {additional-prefix: '[优] '}}
   # 备用订阅源 - 次优节点集合，使用时请修改
   备用服务商: {<<: *BaseProvider, url: '备用订阅源地址', override: {additional-prefix: '[备] '}}
-  # 中转订阅源 - 中转服务连接，使用时请修改
-  中转服务商: {<<: *BaseProvider, url: '中转订阅源地址', override: {additional-prefix: '[中] ', dialer-proxy: 中转服务}}
+  # 落地订阅源 - 落地服务连接，使用时请修改
+  落地服务商: {<<: *BaseProvider, url: '落地订阅源地址', override: {additional-prefix: '[中] ', dialer-proxy: 中转服务}}
 
 # ==================== 监听器 ====================
 listeners:
@@ -146,9 +146,9 @@ dns:
     - https://dns.alidns.com/dns-query
     - https://doh.pub/dns-query
   fake-ip-filter:
-    - rule-set:connectivity-check
-    - rule-set:private_domain
-    - rule-set:cn_domain
+    - rule-set:ConnCheck
+    - rule-set:Private
+    - rule-set:China
     - +.miwifi.com
     - +.docker.io
     - +.market.xiaomi.com
@@ -161,14 +161,19 @@ proxies:
 proxy-groups:
   # 应用策略层 - Select手动选择，支持多场景应用优化，使用时默认，也可修改
   - {name: 一键智能,  <<: *SelectAL, icon: https://git.imee.me/https://github.com/666OS/YYDS/raw/main/mihomo/image/mihomo.png}
+  - {name: 网络测试,  <<: *OneSmart, icon: https://git.imee.me/https://github.com/Koolson/Qure/raw/master/IconSet/Color/Speedtest.png, include-all: true}
   - {name: 人工智能,  <<: *SelectHQ, icon: https://git.imee.me/https://github.com/Koolson/Qure/raw/master/IconSet/Color/AI.png}
-  - {name: 网速测试,  <<: *OneSmart, icon: https://git.imee.me/https://github.com/Koolson/Qure/raw/master/IconSet/Color/Speedtest.png, include-all: true}
   - {name: 电报消息,  <<: *SelectBW, icon: https://git.imee.me/https://github.com/Koolson/Qure/raw/master/IconSet/Color/Telegram_X.png}
-  - {name: 油管视频,  <<: *SelectLR, icon: https://git.imee.me/https://github.com/Koolson/Qure/raw/master/IconSet/Color/YouTube.png}
+  - {name: 社交平台,  <<: *SelectLR, icon: https://git.imee.me/https://github.com/Koolson/Qure/raw/master/IconSet/Color/PBS.png} 
+  - {name: 游戏平台,  <<: *SelectLD, icon: https://git.imee.me/https://github.com/Koolson/Qure/raw/master/IconSet/Color/Game.png}
+  - {name: 货币平台,  <<: *SelectHQ, icon: https://git.imee.me/https://github.com/Koolson/Qure/raw/master/IconSet/Color/Cryptocurrency_3.png}
+  - {name: Emby服,   <<: *SelectBW, icon: https://git.imee.me/https://github.com/Koolson/Qure/raw/master/IconSet/Color/Emby.png}
   - {name: 国际媒体,  <<: *SelectBW, icon: https://git.imee.me/https://github.com/Koolson/Qure/raw/master/IconSet/Color/DomesticMedia.png}
+  - {name: 新闻媒体,  <<: *SelectHQ, icon: https://git.imee.me/https://github.com/Koolson/Qure/raw/master/IconSet/Color/Apple_News.png}
   - {name: 苹果服务,  <<: *SelectHQ, icon: https://git.imee.me/https://github.com/Koolson/Qure/raw/master/IconSet/Color/Apple.png}
   - {name: 谷歌服务,  <<: *SelectHQ, icon: https://git.imee.me/https://github.com/Koolson/Qure/raw/master/IconSet/Color/Google_Search.png}
   - {name: 微软服务,  <<: *SelectHQ, icon: https://git.imee.me/https://github.com/Koolson/Qure/raw/master/IconSet/Color/Microsoft.png}
+  - {name: 脸书服务,  <<: *SelectHQ, icon: https://git.imee.me/https://github.com/Koolson/Qure/raw/master/IconSet/Color/Facebook.png}
   - {name: 国外流量,  <<: *SelectHQ, icon: https://git.imee.me/https://github.com/Koolson/Qure/raw/master/IconSet/Color/Global.png}
   - {name: 国内流量,  <<: *SelectDC, icon: https://git.imee.me/https://github.com/Koolson/Qure/raw/master/IconSet/Color/China.png}
   - {name: 兜底流量,  <<: *SelectHQ, icon: https://git.imee.me/https://github.com/Koolson/Qure/raw/master/IconSet/Color/Final.png}
@@ -193,81 +198,100 @@ proxy-groups:
 
 # ==================== 规则路由 ====================
 rules: 
-  # 修正规则 - 特定服务直连
+  # 端口规则
   - DST-PORT,123,直接连接
   - DST-PORT,9993,直接连接
-  - DOMAIN-SUFFIX,imee.me,直接连接
-  - RULE-SET,fix-direct,直接连接
+
+  # 拦截规则
+  - RULE-SET,Tracking,REJECT
+  - RULE-SET,Advertising,REJECT
+
+  # 应用规则
+  - RULE-SET,ConnCheck,直接连接
+  - RULE-SET,Private,直接连接
+  - RULE-SET,DirectFix,直接连接
   - RULE-SET,XPTV,直接连接
+  - RULE-SET,AppleCN,直接连接
+  - RULE-SET,Cloudflare,直接连接
+  - RULE-SET,AI,人工智能
+  - RULE-SET,Speedtest,网络测试
+  - RULE-SET,Telegram,电报消息
+  - RULE-SET,SocialMedia,社交平台
+  - RULE-SET,NewsMedia,新闻媒体
+  - RULE-SET,Games,游戏平台
+  - RULE-SET,Crypto,货币平台
+  - RULE-SET,Emby,Emby服
+  - RULE-SET,Streaming,国际媒体
+  - RULE-SET,Apple,苹果服务 
+  - RULE-SET,Google,谷歌服务
+  - RULE-SET,Microsoft,微软服务
+  - RULE-SET,Facebook,脸书服务
+  - RULE-SET,Proxy,国外流量
+  - RULE-SET,China,国内流量
 
-  # 修正规则 - 特定服务代理
-  - DOMAIN-KEYWORD,behance,美国智能
-  - DOMAIN-KEYWORD,diabrowser,人工智能
+  # IP规则
+  - RULE-SET,AdvertisingIP,REJECT
+  - RULE-SET,PrivateIP,直接连接,no-resolve
+  - RULE-SET,XPTVIP,直接连接,no-resolve
+  - RULE-SET,CloudflareIP,直接连接,no-resolve
+  - RULE-SET,AIIP,人工智能,no-resolve
+  - RULE-SET,TelegramIP,电报消息,no-resolve
+  - RULE-SET,SocialMediaIP,社交平台,no-resolve
+  - RULE-SET,EmbyIP,Emby服,no-resolve
+  - RULE-SET,StreamingIP,国际媒体,no-resolve
+  - RULE-SET,GoogleIP,谷歌服务,no-resolve
+  - RULE-SET,FacebookIP,脸书服务,no-resolve
+  - RULE-SET,ProxyIP,国外流量,no-resolve
+  - RULE-SET,ChinaIP,国内流量,no-resolve
 
-  # 应用规则 - 按场景分流
-  - RULE-SET,category-ai-!cn,人工智能
-  - RULE-SET,telegram,电报消息
-  - RULE-SET,youtube,油管视频
-  - RULE-SET,spotify,国际媒体
-  - RULE-SET,netflix,国际媒体
-  - RULE-SET,disney,国际媒体
-  - RULE-SET,hbo,国际媒体
-  - RULE-SET,apple-cn,国内流量
-  - RULE-SET,apple,苹果服务
-  - RULE-SET,google,谷歌服务
-  - RULE-SET,github,微软服务
-  - RULE-SET,onedrive,微软服务
-  - RULE-SET,microsoft,微软服务
-  - RULE-SET,download,国内流量
-  - RULE-SET,cn_domain,国内流量
-  - RULE-SET,geolocation-!cn,国外流量
-
-  # IP规则 - 基于IP地址分流
-  - RULE-SET,private_ip,直接连接,no-resolve
-  - RULE-SET,google_ip,谷歌服务,no-resolve
-  - RULE-SET,netflix_ip,国际媒体,no-resolve
-  - RULE-SET,telegram_ip,电报消息,no-resolve
-  - RULE-SET,cn_ip,国内流量,no-resolve
-  
   # 兜底规则 - 未匹配流量
   - MATCH,兜底流量
 
 # 规则集行为模板 - 定义不同类型的规则行为
-BehaviorCL: &BehaviorCL {type: http, behavior: classical, interval: 86400}
-BehaviorDN: &BehaviorDN {type: http, behavior: domain, interval: 86400}
-BehaviorIP: &BehaviorIP {type: http, behavior: ipcidr, interval: 86400}
+BehaviorCL: &BehaviorCL {type: http, behavior: classical, format: text, interval: 86400}
+BehaviorDN: &BehaviorDN {type: http, behavior: domain, format: mrs, interval: 86400}
+BehaviorIP: &BehaviorIP {type: http, behavior: ipcidr, format: mrs, interval: 86400}
 
 # 规则提供者
 rule-providers: 
-  # Classical规则集 - 复合规则
-  download:           {<<: *BehaviorCL, format: yaml, url: https://git.imee.me/https://github.com/666OS/YYDS/raw/main/mihomo/rules/download.yaml}
-  fix-direct:         {<<: *BehaviorCL, format: yaml, url: https://git.imee.me/https://github.com/666OS/YYDS/raw/main/mihomo/rules/fix-direct.yaml}
-  XPTV:               {<<: *BehaviorCL, format: yaml, url: https://git.imee.me/https://github.com/666OS/YYDS/raw/main/mihomo/rules/XPTV.yaml}
-
   # Domain规则集 - 域名规则
-  telegram:           {<<: *BehaviorDN, format: mrs, url: https://git.imee.me/https://github.com/666OS/YYDS/raw/main/mihomo/rules/telegram.mrs}
-  category-ai-!cn:    {<<: *BehaviorDN, format: mrs, url: https://git.imee.me/https://github.com/666OS/YYDS/raw/main/mihomo/rules/category-ai-!cn.mrs}
-  youtube:            {<<: *BehaviorDN, format: mrs, url: https://git.imee.me/https://github.com/666OS/YYDS/raw/main/mihomo/rules/youtube.mrs}
-  spotify:            {<<: *BehaviorDN, format: mrs, url: https://git.imee.me/https://github.com/666OS/YYDS/raw/main/mihomo/rules/spotify.mrs}
-  netflix:            {<<: *BehaviorDN, format: mrs, url: https://git.imee.me/https://github.com/666OS/YYDS/raw/main/mihomo/rules/netflix.mrs}
-  disney:             {<<: *BehaviorDN, format: mrs, url: https://git.imee.me/https://github.com/666OS/YYDS/raw/main/mihomo/rules/disney.mrs}
-  hbo:                {<<: *BehaviorDN, format: mrs, url: https://git.imee.me/https://github.com/666OS/YYDS/raw/main/mihomo/rules/hbo.mrs}
-  apple-cn:           {<<: *BehaviorDN, format: mrs, url: https://git.imee.me/https://github.com/666OS/YYDS/raw/main/mihomo/rules/apple-cn.mrs}
-  apple:              {<<: *BehaviorDN, format: mrs, url: https://git.imee.me/https://github.com/666OS/YYDS/raw/main/mihomo/rules/apple.mrs}
-  facebook:           {<<: *BehaviorDN, format: mrs, url: https://git.imee.me/https://github.com/666OS/YYDS/raw/main/mihomo/rules/facebook.mrs}
-  google:             {<<: *BehaviorDN, format: mrs, url: https://git.imee.me/https://github.com/666OS/YYDS/raw/main/mihomo/rules/google.mrs}
-  github:             {<<: *BehaviorDN, format: mrs, url: https://git.imee.me/https://github.com/666OS/YYDS/raw/main/mihomo/rules/github.mrs}
-  onedrive:           {<<: *BehaviorDN, format: mrs, url: https://git.imee.me/https://github.com/666OS/YYDS/raw/main/mihomo/rules/onedrive.mrs}
-  microsoft:          {<<: *BehaviorDN, format: mrs, url: https://git.imee.me/https://github.com/666OS/YYDS/raw/main/mihomo/rules/microsoft.mrs}  
-  connectivity-check: {<<: *BehaviorDN, format: mrs, url: https://git.imee.me/https://github.com/666OS/YYDS/raw/main/mihomo/rules/connectivity-check.mrs}
-  private_domain:     {<<: *BehaviorDN, format: mrs, url: https://git.imee.me/https://github.com/666OS/YYDS/raw/main/mihomo/rules/private.mrs}
-  geolocation-!cn:    {<<: *BehaviorDN, format: mrs, url: https://git.imee.me/https://github.com/666OS/YYDS/raw/main/mihomo/rules/geolocation-!cn.mrs}
-  cn_domain:          {<<: *BehaviorDN, format: mrs, url: https://git.imee.me/https://github.com/666OS/YYDS/raw/main/mihomo/rules/cn.mrs}
+  Tracking:       {<<: *BehaviorDN, url: https://git.imee.me/https://github.com/666OS/rules/raw/release/mihomo/domain/Tracking.mrs}
+  Advertising:    {<<: *BehaviorDN, url: https://git.imee.me/https://github.com/666OS/rules/raw/release/mihomo/domain/Advertising.mrs} 
+  DirectFix:      {<<: *BehaviorDN, url: https://git.imee.me/https://github.com/666OS/rules/raw/release/mihomo/domain/DirectFix.mrs}
+  Private:        {<<: *BehaviorDN, url: https://git.imee.me/https://github.com/666OS/rules/raw/release/mihomo/domain/Private.mrs}
+  Download:       {<<: *BehaviorDN, url: https://git.imee.me/https://github.com/666OS/rules/raw/release/mihomo/domain/Download.mrs}
+  ConnCheck:      {<<: *BehaviorDN, url: https://git.imee.me/https://github.com/666OS/rules/raw/release/mihomo/domain/ConnCheck.mrs}
+  Speedtest:      {<<: *BehaviorDN, url: https://git.imee.me/https://github.com/666OS/rules/raw/release/mihomo/domain/Speedtest.mrs}
+  AI:             {<<: *BehaviorDN, url: https://git.imee.me/https://github.com/666OS/rules/raw/release/mihomo/domain/AI.mrs}  
+  Telegram:       {<<: *BehaviorDN, url: https://git.imee.me/https://github.com/666OS/rules/raw/release/mihomo/domain/Telegram.mrs}
+  SocialMedia:    {<<: *BehaviorDN, url: https://git.imee.me/https://github.com/666OS/rules/raw/release/mihomo/domain/SocialMedia.mrs}
+  NewsMedia:      {<<: *BehaviorDN, url: https://git.imee.me/https://github.com/666OS/rules/raw/release/mihomo/domain/NewsMedia.mrs}
+  Games:          {<<: *BehaviorDN, url: https://git.imee.me/https://github.com/666OS/rules/raw/release/mihomo/domain/Games.mrs}
+  Crypto:         {<<: *BehaviorDN, url: https://git.imee.me/https://github.com/666OS/rules/raw/release/mihomo/domain/Crypto.mrs}
+  XPTV:           {<<: *BehaviorDN, url: https://git.imee.me/https://github.com/666OS/rules/raw/release/mihomo/domain/XPTV.mrs}  
+  Emby:           {<<: *BehaviorDN, url: https://git.imee.me/https://github.com/666OS/rules/raw/release/mihomo/domain/Emby.mrs}
+  Streaming:      {<<: *BehaviorDN, url: https://git.imee.me/https://github.com/666OS/rules/raw/release/mihomo/domain/Streaming.mrs}  
+  Cloudflare:     {<<: *BehaviorDN, url: https://git.imee.me/https://github.com/666OS/rules/raw/release/mihomo/domain/Cloudflare.mrs}
+  AppleCN:        {<<: *BehaviorDN, url: https://git.imee.me/https://github.com/666OS/rules/raw/release/mihomo/domain/AppleCN.mrs}
+  Apple:          {<<: *BehaviorDN, url: https://git.imee.me/https://github.com/666OS/rules/raw/release/mihomo/domain/Apple.mrs}
+  Google:         {<<: *BehaviorDN, url: https://git.imee.me/https://github.com/666OS/rules/raw/release/mihomo/domain/Google.mrs}
+  Microsoft:      {<<: *BehaviorDN, url: https://git.imee.me/https://github.com/666OS/rules/raw/release/mihomo/domain/Microsoft.mrs}  
+  Facebook:       {<<: *BehaviorDN, url: https://git.imee.me/https://github.com/666OS/rules/raw/release/mihomo/domain/Facebook.mrs}
+  Proxy:          {<<: *BehaviorDN, url: https://git.imee.me/https://github.com/666OS/rules/raw/release/mihomo/domain/Proxy.mrs}
+  China:          {<<: *BehaviorDN, url: https://git.imee.me/https://github.com/666OS/rules/raw/release/mihomo/domain/China.mrs}
 
-  # IPCIDR规则集 - IP地址规则
-  private_ip:         {<<: *BehaviorIP, format: mrs, url: https://git.imee.me/https://github.com/666OS/YYDS/raw/main/mihomo/rules/private_ip.mrs}
-  netflix_ip:         {<<: *BehaviorIP, format: mrs, url: https://git.imee.me/https://github.com/666OS/YYDS/raw/main/mihomo/rules/netflix_ip.mrs}
-  google_ip:          {<<: *BehaviorIP, format: mrs, url: https://git.imee.me/https://github.com/666OS/YYDS/raw/main/mihomo/rules/google_ip.mrs}
-  telegram_ip:        {<<: *BehaviorIP, format: mrs, url: https://git.imee.me/https://github.com/666OS/YYDS/raw/main/mihomo/rules/telegram_ip.mrs}
-  cn_ip:              {<<: *BehaviorIP, format: mrs, url: https://git.imee.me/https://github.com/666OS/YYDS/raw/main/mihomo/rules/cn_ip.mrs}
+  # IPCIDR规则集 - IP规则
+  AdvertisingIP:  {<<: *BehaviorIP, url: https://git.imee.me/https://github.com/666OS/rules/raw/release/mihomo/ip/Advertising.mrs}
+  PrivateIP:      {<<: *BehaviorIP, url: https://git.imee.me/https://github.com/666OS/rules/raw/release/mihomo/ip/Private.mrs}
+  AIIP:           {<<: *BehaviorIP, url: https://git.imee.me/https://github.com/666OS/rules/raw/release/mihomo/ip/AI.mrs}
+  TelegramIP:     {<<: *BehaviorIP, url: https://git.imee.me/https://github.com/666OS/rules/raw/release/mihomo/ip/Telegram.mrs}  
+  SocialMediaIP:  {<<: *BehaviorIP, url: https://git.imee.me/https://github.com/666OS/rules/raw/release/mihomo/ip/SocialMedia.mrs}  
+  XPTVIP:         {<<: *BehaviorIP, url: https://git.imee.me/https://github.com/666OS/rules/raw/release/mihomo/ip/XPTV.mrs}
+  EmbyIP:         {<<: *BehaviorIP, url: https://git.imee.me/https://github.com/666OS/rules/raw/release/mihomo/ip/Emby.mrs}
+  StreamingIP:    {<<: *BehaviorIP, url: https://git.imee.me/https://github.com/666OS/rules/raw/release/mihomo/ip/Streaming.mrs}  
+  CloudflareIP:   {<<: *BehaviorIP, url: https://git.imee.me/https://github.com/666OS/rules/raw/release/mihomo/ip/Cloudflare.mrs}
+  GoogleIP:       {<<: *BehaviorIP, url: https://git.imee.me/https://github.com/666OS/rules/raw/release/mihomo/ip/Google.mrs}
+  FacebookIP:     {<<: *BehaviorIP, url: https://git.imee.me/https://github.com/666OS/rules/raw/release/mihomo/ip/Facebook.mrs}  
+  ProxyIP:        {<<: *BehaviorIP, url: https://git.imee.me/https://github.com/666OS/rules/raw/release/mihomo/ip/Proxy.mrs} 
+  ChinaIP:        {<<: *BehaviorIP, url: https://git.imee.me/https://github.com/666OS/rules/raw/release/mihomo/ip/China.mrs}
 # ==================== EOF ====================
