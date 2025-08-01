@@ -1,3 +1,11 @@
 # macOS 特定文件
 .DS_Store
 ._*
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+Icon?
+ehthumbs.db
+Thumbs.db
