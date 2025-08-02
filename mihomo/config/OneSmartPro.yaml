@@ -214,6 +214,7 @@ rules:
   - RULE-SET,AppleCN,直接连接
   - RULE-SET,Cloudflare,直接连接
   - RULE-SET,AI,人工智能
+  - DOMAIN-KEYWORD,speedtest,网络测试
   - RULE-SET,Speedtest,网络测试
   - RULE-SET,Telegram,电报消息
   - RULE-SET,SocialMedia,社交平台
