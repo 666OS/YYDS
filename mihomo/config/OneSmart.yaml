@@ -10,9 +10,9 @@
 # >>=====================================<<
 # 名称: OneSmart 极简版
 # 地址: https://github.com/666OS/YYDS
-# 版本: v1.2.0
+# 版本: v1.2.1
 # 作者: YYDS666
-# 更新: 2025 年 8 月 1 日
+# 更新: 2025 年 8 月 2 日
 # 频道: https://t.me/Pinched666
 # 描述: 基于全功能版本精简而来，保留核心功能
 
@@ -155,11 +155,7 @@ proxy-groups:
   
 # ==================== 规则路由 ====================
 rules: 
-  # 端口规则
-  - DST-PORT,123,直接连接
-  - DST-PORT,9993,直接连接
-
-  # 应用规则
+  # 域名规则
   - RULE-SET,ConnCheck,直接连接
   - RULE-SET,Private,直接连接
   - RULE-SET,XPTV,直接连接
@@ -182,16 +178,17 @@ rules:
   - RULE-SET,ProxyIP,国外流量,no-resolve
   - RULE-SET,ChinaIP,国内流量,no-resolve
 
-  # 兜底规则 - 未匹配流量
+  # 兜底规则
   - MATCH,兜底流量
 
-# 规则集行为模板 - 定义不同类型的规则行为
+# ==================== 规则集 ====================
+# 规则集行为模板
 BehaviorDN: &BehaviorDN {type: http, behavior: domain, format: mrs, interval: 86400}
 BehaviorIP: &BehaviorIP {type: http, behavior: ipcidr, format: mrs, interval: 86400}
 
 # 规则提供者
 rule-providers: 
-  # Domain规则集 - 域名规则
+  # 域名规则
   Private:        {<<: *BehaviorDN, url: https://git.imee.me/https://github.com/666OS/rules/raw/release/mihomo/domain/Private.mrs}
   ConnCheck:      {<<: *BehaviorDN, url: https://git.imee.me/https://github.com/666OS/rules/raw/release/mihomo/domain/ConnCheck.mrs}
   AI:             {<<: *BehaviorDN, url: https://git.imee.me/https://github.com/666OS/rules/raw/release/mihomo/domain/AI.mrs}  
@@ -203,7 +200,7 @@ rule-providers:
   Proxy:          {<<: *BehaviorDN, url: https://git.imee.me/https://github.com/666OS/rules/raw/release/mihomo/domain/Proxy.mrs}
   China:          {<<: *BehaviorDN, url: https://git.imee.me/https://github.com/666OS/rules/raw/release/mihomo/domain/China.mrs}
 
-  # IPCIDR规则集 - IP规则
+  # IP规则
   PrivateIP:      {<<: *BehaviorIP, url: https://git.imee.me/https://github.com/666OS/rules/raw/release/mihomo/ip/Private.mrs}
   AIIP:           {<<: *BehaviorIP, url: https://git.imee.me/https://github.com/666OS/rules/raw/release/mihomo/ip/AI.mrs}
   TelegramIP:     {<<: *BehaviorIP, url: https://git.imee.me/https://github.com/666OS/rules/raw/release/mihomo/ip/Telegram.mrs}  
