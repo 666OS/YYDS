@@ -1,5 +1,5 @@
 # 规则名称: Emby
-# 规则统计: 192
+# 规则统计: 195
 
 DOMAIN,cc.coemn.com
 DOMAIN,cdn1.nebula-media.org
@@ -14,6 +14,7 @@ DOMAIN,starharn-cf.nebula-media.org
 DOMAIN,starharn.nebula-media.org
 DOMAIN,web-starharn.nebula-media.org
 DOMAIN,web.nebula-media.org
+DOMAIN-SUFFIX,114514.quest
 DOMAIN-SUFFIX,123456.al
 DOMAIN-SUFFIX,16bit.cfd
 DOMAIN-SUFFIX,20120714.xyz
@@ -163,6 +164,7 @@ DOMAIN-SUFFIX,pub3cf.emby.wtf
 DOMAIN-SUFFIX,reddust.link
 DOMAIN-SUFFIX,ru.odysseyplus.site
 DOMAIN-SUFFIX,servers.xeton.dev
+DOMAIN-SUFFIX,shrekmedia.org
 DOMAIN-SUFFIX,shuipo.lol
 DOMAIN-SUFFIX,speedx.one
 DOMAIN-SUFFIX,starcat.eu.org
@@ -172,6 +174,7 @@ DOMAIN-SUFFIX,stream.synn.cc
 DOMAIN-SUFFIX,studyfun.live
 DOMAIN-SUFFIX,tanhuatv.site
 DOMAIN-SUFFIX,texon.fans
+DOMAIN-SUFFIX,theluyuan.com
 DOMAIN-SUFFIX,tkremby.xyz
 DOMAIN-SUFFIX,tv.worldline.space
 DOMAIN-SUFFIX,uuuoo.cc
