@@ -10,9 +10,9 @@
 # >>=====================================<<
 # 名称: OneTouch 一键连
 # 地址: https://github.com/666OS/YYDS
-# 版本: v3.3
+# 版本: v3.5
 # 作者: YYDS666
-# 更新: 2025 年 8 月 2 日
+# 更新: 2025 年 8 月 7 日
 # 频道: https://t.me/Pinched666
 # 描述: 一键连纯净版
 
@@ -32,7 +32,7 @@ FilterKR: &FilterKR '^(?=.*(?i)(韩|🇰🇷|韓|首尔|南朝鲜|KR|KOR|Korea|S
 FilterUS: &FilterUS '^(?=.*(?i)(美|🇺🇸|US|USA|JFK|LAX|ORD|ATL|DFW|SFO|MIA|SEA|IAD))(?!.*(排除1|排除2|5x)).*$'
 FilterTW: &FilterTW '^(?=.*(?i)(台|🇼🇸|🇹🇼|TW|tai|TPE|TSA|KHH))(?!.*(排除1|排除2|5x)).*$'
 FilterEU: &FilterEU '^(?=.*(?i)(奥|比|保|克罗地亚|塞|捷|丹|爱沙|芬|法|德|希|匈|爱尔|意|拉|立|卢|马其它|荷|波|葡|罗|斯洛伐|斯洛文|西|瑞|英|🇧🇪|🇨🇿|🇩🇰|🇫🇮|🇫🇷|🇩🇪|🇮🇪|🇮🇹|🇱🇹|🇱🇺|🇳🇱|🇵🇱|🇸🇪|🇬🇧|CDG|FRA|AMS|MAD|BCN|FCO|MUC|BRU))(?!.*(排除1|排除2|5x)).*$'
-FilterOT: &FilterOT '^(?!.*(DIRECT|美|港|坡|台|新|日|韩|奥|比|保|克罗地亚|塞|捷|丹|爱沙|芬|法|德|希|匈|爱尔|意|拉|立|卢|马其它|荷|波|葡|罗|斯洛伐|斯洛文|西|瑞|英|🇭🇰|🇼🇸|🇹🇼|🇸🇬|🇯🇵|🇰🇷|🇺🇸|🇬🇧|🇦🇹|🇧🇪|🇨🇿|🇩🇰|🇫🇮|🇫🇷|🇩🇪|🇮🇪|🇮🇹|🇱🇹|🇱🇺|🇳🇱|🇵🇱|🇸🇪|HK|TW|SG|JP|KR|US|GB|CDG|FRA|AMS|MAD|BCN|FCO|MUC|BRU|HKG|TPE|TSA|KHH|SIN|XSP|NRT|HND|KIX|CTS|FUK|JFK|LAX|ORD|ATL|DFW|SFO|MIA|SEA|IAD|LHR|LGW))'
+FilterOT: &FilterOT '^(?!.*(DIRECT|直接连接|美|港|坡|台|新|日|韩|奥|比|保|克罗地亚|塞|捷|丹|爱沙|芬|法|德|希|匈|爱尔|意|拉|立|卢|马其它|荷|波|葡|罗|斯洛伐|斯洛文|西|瑞|英|🇭🇰|🇼🇸|🇹🇼|🇸🇬|🇯🇵|🇰🇷|🇺🇸|🇬🇧|🇦🇹|🇧🇪|🇨🇿|🇩🇰|🇫🇮|🇫🇷|🇩🇪|🇮🇪|🇮🇹|🇱🇹|🇱🇺|🇳🇱|🇵🇱|🇸🇪|HK|TW|SG|JP|KR|US|GB|CDG|FRA|AMS|MAD|BCN|FCO|MUC|BRU|HKG|TPE|TSA|KHH|SIN|XSP|NRT|HND|KIX|CTS|FUK|JFK|LAX|ORD|ATL|DFW|SFO|MIA|SEA|IAD|LHR|LGW))'
 FilterAL: &FilterAL '^(?!.*(DIRECT|直接连接|群|邀请|返利|循环|官网|客服|网站|网址|获取|订阅|流量|到期|机场|下次|版本|官址|备用|过期|已用|联系|邮箱|工单|贩卖|通知|倒卖|防止|国内|地址|频道|无法|说明|使用|提示|特别|访问|支持|教程|关注|更新|作者|加入|USE|USED|TOTAL|EXPIRE|EMAIL|Panel|Channel|Author))'
 
 # 策略组代理列表模板 - 预定义的代理节点优先级排序
@@ -62,7 +62,7 @@ unified-delay: true
 tcp-concurrent: true
 log-level: warning
 bind-address: '*'
-find-process-mode: 'off'
+find-process-mode: 'always'
 global-client-fingerprint: chrome
 keep-alive-interval: 15
 keep-alive-idle: 600
@@ -94,7 +94,7 @@ profile:
 
 # 流量嗅探
 sniffer:
-  enable: false
+  enable: true
   override-destination: false
   force-dns-mapping: true
   parse-pure-ip: true
@@ -145,7 +145,6 @@ proxy-groups:
   - {name: 国际媒体,  <<: *SelectOne, icon: https://git.imee.me/https://github.com/Koolson/Qure/raw/master/IconSet/Color/DomesticMedia.png}
   - {name: 国内流量,  <<: *SelectDC, icon: https://git.imee.me/https://github.com/Koolson/Qure/raw/master/IconSet/Color/China.png}
   - {name: 手动选择,  type: select, include-all: true, filter: *FilterAL, icon: https://git.imee.me/https://github.com/Koolson/Qure/raw/master/IconSet/Color/Clubhouse.png}
-
   - {name: 香港自动,  <<: *BaseUT, filter: *FilterHK, include-all: true, icon: https://git.imee.me/https://github.com/Koolson/Qure/raw/master/IconSet/Color/Hong_Kong.png}
   - {name: 台湾自动,  <<: *BaseUT, filter: *FilterTW, include-all: true, icon: https://git.imee.me/https://github.com/Koolson/Qure/raw/master/IconSet/Color/Taiwan.png}
   - {name: 日本自动,  <<: *BaseUT, filter: *FilterJP, include-all: true, icon: https://git.imee.me/https://github.com/Koolson/Qure/raw/master/IconSet/Color/Japan.png}
@@ -173,7 +172,6 @@ rules:
   - RULE-SET,HBO,国际媒体
   - RULE-SET,Proxy,一键连
   - RULE-SET,China,DIRECT
-
   # IP规则
   - RULE-SET,PrivateIP,DIRECT,no-resolve
   - RULE-SET,TelegramIP,社交平台,no-resolve
@@ -181,7 +179,6 @@ rules:
   - RULE-SET,NetflixIP,国际媒体,no-resolve
   - RULE-SET,ProxyIP,一键连,no-resolve
   - RULE-SET,ChinaIP,DIRECT,no-resolve
-
   # 兜底规则
   - MATCH,一键连
 
