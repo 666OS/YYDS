@@ -10,9 +10,9 @@
 # >>=====================================<<
 # 名称: OneSmartPro 一键智能代理
 # 地址: https://github.com/666OS/YYDS
-# 版本: v1.2.1
+# 版本: v1.2.3
 # 作者: YYDS666
-# 更新: 2025 年 8 月 2 日
+# 更新: 2025 年 8 月 8 日
 # 频道: https://t.me/Pinched666
 # 描述: 基于Mihomo的智能代理配置，提供四层架构智能路由和全场景规则集
 #       集成Smart算法自动选择最优节点，支持故障转移和负载均衡
@@ -35,17 +35,17 @@ FilterKR: &FilterKR '^(?=.*(?i)(韩|🇰🇷|韓|首尔|南朝鲜|KR|KOR|Korea|S
 FilterUS: &FilterUS '^(?=.*(?i)(美|🇺🇸|US|USA|JFK|LAX|ORD|ATL|DFW|SFO|MIA|SEA|IAD))(?!.*(排除1|排除2|5x)).*$'
 FilterTW: &FilterTW '^(?=.*(?i)(台|🇼🇸|🇹🇼|TW|tai|TPE|TSA|KHH))(?!.*(排除1|排除2|5x)).*$'
 FilterEU: &FilterEU '^(?=.*(?i)(奥|比|保|克罗地亚|塞|捷|丹|爱沙|芬|法|德|希|匈|爱尔|意|拉|立|卢|马其它|荷|波|葡|罗|斯洛伐|斯洛文|西|瑞|英|🇧🇪|🇨🇿|🇩🇰|🇫🇮|🇫🇷|🇩🇪|🇮🇪|🇮🇹|🇱🇹|🇱🇺|🇳🇱|🇵🇱|🇸🇪|🇬🇧|CDG|FRA|AMS|MAD|BCN|FCO|MUC|BRU))(?!.*(排除1|排除2|5x)).*$'
-FilterOT: &FilterOT '^(?!.*(DIRECT|美|港|坡|台|新|日|韩|奥|比|保|克罗地亚|塞|捷|丹|爱沙|芬|法|德|希|匈|爱尔|意|拉|立|卢|马其它|荷|波|葡|罗|斯洛伐|斯洛文|西|瑞|英|🇭🇰|🇼🇸|🇹🇼|🇸🇬|🇯🇵|🇰🇷|🇺🇸|🇬🇧|🇦🇹|🇧🇪|🇨🇿|🇩🇰|🇫🇮|🇫🇷|🇩🇪|🇮🇪|🇮🇹|🇱🇹|🇱🇺|🇳🇱|🇵🇱|🇸🇪|HK|TW|SG|JP|KR|US|GB|CDG|FRA|AMS|MAD|BCN|FCO|MUC|BRU|HKG|TPE|TSA|KHH|SIN|XSP|NRT|HND|KIX|CTS|FUK|JFK|LAX|ORD|ATL|DFW|SFO|MIA|SEA|IAD|LHR|LGW))'
-FilterAL: &FilterAL '^(?!.*(DIRECT|群|邀请|返利|循环|官网|客服|网站|网址|获取|订阅|流量|到期|机场|下次|版本|官址|备用|过期|已用|联系|邮箱|工单|贩卖|通知|倒卖|防止|国内|地址|频道|无法|说明|使用|提示|特别|访问|支持|教程|关注|更新|作者|加入|USE|USED|TOTAL|EXPIRE|EMAIL|Panel|Channel|Author))'
+FilterOT: &FilterOT '^(?!.*(DIRECT|直接连接|美|港|坡|台|新|日|韩|奥|比|保|克罗地亚|塞|捷|丹|爱沙|芬|法|德|希|匈|爱尔|意|拉|立|卢|马其它|荷|波|葡|罗|斯洛伐|斯洛文|西|瑞|英|🇭🇰|🇼🇸|🇹🇼|🇸🇬|🇯🇵|🇰🇷|🇺🇸|🇬🇧|🇦🇹|🇧🇪|🇨🇿|🇩🇰|🇫🇮|🇫🇷|🇩🇪|🇮🇪|🇮🇹|🇱🇹|🇱🇺|🇳🇱|🇵🇱|🇸🇪|HK|TW|SG|JP|KR|US|GB|CDG|FRA|AMS|MAD|BCN|FCO|MUC|BRU|HKG|TPE|TSA|KHH|SIN|XSP|NRT|HND|KIX|CTS|FUK|JFK|LAX|ORD|ATL|DFW|SFO|MIA|SEA|IAD|LHR|LGW))'
+FilterAL: &FilterAL '^(?!.*(DIRECT|直接连接|群|邀请|返利|循环|官网|客服|网站|网址|获取|订阅|流量|到期|机场|下次|版本|官址|备用|过期|已用|联系|邮箱|工单|贩卖|通知|倒卖|防止|国内|地址|频道|无法|说明|使用|提示|特别|访问|支持|教程|关注|更新|作者|加入|USE|USED|TOTAL|EXPIRE|EMAIL|Panel|Channel|Author))'
 
 # 策略组代理列表模板 - 预定义的代理节点优先级排序
-SelectAL: &SelectAL {type: select, proxies: [高质量线路, 低延迟线路, 大带宽线路, 低倍率线路, 香港智能, 台湾智能, 日本智能, 狮城智能, 韩国智能, 美国智能, 欧洲智能, 直接连接]}
-OneSmart: &OneSmart {type: select, proxies: [一键智能, 高质量线路, 低延迟线路, 大带宽线路, 低倍率线路, 香港智能, 台湾智能, 日本智能, 狮城智能, 韩国智能, 美国智能, 欧洲智能]}
-SelectDC: &SelectDC {type: select, proxies: [直接连接, 高质量线路, 大带宽线路, 低倍率线路, 低延迟线路, 香港智能, 台湾智能, 日本智能, 狮城智能, 韩国智能, 美国智能, 欧洲智能]}
-SelectHQ: &SelectHQ {type: select, proxies: [高质量线路, 低延迟线路, 大带宽线路, 低倍率线路, 香港智能, 台湾智能, 日本智能, 狮城智能, 韩国智能, 欧洲智能, 一键智能, 直接连接]}
-SelectLD: &SelectLD {type: select, proxies: [低延迟线路, 高质量线路, 大带宽线路, 低倍率线路, 香港智能, 台湾智能, 日本智能, 狮城智能, 韩国智能, 欧洲智能, 一键智能, 直接连接]}
-SelectBW: &SelectBW {type: select, proxies: [大带宽线路, 高质量线路, 低延迟线路, 低倍率线路, 香港智能, 台湾智能, 日本智能, 狮城智能, 韩国智能, 欧洲智能, 一键智能, 直接连接]}
-SelectLR: &SelectLR {type: select, proxies: [低倍率线路, 高质量线路, 低延迟线路, 大带宽线路, 香港智能, 台湾智能, 日本智能, 狮城智能, 韩国智能, 欧洲智能, 一键智能, 直接连接]}
+SelectAL: &SelectAL {type: select, proxies: [高质量线路, 低延迟线路, 大带宽线路, 低倍率线路, 香港智能, 台湾智能, 日本智能, 狮城智能, 韩国智能, 美国智能, 欧洲智能, 直接连接, 手动选择]}
+OneSmart: &OneSmart {type: select, proxies: [一键智能, 高质量线路, 低延迟线路, 大带宽线路, 低倍率线路, 香港智能, 台湾智能, 日本智能, 狮城智能, 韩国智能, 美国智能, 欧洲智能, 手动选择]}
+SelectDC: &SelectDC {type: select, proxies: [直接连接, 高质量线路, 大带宽线路, 低倍率线路, 低延迟线路, 香港智能, 台湾智能, 日本智能, 狮城智能, 韩国智能, 美国智能, 欧洲智能, 手动选择]}
+SelectHQ: &SelectHQ {type: select, proxies: [高质量线路, 低延迟线路, 大带宽线路, 低倍率线路, 香港智能, 台湾智能, 日本智能, 狮城智能, 韩国智能, 欧洲智能, 一键智能, 直接连接, 手动选择]}
+SelectLD: &SelectLD {type: select, proxies: [低延迟线路, 高质量线路, 大带宽线路, 低倍率线路, 香港智能, 台湾智能, 日本智能, 狮城智能, 韩国智能, 欧洲智能, 一键智能, 直接连接, 手动选择]}
+SelectBW: &SelectBW {type: select, proxies: [大带宽线路, 高质量线路, 低延迟线路, 低倍率线路, 香港智能, 台湾智能, 日本智能, 狮城智能, 韩国智能, 欧洲智能, 一键智能, 直接连接, 手动选择]}
+SelectLR: &SelectLR {type: select, proxies: [低倍率线路, 高质量线路, 低延迟线路, 大带宽线路, 香港智能, 台湾智能, 日本智能, 狮城智能, 韩国智能, 欧洲智能, 一键智能, 直接连接, 手动选择]}
 
 # ==================== 代理提供者 ====================
 proxy-providers:
@@ -84,7 +84,7 @@ unified-delay: true
 tcp-concurrent: true
 log-level: warning
 bind-address: '*'
-find-process-mode: 'off'
+find-process-mode: 'always'
 global-client-fingerprint: chrome
 keep-alive-interval: 15
 keep-alive-idle: 600
@@ -116,7 +116,7 @@ profile:
 
 # 流量嗅探
 sniffer:
-  enable: false
+  enable: true
   override-destination: false
   force-dns-mapping: true
   parse-pure-ip: true
@@ -177,12 +177,13 @@ proxy-groups:
   - {name: 国外流量,  <<: *SelectHQ, icon: https://git.imee.me/https://github.com/Koolson/Qure/raw/master/IconSet/Color/Global.png}
   - {name: 国内流量,  <<: *SelectDC, icon: https://git.imee.me/https://github.com/Koolson/Qure/raw/master/IconSet/Color/China.png}
   - {name: 兜底流量,  <<: *SelectHQ, icon: https://git.imee.me/https://github.com/Koolson/Qure/raw/master/IconSet/Color/Final.png}
+  - {name: 手动选择,  type: select, include-all: true, filter: *FilterAL, icon: https://git.imee.me/https://github.com/Koolson/Qure/raw/master/IconSet/Color/Clubhouse.png}
 
   # 线路特性层 - Fallback故障转移，按特性优化线路选择，建议修改位置顺序发挥线路优势
-  - {name: 高质量线路,  <<: *BaseFB, proxies: [美国智能, 香港智能, 台湾智能, 日本智能, 狮城智能, 韩国智能, 欧洲智能, 直接连接], icon: https://git.imee.me/https://github.com/Koolson/Qure/raw/master/IconSet/Color/Round_Robin_1.png}
-  - {name: 低延迟线路,  <<: *BaseFB, proxies: [香港智能, 台湾智能, 日本智能, 狮城智能, 韩国智能, 美国智能, 欧洲智能, 直接连接], icon: https://git.imee.me/https://github.com/Koolson/Qure/raw/master/IconSet/Color/Round_Robin_1.png}
-  - {name: 大带宽线路,  <<: *BaseFB, proxies: [狮城智能, 香港智能, 台湾智能, 日本智能, 韩国智能, 美国智能, 欧洲智能, 直接连接], icon: https://git.imee.me/https://github.com/Koolson/Qure/raw/master/IconSet/Color/Round_Robin_1.png}
-  - {name: 低倍率线路,  <<: *BaseFB, proxies: [日本智能, 香港智能, 台湾智能, 狮城智能, 韩国智能, 美国智能, 欧洲智能, 直接连接], icon: https://git.imee.me/https://github.com/Koolson/Qure/raw/master/IconSet/Color/Round_Robin_1.png}
+  - {name: 高质量线路,  <<: *BaseFB, proxies: [美国智能, 香港智能, 台湾智能, 日本智能, 狮城智能, 韩国智能, 欧洲智能, 直接连接, 手动选择], icon: https://git.imee.me/https://github.com/Koolson/Qure/raw/master/IconSet/Color/Round_Robin_1.png}
+  - {name: 低延迟线路,  <<: *BaseFB, proxies: [香港智能, 台湾智能, 日本智能, 狮城智能, 韩国智能, 美国智能, 欧洲智能, 直接连接, 手动选择], icon: https://git.imee.me/https://github.com/Koolson/Qure/raw/master/IconSet/Color/Round_Robin_1.png}
+  - {name: 大带宽线路,  <<: *BaseFB, proxies: [狮城智能, 香港智能, 台湾智能, 日本智能, 韩国智能, 美国智能, 欧洲智能, 直接连接, 手动选择], icon: https://git.imee.me/https://github.com/Koolson/Qure/raw/master/IconSet/Color/Round_Robin_1.png}
+  - {name: 低倍率线路,  <<: *BaseFB, proxies: [日本智能, 香港智能, 台湾智能, 狮城智能, 韩国智能, 美国智能, 欧洲智能, 直接连接, 手动选择], icon: https://git.imee.me/https://github.com/Koolson/Qure/raw/master/IconSet/Color/Round_Robin_1.png}
 
  # 地理策略层 - Smart智能选择，政策权重数值越大优先级越高，修改为关键词节点，比如 优:2;中:1;备:0.5，默认为1，优>中>备，使用时请修改
   - {name: 香港智能,  <<: *BaseSmart, filter: *FilterHK, include-all: true, policy-priority: '优:2;中:1;备:0.5', icon: https://git.imee.me/https://github.com/Koolson/Qure/raw/master/IconSet/Color/Hong_Kong.png}
@@ -222,12 +223,11 @@ rules:
   - RULE-SET,Google,谷歌服务
   - RULE-SET,Microsoft,微软服务
   - RULE-SET,Facebook,脸书服务
-  - RULE-SET,Cloudflare,直接连接
   - RULE-SET,Proxy,国外流量
   - RULE-SET,China,国内流量
 
   # IP规则
-  - RULE-SET,AdvertisingIP,REJECT
+  - RULE-SET,AdvertisingIP,REJECT,no-resolve
   - RULE-SET,PrivateIP,直接连接,no-resolve
   - RULE-SET,XPTVIP,直接连接,no-resolve
   - RULE-SET,AIIP,人工智能,no-resolve
@@ -237,7 +237,6 @@ rules:
   - RULE-SET,StreamingIP,国际媒体,no-resolve
   - RULE-SET,GoogleIP,谷歌服务,no-resolve
   - RULE-SET,FacebookIP,脸书服务,no-resolve
-  - RULE-SET,CloudflareIP,直接连接,no-resolve
   - RULE-SET,ProxyIP,国外流量,no-resolve
   - RULE-SET,ChinaIP,国内流量,no-resolve
 
@@ -273,7 +272,6 @@ rule-providers:
   Google:         {<<: *BehaviorDN, url: https://git.imee.me/https://github.com/666OS/rules/raw/release/mihomo/domain/Google.mrs}
   Microsoft:      {<<: *BehaviorDN, url: https://git.imee.me/https://github.com/666OS/rules/raw/release/mihomo/domain/Microsoft.mrs}  
   Facebook:       {<<: *BehaviorDN, url: https://git.imee.me/https://github.com/666OS/rules/raw/release/mihomo/domain/Facebook.mrs}
-  Cloudflare:     {<<: *BehaviorDN, url: https://git.imee.me/https://github.com/666OS/rules/raw/release/mihomo/domain/Cloudflare.mrs}  
   Proxy:          {<<: *BehaviorDN, url: https://git.imee.me/https://github.com/666OS/rules/raw/release/mihomo/domain/Proxy.mrs}
   China:          {<<: *BehaviorDN, url: https://git.imee.me/https://github.com/666OS/rules/raw/release/mihomo/domain/China.mrs}
 
@@ -288,7 +286,6 @@ rule-providers:
   StreamingIP:    {<<: *BehaviorIP, url: https://git.imee.me/https://github.com/666OS/rules/raw/release/mihomo/ip/Streaming.mrs}  
   GoogleIP:       {<<: *BehaviorIP, url: https://git.imee.me/https://github.com/666OS/rules/raw/release/mihomo/ip/Google.mrs}
   FacebookIP:     {<<: *BehaviorIP, url: https://git.imee.me/https://github.com/666OS/rules/raw/release/mihomo/ip/Facebook.mrs}  
-  CloudflareIP:   {<<: *BehaviorIP, url: https://git.imee.me/https://github.com/666OS/rules/raw/release/mihomo/ip/Cloudflare.mrs}
   ProxyIP:        {<<: *BehaviorIP, url: https://git.imee.me/https://github.com/666OS/rules/raw/release/mihomo/ip/Proxy.mrs} 
   ChinaIP:        {<<: *BehaviorIP, url: https://git.imee.me/https://github.com/666OS/rules/raw/release/mihomo/ip/China.mrs}
 # ==================== EOF ====================
