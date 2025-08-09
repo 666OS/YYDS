@@ -55,9 +55,6 @@ DOMAIN,th-a.pinduoduo.com,REJECT-NO-DROP,extended-matching,pre-matching
 DOMAIN,th-b.pinduoduo.com,REJECT-NO-DROP,extended-matching,pre-matching
 DOMAIN,th.pinduoduo.com,REJECT-NO-DROP,extended-matching,pre-matching
 
-#>航旅纵横
-URL-REGEX,^http?:\/\/(discardrp|startup)\.umetrip\.com\/gateway\/api\/umetrip\/native,REJECT,extended-matching
-
 #>高德地图
 AND,((URL-REGEX,^http:\/\/.+\/amdc\/mobileDispatch), (USER-AGENT,AMapiPhone*)),REJECT
 DOMAIN,amap-aos-info-nogw.amap.com,REJECT,extended-matching,pre-matching
@@ -67,8 +64,8 @@ DOMAIN-SUFFIX,v.smtcdns.com,REJECT,extended-matching,pre-matching
 #>滴滴出行
 DOMAIN,hd.xiaojukeji.com,REJECT,extended-matching,pre-matching
 DOMAIN,gwp.xiaojukeji.com,REJECT,extended-matching,pre-matching
-AND,((IP-ASN,45090,no-resolve), (DEST-PORT,25641), (PROTOCOL,TCP)),REJECT
-AND,((IP-ASN,63646,no-resolve), (DEST-PORT,25641), (PROTOCOL,TCP)),REJECT
+AND,((IP-ASN,45090), (DEST-PORT,25641), (PROTOCOL,TCP)),REJECT
+AND,((IP-ASN,63646), (DEST-PORT,25641), (PROTOCOL,TCP)),REJECT
 
 #>彩云天气
 DOMAIN,abyss.cyapi.cn,REJECT,extended-matching,pre-matching
@@ -115,7 +112,7 @@ DOMAIN-KEYWORD,trace.video.qq.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,gdt.qq.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,l.qq.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,ugdtimg.com,REJECT,extended-matching,pre-matching
-IP-CIDR,47.110.187.87/32,REJECT,no-resolve,pre-matching
+IP-CIDR,47.110.187.87/32,REJECT,pre-matching
 
 [URL Rewrite]
 #>云闪付 //wallet.95516.com
@@ -331,9 +328,6 @@ http-response-jq ^https:\/\/api\.gotokeep\.com\/config\/v3\/basic '.data.homeTab
 #>拼多多 //api.pinduoduo.com, api.yangkeduo.com
 拼多多 = type=http-response, pattern=^https:\/\/api\.pinduoduo\.com\/api\/alexa\/homepage\/hub\?, script-path=https://raw.ananaskop.com/Scripts/Pinduoduo.js, requires-body=true
 
-#>航旅纵横 //114.115.217.129, home.umetrip.com
-航旅纵横 = type=http-response, pattern=^http?:\/\/(114\.115\.217\.129)|(home\.umetrip\.com)\/gateway\/api\/umetrip\/native$, script-path=https://raw.ananaskop.com/Scripts/Umetrip.js, requires-body=true
-
 #>高德地图 //m5.amap.com, m5-zb.amap.com, oss.amap.com, sns.amap.com
 高德地图 = type=http-response, pattern=^https:\/\/m5\.amap\.com\/ws\/aos\/perception\/publicTravel\/beforeNavi\?, script-path=https://raw.ananaskop.com/Scripts/Amap.js, requires-body=true
 高德地图 = type=http-response, pattern=^https:\/\/m5\.amap\.com\/ws\/bus\/plan\/integrate\?, script-path=https://raw.ananaskop.com/Scripts/Amap.js, requires-body=true
@@ -362,4 +356,4 @@ http-response-jq ^https:\/\/api\.gotokeep\.com\/config\/v3\/basic '.data.homeTab
 微信链接限制解除 = type=http-response,pattern=^https\:\/\/(weixin110\.qq|security.wechat)\.com\/cgi-bin\/mmspamsupport-bin\/newredirectconfirmcgi\?, script-path=https://raw.ananaskop.com/Scripts/UnblockURLinWeChat.js, requires-body=true
 
 [MITM]
-hostname = %APPEND% wxa.wxs.qq.com, wximg.wxs.qq.com, wxsmw.wxs.qq.com, *.weibo.cn, *.weibo.com, weibo.com, *-mtop.cainiao.com, cn-acs.m.cainiao.com, acs.m.taobao.com, heic.alicdn.com, guide-acs.m.taobao.com, poplayer.template.alibaba.com, ad.12306.cn, mobile.12306.cn, *api.alipan.com, member.alipan.com, pan.baidu.com, image.mybank.icbc.com.cn, gab.122.gov.cn, flowplus.meituan.net, img.meituan.net, s3plus.meituan.net, osg-service.sgcc.com.cn, mp.weixin.qq.com, home.mi.com, wallet.95516.com, *.hupu.com, api.pinduoduo.com, video-dsp.pddpic.com, t-dsp.pinduoduo.com, images.pinduoduo.com, api.yangkeduo.com, 114.115.217.129, home.umetrip.com, m5.amap.com, m5-zb.amap.com, oss.amap.com, sns.amap.com, common.diditaxi.com.cn, freight.xiaojukeji.com, daijia.kuaidadi.com, ct.xiaojukeji.com, res.xiaojukeji.com, conf.diditaxi.com.cn, api.udache.com, 123.207.209.*, 112.53.55.225, 120.241.142.*, 120.241.143.*, 116.85.*, 139.199.240.84, api.caiyunapp.com, wrapper.cyapi.cn, weixin110.qq.com, security.wechat.com, m.baidu.com, www.baidu.com, zhidao.baidu.com, 42.187.199.248, api.gotokeep.com
+hostname = %APPEND% wxa.wxs.qq.com, wximg.wxs.qq.com, wxsmw.wxs.qq.com, *.weibo.cn, *.weibo.com, weibo.com, *-mtop.cainiao.com, cn-acs.m.cainiao.com, acs.m.taobao.com, heic.alicdn.com, guide-acs.m.taobao.com, poplayer.template.alibaba.com, ad.12306.cn, mobile.12306.cn, *api.alipan.com, member.alipan.com, pan.baidu.com, image.mybank.icbc.com.cn, gab.122.gov.cn, flowplus.meituan.net, img.meituan.net, s3plus.meituan.net, osg-service.sgcc.com.cn, mp.weixin.qq.com, home.mi.com, wallet.95516.com, *.hupu.com, api.pinduoduo.com, video-dsp.pddpic.com, t-dsp.pinduoduo.com, images.pinduoduo.com, api.yangkeduo.com, m5.amap.com, m5-zb.amap.com, oss.amap.com, sns.amap.com, common.diditaxi.com.cn, freight.xiaojukeji.com, daijia.kuaidadi.com, ct.xiaojukeji.com, res.xiaojukeji.com, conf.diditaxi.com.cn, api.udache.com, 123.207.209.*, 112.53.55.225, 120.241.142.*, 120.241.143.*, 116.85.*, 139.199.240.84, api.caiyunapp.com, wrapper.cyapi.cn, weixin110.qq.com, security.wechat.com, m.baidu.com, www.baidu.com, zhidao.baidu.com, 42.187.199.248, api.gotokeep.com
