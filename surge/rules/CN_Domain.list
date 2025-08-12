@@ -1,7 +1,7 @@
 # NAME: ChinaMaxNoIP
 # AUTHOR: blackmatrix7
 # REPO: https://github.com/blackmatrix7/ios_rule_script
-# UPDATED: 2025-08-10 02:09:51
+# UPDATED: 2025-08-12 02:09:56
 # DOMAIN: 255
 # DOMAIN-KEYWORD: 13
 # DOMAIN-SUFFIX: 117970
@@ -71126,7 +71126,6 @@
 .naiveadmin.com
 .naiveblue.com
 .naiwch.com
-.naixi.net
 .naixuecha.com
 .naiyouxuexi.com
 .najingtech.com
@@ -95322,6 +95321,7 @@
 .tuishujun.com
 .tuisnake.com
 .tuistone.com
+.tuitui.info
 .tuitui99.com
 .tuituifang.com
 .tuituisoft.com
