@@ -10,9 +10,9 @@
 # >>=====================================<<
 # 名称: OneTouch 一键连
 # 地址: https://github.com/666OS/YYDS
-# 版本: v3.5
+# 版本: v3.6
 # 作者: YYDS666
-# 更新: 2025 年 8 月 7 日
+# 更新: 2025 年 8 月 15 日
 # 频道: https://t.me/Pinched666
 # 描述: 一键连纯净版
 
@@ -36,10 +36,10 @@ FilterOT: &FilterOT '^(?!.*(DIRECT|直接连接|美|港|坡|台|新|日|韩|奥|
 FilterAL: &FilterAL '^(?!.*(DIRECT|直接连接|群|邀请|返利|循环|官网|客服|网站|网址|获取|订阅|流量|到期|机场|下次|版本|官址|备用|过期|已用|联系|邮箱|工单|贩卖|通知|倒卖|防止|国内|地址|频道|无法|说明|使用|提示|特别|访问|支持|教程|关注|更新|作者|加入|USE|USED|TOTAL|EXPIRE|EMAIL|Panel|Channel|Author))'
 
 # 策略组代理列表模板 - 预定义的代理节点优先级排序
-SelectAL: &SelectAL   {type: select, proxies: [故障转移, 香港自动, 台湾自动, 日本自动, 狮城自动, 韩国自动, 美国自动, 欧洲自动, 手动选择]}
-SelectOne: &SelectOne {type: select, proxies: [一键连, 香港自动, 台湾自动, 日本自动, 狮城自动, 韩国自动, 美国自动, 欧洲自动, 手动选择]}
-SelectUS: &SelectUS   {type: select, proxies: [美国自动, 一键连, 香港自动, 台湾自动, 日本自动, 狮城自动, 韩国自动, 欧洲自动, 手动选择]}
-SelectDC: &SelectDC   {type: select, proxies: [直接连接, 香港自动, 台湾自动, 日本自动, 狮城自动, 韩国自动, 美国自动, 欧洲自动, 手动选择]}
+SelectAL: &SelectAL   {type: select, proxies: [故障转移, 香港自动, 台湾自动, 日本自动, 狮城自动, 韩国自动, 美国自动, 欧洲自动, 手动选择, 直接连接]}
+SelectOne: &SelectOne {type: select, proxies: [一键连, 香港自动, 台湾自动, 日本自动, 狮城自动, 韩国自动, 美国自动, 欧洲自动, 手动选择, 直接连接]}
+SelectUS: &SelectUS   {type: select, proxies: [美国自动, 一键连, 香港自动, 台湾自动, 日本自动, 狮城自动, 韩国自动, 欧洲自动, 手动选择, 直接连接]}
+SelectDC: &SelectDC   {type: select, proxies: [直接连接, 一键连, 香港自动, 台湾自动, 日本自动, 狮城自动, 韩国自动, 美国自动, 欧洲自动, 手动选择]}
 
 # ==================== 代理提供者 ====================
 proxy-providers:
@@ -134,10 +134,8 @@ dns:
 
 # ==================== 代理策略组 ====================
 proxies:
-  - {name: 直接连接, type: direct, udp: true}
 
 proxy-groups:
-
   - {name: 一键连,    <<: *SelectAL, icon: https://git.imee.me/https://github.com/666OS/YYDS/raw/main/mihomo/image/mihomo.png}
   - {name: 故障转移,  <<: *BaseFB, proxies: [香港自动, 台湾自动, 狮城自动, 日本自动, 韩国自动, 美国自动, 手动选择], icon: https://git.imee.me/https://github.com/Koolson/Qure/raw/master/IconSet/Color/ULB.png}
   - {name: 人工智能,  <<: *SelectUS, icon: https://git.imee.me/https://github.com/Koolson/Qure/raw/master/IconSet/Color/AI.png}
@@ -145,6 +143,7 @@ proxy-groups:
   - {name: 国际媒体,  <<: *SelectOne, icon: https://git.imee.me/https://github.com/Koolson/Qure/raw/master/IconSet/Color/DomesticMedia.png}
   - {name: 国内流量,  <<: *SelectDC, icon: https://git.imee.me/https://github.com/Koolson/Qure/raw/master/IconSet/Color/China.png}
   - {name: 手动选择,  type: select, include-all: true, filter: *FilterAL, icon: https://git.imee.me/https://github.com/Koolson/Qure/raw/master/IconSet/Color/Clubhouse.png}
+  - {name: 直接连接,  type: select, proxies: [DIRECT], hidden: true, icon: https://git.imee.me/https://github.com/Koolson/Qure/raw/master/IconSet/Color/Direct.png}
   - {name: 香港自动,  <<: *BaseUT, filter: *FilterHK, include-all: true, icon: https://git.imee.me/https://github.com/Koolson/Qure/raw/master/IconSet/Color/Hong_Kong.png}
   - {name: 台湾自动,  <<: *BaseUT, filter: *FilterTW, include-all: true, icon: https://git.imee.me/https://github.com/Koolson/Qure/raw/master/IconSet/Color/Taiwan.png}
   - {name: 日本自动,  <<: *BaseUT, filter: *FilterJP, include-all: true, icon: https://git.imee.me/https://github.com/Koolson/Qure/raw/master/IconSet/Color/Japan.png}
@@ -156,12 +155,12 @@ proxy-groups:
 # ==================== 规则路由 ====================
 rules: 
   # 域名规则
-  - RULE-SET,ConnCheck,DIRECT
-  - RULE-SET,Private,DIRECT
-  - RULE-SET,Direct,DIRECT
-  - RULE-SET,AppleCN,DIRECT
-  - RULE-SET,Download,DIRECT
-  - RULE-SET,XPTV,DIRECT
+  - RULE-SET,ConnCheck,直接连接
+  - RULE-SET,Private,直接连接
+  - RULE-SET,Direct,直接连接
+  - RULE-SET,AppleCN,直接连接
+  - RULE-SET,Download,直接连接
+  - RULE-SET,XPTV,直接连接
   - RULE-SET,AI,人工智能
   - RULE-SET,Telegram,社交平台
   - RULE-SET,SocialMedia,社交平台
@@ -171,14 +170,14 @@ rules:
   - RULE-SET,Disney,国际媒体
   - RULE-SET,HBO,国际媒体
   - RULE-SET,Proxy,一键连
-  - RULE-SET,China,DIRECT
+  - RULE-SET,China,国内流量
   # IP规则
-  - RULE-SET,PrivateIP,DIRECT,no-resolve
+  - RULE-SET,PrivateIP,直接连接,no-resolve
   - RULE-SET,TelegramIP,社交平台,no-resolve
   - RULE-SET,SocialMediaIP,社交平台,no-resolve
   - RULE-SET,NetflixIP,国际媒体,no-resolve
   - RULE-SET,ProxyIP,一键连,no-resolve
-  - RULE-SET,ChinaIP,DIRECT,no-resolve
+  - RULE-SET,ChinaIP,国内流量,no-resolve
   # 兜底规则
   - MATCH,一键连
 
