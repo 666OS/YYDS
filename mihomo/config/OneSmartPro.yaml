@@ -155,8 +155,6 @@ dns:
     - +.push.apple.com
 
 # ==================== 代理策略组 ====================
-proxies:
-
 proxy-groups:
   # 应用策略层 - Select手动选择，支持多场景应用优化，使用时默认，也可修改
   - {name: 一键智能,  <<: *SelectAL, icon: https://git.imee.me/https://github.com/666OS/YYDS/raw/main/mihomo/image/mihomo.png}

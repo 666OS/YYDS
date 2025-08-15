@@ -133,8 +133,6 @@ dns:
     - +.push.apple.com
 
 # ==================== 代理策略组 ====================
-proxies:
-
 proxy-groups:
   - {name: 一键连,    <<: *SelectAL, icon: https://git.imee.me/https://github.com/666OS/YYDS/raw/main/mihomo/image/mihomo.png}
   - {name: 故障转移,  <<: *BaseFB, proxies: [香港自动, 台湾自动, 狮城自动, 日本自动, 韩国自动, 美国自动, 手动选择], icon: https://git.imee.me/https://github.com/Koolson/Qure/raw/master/IconSet/Color/ULB.png}
