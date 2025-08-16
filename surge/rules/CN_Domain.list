@@ -1,13 +1,13 @@
 # NAME: ChinaMaxNoIP
 # AUTHOR: blackmatrix7
 # REPO: https://github.com/blackmatrix7/ios_rule_script
-# UPDATED: 2025-08-12 02:09:56
+# UPDATED: 2025-08-16 02:10:01
 # DOMAIN: 255
 # DOMAIN-KEYWORD: 13
-# DOMAIN-SUFFIX: 117970
+# DOMAIN-SUFFIX: 117976
 # PROCESS-NAME: 12
 # USER-AGENT: 65
-# TOTAL: 118315
+# TOTAL: 118321
 .0.zone
 .00.net
 .000.link
@@ -31672,6 +31672,7 @@
 .dzlems.net
 .dzljy.com
 .dzllzg.com
+.dzlndygh.com
 .dzmachines.com
 .dzmhospital.com
 .dzng.com
@@ -45824,6 +45825,7 @@
 .hcccia.com
 .hcciot.com
 .hcclhealthcare.com
+.hccoeutg.com
 .hccpcba.com
 .hcdamai.com
 .hcdiy.com
@@ -92574,6 +92576,7 @@
 .tecolighting.com
 .tecompharma.com
 .tecreal.com
+.tecunonline.com
 .tecyle.com
 .teda-veolia.com
 .tedagas.com
@@ -103038,6 +103041,7 @@
 .xct168.com
 .xctmr.com
 .xcukezmr.com
+.xcultur.com
 .xcurrency.com
 .xcvec.com
 .xcvmbyte.com
@@ -106900,7 +106904,9 @@
 .xxxhhh.com
 .xxxinwen.com
 .xxxoooxxxooo.net
+.xxxx88xxxx.com
 .xxxx92xxxx.com
+.xxxx96xxxx.com
 .xxxxxx6.com
 .xxxzzlm.org
 .xxycw.com
