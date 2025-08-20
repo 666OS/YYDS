@@ -1,13 +1,13 @@
 # NAME: ChinaMaxNoIP
 # AUTHOR: blackmatrix7
 # REPO: https://github.com/blackmatrix7/ios_rule_script
-# UPDATED: 2025-08-16 02:10:01
+# UPDATED: 2025-08-20 02:10:06
 # DOMAIN: 255
 # DOMAIN-KEYWORD: 13
-# DOMAIN-SUFFIX: 117976
+# DOMAIN-SUFFIX: 117975
 # PROCESS-NAME: 12
 # USER-AGENT: 65
-# TOTAL: 118321
+# TOTAL: 118320
 .0.zone
 .00.net
 .000.link
@@ -36613,7 +36613,6 @@
 .furielec.com
 .furniture-channel.com
 .furongedu.com
-.furrybar.com
 .furrychina.com
 .furuijiaju.vip
 .furuise.com
