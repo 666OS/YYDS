@@ -1,13 +1,13 @@
 # NAME: ChinaMaxNoIP
 # AUTHOR: blackmatrix7
 # REPO: https://github.com/blackmatrix7/ios_rule_script
-# UPDATED: 2025-08-24 02:09:27
-# DOMAIN: 255
+# UPDATED: 2025-08-28 02:10:21
+# DOMAIN: 277
 # DOMAIN-KEYWORD: 13
-# DOMAIN-SUFFIX: 117969
+# DOMAIN-SUFFIX: 117968
 # PROCESS-NAME: 12
 # USER-AGENT: 65
-# TOTAL: 118314
+# TOTAL: 118335
 .0.zone
 .00.net
 .000.link
@@ -25098,7 +25098,6 @@
 .copl.com.hk
 .copperalliance.asia
 .copperhome.net
-.copy-manga.com
 .copyedu.com
 .copyfuture.com
 .copyswisswatches.com
@@ -28595,6 +28594,7 @@
 .delixidrive.com
 .deliyun.com
 .dell-alw.com
+.dell-brand.com
 .dell027.com
 .dellecs.com
 .dellemc-solution.com
@@ -36558,6 +36558,7 @@
 .functionads.com
 .functionaltextilesshanghai.com
 .functioncool.com
+.functiongraph.run
 .fund001.com
 .fundebug.com
 .fundebug.net
@@ -67262,9 +67263,7 @@
 .manfen5.com
 .manfred-auto.com
 .manfrottoclub.com
-.mangacopy.com
 .mangafuna.xyz
-.mangafunb.fun
 .manganesenanhai.com
 .mangg.com
 .mangguo.com
@@ -76686,6 +76685,7 @@
 .plateno.com
 .platenogroup.com
 .platform-cn.com
+.platform.dell.com
 .platinum-traveller.com
 .platinumchina.com
 .play-analytics.com
@@ -81585,6 +81585,7 @@
 .robam.com
 .robei.com
 .roboeyeai.com
+.robomaster.com
 .roboo.com
 .robook.com
 .robopeak.net
@@ -102165,7 +102166,6 @@
 .www.adobe.com
 .www.cg
 .www.com.my
-.www.dell-brand.com
 .www.dell.com
 .www.djivideos.com
 .www.gov.mo
@@ -109847,7 +109847,6 @@
 .ymlt.vip
 .ymm56.com
 .ymmfa.com
-.ymmobi.com
 .ymnsdk.com
 .ymoxuan.com
 .ympc88.com
@@ -117951,6 +117950,7 @@
 a.xttv.top
 abclive2-lh.akamaihd.net
 admob-cn.com
+afcs.dell.com
 aka-amd-njpwworld-hls-enlive.akamaized.net
 alibaba.cdn.steampipe.steamcontent.com
 aljazeera-eng-hd-live.hls.adaptive.level3.net
@@ -117990,28 +117990,42 @@ cgntv-glive.ofsdelivery.net
 channellive.leshantv.net
 clickserve.cc-dt.com
 client.amplifi.com
+clientperipherals.dell.com
 cn.download.nvidia.com
 cn.widevine.com
 crl.pki.goog
 crls.pki.goog
+customization-cdn.dell.com
 d9af5a60.edmonst.net
 dartsearch-cn.net
+dds.dell.com
+dl.dell.com
 doubleclick-cn.net
 doubleclick.net
 download.jetbrains.com
 download.qatp1.net
 e1.vdowowza.vip.hk1.tvb.com
+ea2cn-dev-outlet.dell.com
+ea2cn-prod-outlet.dell.com
+ea2cn-staging-outlet.dell.com
 edge.music-choice-play-chaina1.top.comcast.net
 emoi-cncdn.bing.com
 f24hls-i.akamaihd.net
 fash1043.cloudycdn.services
+fcs.dell.com
 file.mb.leshantv.net
 flv.drs.tv.yatv.tv
 fm901.cityfm.tw
 fm929.cityfm.tw
 fm971.cityfm.tw
 fm983.cityfm.tw
+fta.dell.com
+ftaapj.dell.com
+ftaemea.dell.com
+ftasitapj.dell.com
 gayotv.net
+gbxgateway-dev.dell.com
+gbxgateway.dell.com
 gog-cdn-fastly.gog.com
 gog-cdn.akamaized.net
 gogalaxy.gog-statics.com
@@ -118121,13 +118135,18 @@ rthklive1-lh.akamaihd.net
 rthklive2-lh.akamaihd.net
 rtvcdn.com.au
 scanservice1.qcpp1.net
+scene7-cdn.dell.com
 sdn-global-live-streaming-packager-cache-3qsdn.akamaized.net
 seb.sason.top
 service.urchin.com
+si.cdn.dell.com
 silverlight.dlservice.microsoft.com
 slive.ytn.co.kr
 slupdate.dlservice.microsoft.com
+sm.dell.com
 sms.imagetasks.com
+snp.cdn.dell.com
+snpi.dell.com
 sohucao.duapp.com
 staging-controlbe.floonet.goog
 staging-databe.floonet.goog
@@ -118149,6 +118168,7 @@ stream01.dqtv123.com
 stream1.shopch.jp
 stream2.cprnetwork.org
 streamipcf.akamaized.net
+supportassist.dell.com
 surface.downloads.prss.microsoft.com
 test.gbugs-qa.chromium.org
 time.xtracloud.net
@@ -118173,6 +118193,7 @@ wowza.montevideo.com.uy
 wowza.ner.gov.tw
 wpc.124ce.sigmacdn.net
 wuwm.streamguys1.com
+www-csb.dell.com
 www.cbsnews.com
 www.destinationurl.com
 www.filmon.com
