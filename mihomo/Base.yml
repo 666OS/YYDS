@@ -2,7 +2,7 @@ mixed-port: 7890
 allow-lan: false
 unified-delay: true
 tcp-concurrent: true
-log-level: info
+log-level: warning
 bind-address: "*"
 find-process-mode: always
 global-client-fingerprint: chrome
