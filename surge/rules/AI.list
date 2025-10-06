@@ -5,6 +5,7 @@ DOMAIN,apple-relay.cloudflare.com
 DOMAIN,apple-relay.fastly-edge.com
 DOMAIN,cp4.cloudflare.com
 DOMAIN,guzzoni.apple.com
+DOMAIN,gspe1-ssl.ls.apple.com
 
 # Anthropic
 # > Claude
