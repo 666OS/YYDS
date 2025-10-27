@@ -91,3 +91,5 @@ DOMAIN-SUFFIX,x.ai
 # > Doubao Cici
 DOMAIN-SUFFIX,cici.com,extended-matching
 DOMAIN-SUFFIX,ciciai.com,extended-matching
+DOMAIN-SUFFIX,dola.com,extended-matching
+DOMAIN-SUFFIX,abtest-sg.byteoversea.com,extended-matching

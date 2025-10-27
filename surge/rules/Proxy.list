@@ -502,9 +502,11 @@ DOMAIN-SUFFIX,zoominfo.com
 DOMAIN-SUFFIX,zoom.us
 DOMAIN,addons.mozilla.org
 DOMAIN,community.oneplus.com
-DOMAIN,login.alibaba.com
 DOMAIN,wego.here.com
 
+# Alibaba
+DOMAIN,login.alibaba.com
+DOMAIN,merchant-rating.alibaba.com
 # > Alphabet
 DOMAIN-SUFFIX,go.dev
 DOMAIN-SUFFIX,golang.org
