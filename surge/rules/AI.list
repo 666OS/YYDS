@@ -10,6 +10,7 @@ DOMAIN,gspe1-ssl.ls.apple.com
 # Anthropic
 # > Claude
 DOMAIN-SUFFIX,claude.ai
+DOMAIN-SUFFIX,claude.com
 DOMAIN-SUFFIX,anthropic.com
 
 # OpenAI
