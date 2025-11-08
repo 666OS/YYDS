@@ -122,12 +122,18 @@ dns:
   enhanced-mode: fake-ip
   fake-ip-range: 198.18.0.1/16
   default-nameserver:
-    - 119.29.29.29
-    - 180.184.1.1
-    - 223.5.5.5
+    - tls://223.5.5.5
+    - tls://223.6.6.6
   nameserver:
+    - https://cloudflare-dns.com/dns-query
+    - https://dns.google/dns-query
+  proxy-server-nameserver:
     - https://dns.alidns.com/dns-query
     - https://doh.pub/dns-query
+  direct-nameserver:
+    - https://dns.alidns.com/dns-query
+    - https://doh.pub/dns-query
+  respect-rules: true
   fake-ip-filter:
     - rule-set:ConnCheck
     - rule-set:Private
