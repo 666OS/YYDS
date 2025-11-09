@@ -141,7 +141,8 @@ dns:
     rule-set:Speedtest,Twitter,Telegram,SocialMedia,NewsMedia,Games,Crypto,Emby,Netflix,YouTube,Streaming,Apple,Google,Microsoft,Proxy:
       - https://dns.google/dns-query
       - https://cloudflare-dns.com/dns-query
-
+    rule-set:Advertising,Tracking: # 广告拦截，跟踪拦截，不进行DNS解析，直接返回成功
+      - rcode://success
 
 # ==================== 代理策略组 ====================
 proxy-groups:
@@ -222,10 +223,6 @@ proxy-groups:
 
 # ==================== 规则路由 ====================
 rules: 
-  # 拦截规则
-  - RULE-SET,Tracking,REJECT
-  - RULE-SET,Advertising,REJECT
-
   # 域名规则
   - RULE-SET,LocationDKS,抖快书定位
   - RULE-SET,ConnCheck,直接连接
