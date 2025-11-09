@@ -114,27 +114,26 @@ dns:
   ipv6: true
   enhanced-mode: fake-ip
   fake-ip-range: 198.18.0.1/16
+  fake-ip-filter:
+    - "*"
+    - "+.lan"
+    - "+.local"
+    - "+.market.xiaomi.com"
+    - "+.push.apple.com"
+    - "+.aaplimg.com"
+    - rule-set:ConnCheck
+    - rule-set:Private
+    - rule-set:China
   default-nameserver:
     - tls://223.5.5.5
     - tls://223.6.6.6
   nameserver:
-    - https://cloudflare-dns.com/dns-query
-    - https://dns.google/dns-query
-  proxy-server-nameserver:
-    - https://dns.alidns.com/dns-query
     - https://doh.pub/dns-query
-  direct-nameserver:
     - https://dns.alidns.com/dns-query
-    - https://doh.pub/dns-query
-  respect-rules: true
-  fake-ip-filter:
-    - rule-set:ConnCheck
-    - rule-set:Private
-    - rule-set:China
-    - +.miwifi.com
-    - +.docker.io
-    - +.market.xiaomi.com
-    - +.push.apple.com
+  nameserver-policy:  #需要国外DNS解析的规则集
+    rule-set:AI,Telegram,SocialMedia,Emby,Streaming,Proxy:
+      - https://dns.google/dns-query
+      - https://cloudflare-dns.com/dns-query
 
 # ==================== 代理策略组 ====================
 proxy-groups:
