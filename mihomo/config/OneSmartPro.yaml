@@ -138,28 +138,21 @@ dns:
   ipv6: true
   enhanced-mode: fake-ip
   fake-ip-range: 198.18.0.1/16
+  default-nameserver:
+    - 119.29.29.29
+    - 180.184.1.1
+    - 223.5.5.5
+  nameserver:
+    - https://dns.alidns.com/dns-query
+    - https://doh.pub/dns-query
   fake-ip-filter:
-    - "*"
-    - "+.lan"
-    - "+.local"
-    - "+.market.xiaomi.com"
-    - "+.push.apple.com"
-    - "+.aaplimg.com"
     - rule-set:ConnCheck
     - rule-set:Private
     - rule-set:China
-  default-nameserver:
-    - tls://223.5.5.5
-    - tls://223.6.6.6
-  nameserver:
-    - https://doh.pub/dns-query
-    - https://dns.alidns.com/dns-query
-  nameserver-policy:  #需要国外DNS解析的规则集
-    rule-set:AI,Speedtest,Telegram,SocialMedia,NewsMedia,Games,Crypto,Emby,Streaming,Apple,Google,Microsoft,Facebook,Proxy:
-      - https://dns.google/dns-query
-      - https://cloudflare-dns.com/dns-query
-    rule-set:Advertising,Tracking: # 广告拦截，跟踪拦截，不进行DNS解析，直接返回成功
-      - rcode://success
+    - +.miwifi.com
+    - +.docker.io
+    - +.market.xiaomi.com
+    - +.push.apple.com
 
 # ==================== 代理策略组 ====================
 proxy-groups:
@@ -204,6 +197,10 @@ proxy-groups:
 
 # ==================== 规则路由 ====================
 rules: 
+  # 拦截规则
+  - RULE-SET,Tracking,REJECT
+  - RULE-SET,Advertising,REJECT
+
   # 域名规则
   - RULE-SET,ConnCheck,直接连接
   - RULE-SET,Private,直接连接
