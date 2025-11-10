@@ -3,9 +3,11 @@ DOMAIN-SUFFIX,smoot.apple.com
 DOMAIN,apple-relay.apple.com
 DOMAIN,apple-relay.cloudflare.com
 DOMAIN,apple-relay.fastly-edge.com
+DOMAIN-SUFFIX,gateway.icloud.com
 DOMAIN,cp4.cloudflare.com
 DOMAIN,guzzoni.apple.com
 DOMAIN,gspe1-ssl.ls.apple.com
+DOMAIN-SUFFIX,apps.mzstatic.com
 
 # Anthropic
 # > Claude
@@ -89,8 +91,8 @@ DOMAIN-SUFFIX,grok.com
 DOMAIN-SUFFIX,x.ai
 
 # Doubao
-# > Doubao Cici
+# > Doubao Dola
 DOMAIN-SUFFIX,cici.com,extended-matching
 DOMAIN-SUFFIX,ciciai.com,extended-matching
 DOMAIN-SUFFIX,dola.com,extended-matching
-DOMAIN-SUFFIX,abtest-sg.byteoversea.com,extended-matching
+DOMAIN-SUFFIX,byteoversea.com,extended-matching

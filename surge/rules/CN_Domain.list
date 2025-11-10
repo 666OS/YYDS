@@ -1,13 +1,13 @@
 # NAME: ChinaMaxNoIP
 # AUTHOR: blackmatrix7
 # REPO: https://github.com/blackmatrix7/ios_rule_script
-# UPDATED: 2025-11-02 02:09:57
+# UPDATED: 2025-11-10 02:10:40
 # DOMAIN: 275
 # DOMAIN-KEYWORD: 13
-# DOMAIN-SUFFIX: 116855
+# DOMAIN-SUFFIX: 116852
 # PROCESS-NAME: 12
 # USER-AGENT: 65
-# TOTAL: 117220
+# TOTAL: 117217
 .0.zone
 .00.net
 .000.link
@@ -52275,7 +52275,6 @@
 .imliuyi.com
 .imlizhi.com
 .immeee.com
-.immersivetranslate.com
 .immfast.com
 .immi520.com
 .immiexpo.com
@@ -52455,7 +52454,6 @@
 .infertilitybridge.com
 .infimotion.com
 .infineon-autoeco.com
-.infineon.com
 .infini-ai.com
 .infinisign.com
 .infinitescript.com
@@ -92247,7 +92245,6 @@
 .thzu.cc
 .ti-node.com
 .ti-solar.com
-.ti.com
 .ti0s.com
 .tiamaes.com
 .tian-gang.com
