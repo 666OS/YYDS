@@ -10,9 +10,9 @@
 # >>=====================================<<
 # 名称: OneSmart 极简版
 # 地址: https://github.com/666OS/YYDS
-# 版本: v1.2.5
+# 版本: v1.2.6
 # 作者: YYDS666
-# 更新: 2025 年 8 月 15 日
+# 更新: 2025 年 11 月 11 日
 # 频道: https://t.me/Pinched666
 # 描述: 基于全功能版本精简而来，保留核心功能
 
@@ -122,7 +122,7 @@ dns:
     - https://dns.alidns.com/dns-query
     - https://doh.pub/dns-query
   fake-ip-filter:
-    - rule-set:ConnCheck
+    - rule-set:Direct
     - rule-set:Private
     - rule-set:China
     - +.miwifi.com
@@ -155,8 +155,8 @@ proxy-groups:
 # ==================== 规则路由 ====================
 rules: 
   # 域名规则
-  - RULE-SET,ConnCheck,直接连接
   - RULE-SET,Private,直接连接
+  - RULE-SET,Direct,直接连接
   - RULE-SET,XPTV,直接连接
   - RULE-SET,AI,人工智能
   - RULE-SET,Telegram,社交平台
@@ -189,7 +189,7 @@ BehaviorIP: &BehaviorIP {type: http, behavior: ipcidr, format: mrs, interval: 86
 rule-providers: 
   # 域名规则
   Private:        {<<: *BehaviorDN, url: https://git.imee.me/https://github.com/666OS/rules/raw/release/mihomo/domain/Private.mrs}
-  ConnCheck:      {<<: *BehaviorDN, url: https://git.imee.me/https://github.com/666OS/rules/raw/release/mihomo/domain/ConnCheck.mrs}
+  Direct:         {<<: *BehaviorDN, url: https://git.imee.me/https://github.com/666OS/rules/raw/release/mihomo/domain/Direct.mrs}
   AI:             {<<: *BehaviorDN, url: https://git.imee.me/https://github.com/666OS/rules/raw/release/mihomo/domain/AI.mrs}  
   Telegram:       {<<: *BehaviorDN, url: https://git.imee.me/https://github.com/666OS/rules/raw/release/mihomo/domain/Telegram.mrs}
   SocialMedia:    {<<: *BehaviorDN, url: https://git.imee.me/https://github.com/666OS/rules/raw/release/mihomo/domain/SocialMedia.mrs}
