@@ -1,0 +1,18 @@
+{
+    "name": "3D",
+    "description": "by 666",
+    "icons": [
+      {
+        "name": "AppStore",
+        "url": "https://raw.githubusercontent.com/666OS/YYDS/main/icon/3d/AppStore.png"
+      },
+      {
+        "name": "disney",
+        "url": "https://raw.githubusercontent.com/666OS/YYDS/main/icon/3d/disney.png"
+      },
+      {
+        "name": "Netflix",
+        "url": "https://raw.githubusercontent.com/666OS/YYDS/main/icon/3d/Netflix.png"
+      }
+    ]
+  }
