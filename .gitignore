@@ -1,13 +1,34 @@
-# macOS 特定文件
-mihomo/.DS_Store
+# macOS
 .DS_Store
+.AppleDouble
+.LSOverride
 ._*
-.DS_Store
-.DS_Store?
-._*
+Icon
 .Spotlight-V100
 .Trashes
-Icon?
-ehthumbs.db
+# Linux
+*~
+.cache
+.directory
+.nfs*
+# IDE / Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*.bak
+*.tmp
+# Logs
+*.log
+# System files
 Thumbs.db
-.DS_Store
+ehthumbs.db
+Desktop.ini
+# Python / Node / Others
+__pycache__/
+node_modules/
+.cunzhi-memory
+# Git
+.git/
+docs/
+mihomo/.DS_Store
