@@ -1,4 +1,4 @@
-## TG 频道: [拿捏🤌](https://t.me/Pinched666)
+## TG 频道: [拿捏🤌](https://t.me/Pinched666) ｜ 规则库: [Rules](https://github.com/666OS/rules/tree/release)  ｜ 客户端: [ClashMac](https://github.com/666OS/ClashMac) 
 
 > 中文: 禁止任何形式的转载或发布至"中国互联网"平台。
 > English: No reproduction or publication in any form on “Chinese internet” platforms is allowed.
