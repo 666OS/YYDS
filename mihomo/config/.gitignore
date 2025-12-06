@@ -1,0 +1,34 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+Icon
+.Spotlight-V100
+.Trashes
+# Linux
+*~
+.cache
+.directory
+.nfs*
+# IDE / Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*.bak
+*.tmp
+# Logs
+*.log
+# System files
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+# Python / Node / Others
+__pycache__/
+node_modules/
+.cunzhi-memory
+# Git
+.git/
+docs/
+mihomo/.DS_Store
