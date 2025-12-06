@@ -10,9 +10,9 @@
 # >>=====================================<<
 # 名称: OneTouch 一键连
 # 地址: https://github.com/666OS/YYDS
-# 版本: v3.8
+# 版本: v3.9.0
 # 作者: YYDS666
-# 更新: 2025 年 11 月 27 日
+# 更新: 2025 年 12 月 6 日
 # 频道: https://t.me/Pinched666
 # 描述: 一键连纯净版
 
@@ -160,6 +160,9 @@ proxy-groups:
   
 # ==================== 规则路由 ====================
 rules: 
+  # 拦截规则
+  - AND,((DST-PORT,443),(NETWORK,UDP)),REJECT  # 阻止 QUIC
+
   # 域名规则
   - RULE-SET,Private,直接连接
   - RULE-SET,Direct,直接连接

@@ -10,9 +10,9 @@
 # >>=====================================<<
 # 名称: OneSmartPro 一键智能代理
 # 地址: https://github.com/666OS/YYDS
-# 版本: v1.2.7
+# 版本: v1.3.0
 # 作者: YYDS666
-# 更新: 2025 年 11 月 27 日
+# 更新: 2025 年 12 月 6 日
 # 频道: https://t.me/Pinched666
 # 描述: 基于Mihomo的智能代理配置，提供四层架构智能路由和全场景规则集
 #       集成Smart算法自动选择最优节点，支持故障转移和负载均衡
@@ -208,6 +208,7 @@ rules:
   # 拦截规则
   - RULE-SET,Tracking,REJECT
   - RULE-SET,Advertising,REJECT
+  - AND,((DST-PORT,443),(NETWORK,UDP)),REJECT  # 阻止 QUIC
 
   # 域名规则
   - RULE-SET,Private,直接连接
