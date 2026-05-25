@@ -10,9 +10,9 @@
 # >>=====================================<<
 # 名称: MihomoPro 高大全版
 # 地址: https://github.com/666OS/YYDS
-# 版本: v26.1.1
+# 版本: v26.1.2
 # 作者: YYDS666
-# 更新: 2026 年 1 月 30 日
+# 更新: 2026 年 5 月 25 日
 # 频道: https://t.me/Pinched666
 # 描述: 在proxy-providers加入您的机场订阅链接（代理提供者）
 
@@ -62,7 +62,7 @@ redir-port: 7892
 mixed-port: 7893
 tproxy-port: 7895
 ipv6: true
-allow-lan: true
+allow-lan: false
 unified-delay: true
 tcp-concurrent: true
 log-level: warning
@@ -75,10 +75,8 @@ keep-alive-idle: 600
 authentication:
   - mihomo:yyds666
 skip-auth-prefixes:
-  - 192.168.1.0/24
-  - 192.168.31.0/24
-  - 192.168.100.0/24
   - 127.0.0.1/8
+  - ::1/128
 
 # 实验性功能
 experimental:
@@ -263,7 +261,7 @@ rules:
   - RULE-SET,StreamingIP,国际媒体,no-resolve
   - RULE-SET,GoogleIP,谷歌服务,no-resolve
   - RULE-SET,ProxyIP,国外流量,no-resolve
-  - RULE-SET,ChinaIP,国内流量
+  - RULE-SET,ChinaIP,国内流量,no-resolve
 
   # 兜底规则
   - MATCH,兜底流量
