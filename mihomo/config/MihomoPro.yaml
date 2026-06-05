@@ -10,9 +10,9 @@
 # >>=====================================<<
 # 名称: MihomoPro 高大全版
 # 地址: https://github.com/666OS/YYDS
-# 版本: v26.1.2
+# 版本: v26.1.3
 # 作者: YYDS666
-# 更新: 2026 年 5 月 25 日
+# 更新: 2026 年 6 月 5 日
 # 频道: https://t.me/Pinched666
 # 描述: 在proxy-providers加入您的机场订阅链接（代理提供者）
 
@@ -21,10 +21,10 @@
 BaseProvider: &BaseProvider {type: http, interval: 86400, proxy: DIRECT, health-check: {enable: true, url: 'https://www.google.com/generate_204', interval: 300}, filter: '^(?!.*(群|邀请|返利|循环|官网|客服|网站|网址|获取|订阅|流量|到期|机场|下次|版本|官址|备用|过期|已用|联系|邮箱|工单|贩卖|通知|倒卖|防止|国内|地址|频道|无法|说明|使用|提示|特别|访问|支持|教程|关注|更新|作者|加入|USE|USED|TOTAL|EXPIRE|EMAIL|Panel|Channel|Author))'}
 
 # 策略组类型模板 - 定义不同的策略组基础配置
-BaseFB: &BaseFB {type: fallback, interval: 200, lazy: true, url: 'https://www.google.com/generate_204'}
-BaseCH: &BaseCH {type: load-balance, interval: 200, lazy: true, url: 'https://www.google.com/generate_204', strategy: consistent-hashing, hidden: true}
-BaseCR: &BaseCR {type: load-balance, interval: 200, lazy: true, url: 'https://www.google.com/generate_204', strategy: round-robin, hidden: true}
-BaseUT: &BaseUT {type: url-test, interval: 200, lazy: true, url: 'https://www.google.com/generate_204', hidden: true}
+BaseFB: &BaseFB {type: fallback, interval: 200, lazy: true, empty-fallback: REJECT, url: 'https://www.google.com/generate_204'}
+BaseCH: &BaseCH {type: load-balance, interval: 200, lazy: true, empty-fallback: REJECT, url: 'https://www.google.com/generate_204', strategy: consistent-hashing, hidden: true}
+BaseCR: &BaseCR {type: load-balance, interval: 200, lazy: true, empty-fallback: REJECT, url: 'https://www.google.com/generate_204', strategy: round-robin, hidden: true}
+BaseUT: &BaseUT {type: url-test, interval: 200, lazy: true, empty-fallback: REJECT, url: 'https://www.google.com/generate_204', hidden: true}
 
 # 节点筛选正则表达式 - 基于地理位置和关键词过滤
 FilterHK: &FilterHK '^(?=.*(?i)(港|🇭🇰|HK|Hong|HKG))(?!.*(排除1|排除2|5x)).*$'
