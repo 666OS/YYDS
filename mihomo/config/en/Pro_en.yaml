@@ -1,0 +1,250 @@
+# >>=====================================<<
+# ||                                     ||
+# ||      ██████╗  ██████╗  ██████╗      ||
+# ||     ██╔════╝ ██╔════╝ ██╔════╝      ||
+# ||     ███████╗ ███████╗ ███████╗      ||
+# ||     ██╔═══██╗██╔═══██╗██╔═══██╗     ||
+# ||     ╚██████╔╝╚██████╔╝╚██████╔╝     ||
+# ||      ╚═════╝  ╚═════╝  ╚═════╝      ||
+# ||                                     ||
+# >>=====================================<<
+# Pro_en Edition v2.0.0 by YYDS666 (2026-05-25)
+# Repo: https://github.com/666OS/YYDS | Channel: https://t.me/Pinched666
+# Add your subscription links in proxy-providers, or insert custom nodes under proxies
+
+# Anchors
+x-base-provider: &base-provider {type: http, interval: 86400, proxy: DIRECT, health-check: {enable: true, url: 'https://www.google.com/generate_204', interval: 300}, filter: '^(?!.*(群|邀请|返利|循环|官网|客服|网站|网址|获取|订阅|流量|到期|机场|下次|版本|官址|备用|过期|已用|联系|邮箱|工单|贩卖|通知|倒卖|防止|国内|地址|频道|无法|说明|使用|提示|特别|访问|支持|教程|关注|更新|作者|加入|USE|USED|TOTAL|EXPIRE|EMAIL|Panel|Channel|Author))'}
+
+x-url-test:     &url-test     { type: url-test, url: "https://www.gstatic.com/generate_204", interval: 300, empty-fallback: REJECT, include-all: true, hidden: true, tolerance: 50 }
+x-load-balance: &load-balance { type: load-balance, url: "https://www.gstatic.com/generate_204", interval: 300, empty-fallback: REJECT, include-all: true, hidden: true, strategy: consistent-hashing }
+x-fallback:     &fallback     { type: fallback, url: "https://www.gstatic.com/generate_204", interval: 300, empty-fallback: REJECT }
+
+x-filter-hk:    &filter-hk    "(?i)港|hk|hongkong|hong kong"
+x-filter-tw:    &filter-tw    "(?i)台|tw|taiwan|taipei"
+x-filter-jp:    &filter-jp    "(?i)日|jp|japan|tokyo"
+x-filter-sg:    &filter-sg    "(?i)新|sg|singapore"
+x-filter-kr:    &filter-kr    "(?i)韩|kr|korea|seoul"
+x-filter-us:    &filter-us    "(?i)美|us|usa|america|united states"
+
+x-oversea:      &oversea      [FALLBACK, MANUAL, HK, TW, JP, SG, KR, US, DIRECT]
+x-direct:       &direct       [DIRECT, FALLBACK, MANUAL, HK, TW, JP, SG, KR, US]
+x-us-first:     &us-first     [US, FALLBACK, MANUAL, HK, TW, JP, SG, KR]
+x-hk-first:     &hk-first     [HK, FALLBACK, MANUAL, TW, JP, SG, KR, US]
+x-sg-first:     &sg-first     [SG, FALLBACK, MANUAL, HK, TW, JP, KR, US]
+x-jp-first:     &jp-first     [JP, FALLBACK, MANUAL, HK, TW, SG, KR, US]
+
+x-rule-set-domain: &rule-set-domain { type: http, behavior: domain, format: mrs, interval: 86400 }
+x-rule-set-ipcidr: &rule-set-ipcidr { type: http, behavior: ipcidr, format: mrs, interval: 86400 }
+
+proxy-providers:
+  # Primary: {<<: *base-provider, url: 'YOUR_PRIMARY_URL', override: {additional-prefix: '[P] '}}
+  # Backup:   {<<: *base-provider, url: 'YOUR_BACKUP_URL',  override: {additional-prefix: '[B] '}}
+
+# Custom Proxies
+proxies:
+  # - name: "ss1"
+  #   type: ss
+  #   server: server
+  #   port: 443
+  #   cipher: aes-128-gcm
+  #   password: password
+
+# General
+mode: rule
+port: 7890
+socks-port: 7891
+redir-port: 7892
+mixed-port: 7893
+tproxy-port: 7895
+ipv6: false
+allow-lan: false
+unified-delay: true
+tcp-concurrent: true
+log-level: silent
+bind-address: '*'
+find-process-mode: 'always'
+keep-alive-interval: 15
+keep-alive-idle: 600
+authentication: [mihomo:yyds666]
+skip-auth-prefixes: [127.0.0.1/8, '::1/128']
+experimental: {quic-go-disable-gso: true}
+
+# Dashboard
+external-ui-url: https://github.com/Zephyruso/zashboard/releases/latest/download/dist.zip
+external-ui-name: zashboard
+external-ui: ui
+external-controller: 127.0.0.1:9090
+secret: yyds666
+profile: {store-selected: true, store-fake-ip: true}
+
+# Sniffer
+sniffer:
+  enable: true
+  sniff:
+    HTTP:  {ports: [80, 8080-8880], override-destination: true}
+    TLS:   {ports: [443, 8443]}
+    QUIC:  {ports: [443, 8443]}
+  skip-domain: ["Mijia Cloud", "+.push.apple.com"]
+
+# TUN
+tun:
+  enable: false
+  stack: mixed
+  dns-hijack: ["any:53", "tcp://any:53"]
+  auto-route: true
+  auto-redirect: true
+  auto-detect-interface: true
+
+# DNS
+dns:
+  enable: true
+  ipv6: false
+  enhanced-mode: fake-ip
+  fake-ip-range: 198.18.0.1/16
+  default-nameserver: [119.29.29.29, 180.184.1.1, 223.5.5.5]
+  nameserver: [https://dns.alidns.com/dns-query, https://doh.pub/dns-query]
+  fake-ip-filter: [+.miwifi.com, +.docker.io, +.market.xiaomi.com, +.push.apple.com]
+
+proxy-groups:
+  # routing
+  - { name: GUARD,     type: select, proxies: [REJECT-DROP, REJECT, DIRECT], icon: https://github.com/Koolson/Qure/raw/master/IconSet/Color/Reject.png }
+  - { name: SPEEDTEST, type: select, proxies: *oversea, icon: https://github.com/Koolson/Qure/raw/master/IconSet/Color/Speedtest.png }
+  - { name: TM,        type: select, proxies: *sg-first, icon: https://github.com/Koolson/Qure/raw/master/IconSet/Color/Telegram_X.png }
+  - { name: SOCIAL,    type: select, proxies: *us-first, icon: https://github.com/Koolson/Qure/raw/master/IconSet/Color/Twitter.png }
+  - { name: AI,        type: select, proxies: *us-first, icon: https://github.com/Koolson/Qure/raw/master/IconSet/Color/AI.png }
+  - { name: DEV,       type: select, proxies: *us-first, icon: https://github.com/Koolson/Qure/raw/master/IconSet/Color/GitHub.png }
+  - { name: EMBY,      type: select, proxies: *us-first, icon: https://github.com/Koolson/Qure/raw/master/IconSet/Color/Emby.png }
+  - { name: STREAMING, type: select, proxies: *us-first, icon: https://github.com/Koolson/Qure/raw/master/IconSet/Color/Streaming.png }
+  - { name: GAMES,     type: select, proxies: *us-first, icon: https://github.com/Koolson/Qure/raw/master/IconSet/Color/Game.png }
+  - { name: CRYPTO,    type: select, proxies: *jp-first, icon: https://github.com/Koolson/Qure/raw/master/IconSet/Color/Cryptocurrency_3.png }
+  - { name: GOOGLE,    type: select, proxies: *us-first, icon: https://github.com/Koolson/Qure/raw/master/IconSet/Color/Google_Search.png }
+  - { name: MICROSOFT, type: select, proxies: *us-first, icon: https://github.com/Koolson/Qure/raw/master/IconSet/Color/Microsoft.png }
+  - { name: FACEBOOK,  type: select, proxies: *us-first, icon: https://github.com/Koolson/Qure/raw/master/IconSet/Color/Facebook.png }
+  - { name: APPLE,     type: select, proxies: *us-first, icon: https://github.com/Koolson/Qure/raw/master/IconSet/Color/Apple_1.png }
+  - { name: OUTCN,     type: select, proxies: *oversea, icon: https://github.com/Koolson/Qure/raw/master/IconSet/Color/Global.png }
+  - { name: CN,        type: select, proxies: *direct, icon: https://github.com/Koolson/Qure/raw/master/IconSet/Color/China.png }
+  - { name: MATCH,     type: select, proxies: *oversea, icon: https://github.com/Koolson/Qure/raw/master/IconSet/Color/Final.png }
+  
+  # fallback
+  - { name: FALLBACK, <<: *fallback, proxies: [US, JP, SG, KR, HK, TW], icon: https://github.com/Koolson/Qure/raw/master/IconSet/Color/ULB.png }
+
+  # manual
+  - { name: MANUAL,    type: select, include-all: true, icon: https://github.com/Koolson/Qure/raw/master/IconSet/Color/Clubhouse.png }
+  
+  # region
+  - { name: HK,      type: select, include-all: true, filter: *filter-hk, proxies: [HK-AUTO, HK-BALANCE], icon: https://github.com/Koolson/Qure/raw/master/IconSet/Color/Hong_Kong.png }
+  - { name: TW,      type: select, include-all: true, filter: *filter-tw, proxies: [TW-AUTO, TW-BALANCE], icon: https://github.com/Koolson/Qure/raw/master/IconSet/Color/Taiwan.png }
+  - { name: JP,      type: select, include-all: true, filter: *filter-jp, proxies: [JP-AUTO, JP-BALANCE], icon: https://github.com/Koolson/Qure/raw/master/IconSet/Color/Japan.png }
+  - { name: SG,      type: select, include-all: true, filter: *filter-sg, proxies: [SG-AUTO, SG-BALANCE], icon: https://github.com/Koolson/Qure/raw/master/IconSet/Color/Singapore.png }
+  - { name: KR,      type: select, include-all: true, filter: *filter-kr, proxies: [KR-AUTO, KR-BALANCE], icon: https://github.com/Koolson/Qure/raw/master/IconSet/Color/Korea.png }
+  - { name: US,      type: select, include-all: true, filter: *filter-us, proxies: [US-AUTO, US-BALANCE], icon: https://github.com/Koolson/Qure/raw/master/IconSet/Color/United_States.png }
+
+  # latency-test
+  - { name: HK-AUTO, <<: *url-test, filter: *filter-hk, icon: https://github.com/Koolson/Qure/raw/master/IconSet/Color/Auto.png }
+  - { name: TW-AUTO, <<: *url-test, filter: *filter-tw, icon: https://github.com/Koolson/Qure/raw/master/IconSet/Color/Auto.png }
+  - { name: JP-AUTO, <<: *url-test, filter: *filter-jp, icon: https://github.com/Koolson/Qure/raw/master/IconSet/Color/Auto.png }
+  - { name: SG-AUTO, <<: *url-test, filter: *filter-sg, icon: https://github.com/Koolson/Qure/raw/master/IconSet/Color/Auto.png }
+  - { name: KR-AUTO, <<: *url-test, filter: *filter-kr, icon: https://github.com/Koolson/Qure/raw/master/IconSet/Color/Auto.png }
+  - { name: US-AUTO, <<: *url-test, filter: *filter-us, icon: https://github.com/Koolson/Qure/raw/master/IconSet/Color/Auto.png }
+
+  # load-balance
+  - { name: HK-BALANCE,   <<: *load-balance, filter: *filter-hk, icon: https://github.com/Koolson/Qure/raw/master/IconSet/Color/Round_Robin_1.png }
+  - { name: TW-BALANCE,   <<: *load-balance, filter: *filter-tw, icon: https://github.com/Koolson/Qure/raw/master/IconSet/Color/Round_Robin_1.png }
+  - { name: JP-BALANCE,   <<: *load-balance, filter: *filter-jp, icon: https://github.com/Koolson/Qure/raw/master/IconSet/Color/Round_Robin_1.png }
+  - { name: SG-BALANCE,   <<: *load-balance, filter: *filter-sg, icon: https://github.com/Koolson/Qure/raw/master/IconSet/Color/Round_Robin_1.png }
+  - { name: KR-BALANCE,   <<: *load-balance, filter: *filter-kr, icon: https://github.com/Koolson/Qure/raw/master/IconSet/Color/Round_Robin_1.png }
+  - { name: US-BALANCE,   <<: *load-balance, filter: *filter-us, icon: https://github.com/Koolson/Qure/raw/master/IconSet/Color/Round_Robin_1.png }
+
+rules:
+  # guard
+  - RULE-SET,Tracking,GUARD
+  - RULE-SET,Advertising,GUARD
+  - AND,((DST-PORT,443),(NETWORK,UDP),(NOT,((GEOIP,CN,no-resolve)))),GUARD
+  
+  # local
+  - RULE-SET,Private,DIRECT
+  - RULE-SET,PrivateIP,DIRECT,no-resolve
+
+  # speedtest
+  - RULE-SET,Speedtest,SPEEDTEST
+
+  # tm
+  - RULE-SET,TM,TM
+  - RULE-SET,Telegram,TM
+  - RULE-SET,TelegramIP,TM,no-resolve
+
+  # social
+  - RULE-SET,SocialMedia,SOCIAL
+  - RULE-SET,SocialMediaIP,SOCIAL,no-resolve
+
+  # ai
+  - RULE-SET,AI,AI
+  - RULE-SET,AIIP,AI,no-resolve
+
+  # dev
+  - RULE-SET,Dev,DEV
+
+  # streaming
+  - RULE-SET,Emby,EMBY
+  - RULE-SET,EmbyIP,EMBY,no-resolve
+  - RULE-SET,Streaming,STREAMING
+  - RULE-SET,StreamingIP,STREAMING,no-resolve
+
+  #games
+  - RULE-SET,Games,GAMES
+
+  # crypto
+  - RULE-SET,Crypto,CRYPTO
+
+  # platform
+  - RULE-SET,Google,GOOGLE
+  - RULE-SET,GoogleIP,GOOGLE,no-resolve
+  - RULE-SET,Microsoft,MICROSOFT
+  - RULE-SET,Facebook,FACEBOOK
+  - RULE-SET,Apple,APPLE
+
+  # outcn
+  - RULE-SET,Proxy,OUTCN
+  - RULE-SET,ProxyIP,OUTCN,no-resolve
+
+  # cn
+  - RULE-SET,China,CN
+  - RULE-SET,ChinaIP,CN,no-resolve
+
+  # match
+  - MATCH,MATCH
+
+rule-providers:
+  Tracking:       { <<: *rule-set-domain, url: https://github.com/666OS/rules/raw/release/mihomo/domain/Tracking.mrs }
+  Advertising:    { <<: *rule-set-domain, url: https://github.com/666OS/rules/raw/release/mihomo/domain/Advertising.mrs } 
+  Private:        { <<: *rule-set-domain, url: https://github.com/666OS/rules/raw/release/mihomo/domain/Private.mrs }
+  Apple:          { <<: *rule-set-domain, url: https://github.com/666OS/rules/raw/release/mihomo/domain/Apple.mrs }
+  Telegram:       { <<: *rule-set-domain, url: https://github.com/666OS/rules/raw/release/mihomo/domain/Telegram.mrs }
+  TM:             { <<: *rule-set-domain, url: https://github.com/666OS/rules/raw/release/mihomo/domain/TM.mrs }
+  SocialMedia:    { <<: *rule-set-domain, url: https://github.com/666OS/rules/raw/release/mihomo/domain/SocialMedia.mrs }
+  AI:             { <<: *rule-set-domain, url: https://github.com/666OS/rules/raw/release/mihomo/domain/AI.mrs }
+  Dev:            { <<: *rule-set-domain, url: https://github.com/666OS/rules/raw/release/mihomo/domain/Dev.mrs }
+  YouTube:        { <<: *rule-set-domain, url: https://github.com/666OS/rules/raw/release/mihomo/domain/YouTube.mrs }
+  Netflix:        { <<: *rule-set-domain, url: https://github.com/666OS/rules/raw/release/mihomo/domain/Netflix.mrs }
+  Spotify:        { <<: *rule-set-domain, url: https://github.com/666OS/rules/raw/release/mihomo/domain/Spotify.mrs }
+  Disney:         { <<: *rule-set-domain, url: https://github.com/666OS/rules/raw/release/mihomo/domain/Disney.mrs }
+  Emby:           { <<: *rule-set-domain, url: https://github.com/666OS/rules/raw/release/mihomo/domain/Emby.mrs }
+  Streaming:      { <<: *rule-set-domain, url: https://github.com/666OS/rules/raw/release/mihomo/domain/Streaming.mrs }
+  Proxy:          { <<: *rule-set-domain, url: https://github.com/666OS/rules/raw/release/mihomo/domain/Proxy.mrs }
+  China:          { <<: *rule-set-domain, url: https://github.com/666OS/rules/raw/release/mihomo/domain/China.mrs }
+  Speedtest:      { <<: *rule-set-domain, url: https://github.com/666OS/rules/raw/release/mihomo/domain/Speedtest.mrs }
+  Games:          { <<: *rule-set-domain, url: https://github.com/666OS/rules/raw/release/mihomo/domain/Games.mrs }
+  Crypto:         { <<: *rule-set-domain, url: https://github.com/666OS/rules/raw/release/mihomo/domain/Crypto.mrs }
+  Google:         { <<: *rule-set-domain, url: https://github.com/666OS/rules/raw/release/mihomo/domain/Google.mrs }
+  Microsoft:      { <<: *rule-set-domain, url: https://github.com/666OS/rules/raw/release/mihomo/domain/Microsoft.mrs }
+  Facebook:       { <<: *rule-set-domain, url: https://github.com/666OS/rules/raw/release/mihomo/domain/Facebook.mrs }
+  PrivateIP:      { <<: *rule-set-ipcidr, url: https://github.com/666OS/rules/raw/release/mihomo/ip/Private.mrs }
+  TelegramIP:     { <<: *rule-set-ipcidr, url: https://github.com/666OS/rules/raw/release/mihomo/ip/Telegram.mrs }
+  SocialMediaIP:  { <<: *rule-set-ipcidr, url: https://github.com/666OS/rules/raw/release/mihomo/ip/SocialMedia.mrs }
+  AIIP:           { <<: *rule-set-ipcidr, url: https://github.com/666OS/rules/raw/release/mihomo/ip/AI.mrs }
+  NetflixIP:      { <<: *rule-set-ipcidr, url: https://github.com/666OS/rules/raw/release/mihomo/ip/Netflix.mrs }
+  EmbyIP:         { <<: *rule-set-ipcidr, url: https://github.com/666OS/rules/raw/release/mihomo/ip/Emby.mrs }
+  StreamingIP:    { <<: *rule-set-ipcidr, url: https://github.com/666OS/rules/raw/release/mihomo/ip/Streaming.mrs }
+  ProxyIP:        { <<: *rule-set-ipcidr, url: https://github.com/666OS/rules/raw/release/mihomo/ip/Proxy.mrs }
+  ChinaIP:        { <<: *rule-set-ipcidr, url: https://github.com/666OS/rules/raw/release/mihomo/ip/China.mrs }
+  GoogleIP:       { <<: *rule-set-ipcidr, url: https://github.com/666OS/rules/raw/release/mihomo/ip/Google.mrs }

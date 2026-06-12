@@ -1,0 +1,118 @@
+# >>=====================================<<
+# ||                                     ||
+# ||      ██████╗  ██████╗  ██████╗      ||
+# ||     ██╔════╝ ██╔════╝ ██╔════╝      ||
+# ||     ███████╗ ███████╗ ███████╗      ||
+# ||     ██╔═══██╗██╔═══██╗██╔═══██╗     ||
+# ||     ╚██████╔╝╚██████╔╝╚██████╔╝     ||
+# ||      ╚═════╝  ╚═════╝  ╚═════╝      ||
+# ||                                     ||
+# >>=====================================<<
+# Mini中文版 v2.0.0 by YYDS666 (2026-05-25)
+# 项目: https://github.com/666OS/YYDS | 频道: https://t.me/Pinched666
+# 请在 proxy-providers 中添加您的订阅链接，或在 proxies 中添加自定义节点
+
+
+# 锚点配置
+x-base-provider: &base-provider {type: http, interval: 86400, health-check: {enable: true, url: 'https://www.google.com/generate_204', interval: 300}, filter: '^(?!.*(群|邀请|返利|循环|官网|客服|网站|网址|获取|订阅|流量|到期|机场|下次|版本|官址|备用|过期|已用|联系|邮箱|工单|贩卖|通知|倒卖|防止|国内|地址|频道|无法|说明|使用|提示|特别|访问|支持|教程|关注|更新|作者|加入|USE|USED|TOTAL|EXPIRE|EMAIL|Panel|Channel|Author))'}
+
+x-rule-set-domain: &rule-set-domain { type: http, behavior: domain, format: mrs, interval: 86400 }
+x-rule-set-ipcidr: &rule-set-ipcidr { type: http, behavior: ipcidr, format: mrs, interval: 86400 }
+
+proxy-providers:
+  # Primary: {<<: *base-provider, url: 'YOUR_PRIMARY_URL', override: {additional-prefix: '[P] '}}
+  # Backup:   {<<: *base-provider, url: 'YOUR_BACKUP_URL',  override: {additional-prefix: '[B] '}}
+
+# 自定义代理节点
+proxies:
+  # - name: "ss1"
+  #   type: ss
+  #   server: server
+  #   port: 443
+  #   cipher: aes-128-gcm
+  #   password: password
+
+# 基础设置
+mode: rule
+port: 7890
+socks-port: 7891
+redir-port: 7892
+mixed-port: 7893
+tproxy-port: 7895
+ipv6: false
+allow-lan: false
+unified-delay: true
+tcp-concurrent: true
+log-level: silent
+bind-address: '*'
+find-process-mode: 'always'
+keep-alive-interval: 15
+keep-alive-idle: 600
+authentication: [mihomo:yyds666]
+skip-auth-prefixes: [127.0.0.1/8, '::1/128']
+experimental: {quic-go-disable-gso: true}
+
+# 控制面板
+external-ui-url: https://github.com/Zephyruso/zashboard/releases/latest/download/dist.zip
+external-ui-name: zashboard
+external-ui: ui
+external-controller: 127.0.0.1:9090
+secret: yyds666
+profile: {store-selected: true, store-fake-ip: true}
+
+# 流量嗅探
+sniffer:
+  enable: true
+  sniff:
+    HTTP:   {ports: [80, 8080-8880], override-destination: true}
+    TLS:     {ports: [443, 8443]}
+    QUIC:   {ports: [443, 8443]}
+  skip-domain: ["Mijia Cloud", "+.push.apple.com"]
+
+# TUN模式
+tun:
+  enable: false
+  stack: mixed
+  dns-hijack: ["any:53", "tcp://any:53"]
+  auto-route: true
+  auto-redirect: true
+  auto-detect-interface: true
+
+# DNS设置
+dns:
+  enable: true
+  ipv6: false
+  enhanced-mode: fake-ip
+  fake-ip-range: 198.18.0.1/16
+  default-nameserver: [119.29.29.29, 180.184.1.1, 223.5.5.5]
+  nameserver: [https://dns.alidns.com/dns-query, https://doh.pub/dns-query]
+  fake-ip-filter: [+.miwifi.com, +.docker.io, +.market.xiaomi.com, +.push.apple.com]
+
+# 代理策略组
+proxy-groups:
+  - { name: 国外流量, type: select, include-all: true, empty-fallback: REJECT, icon: https://github.com/Koolson/Qure/raw/master/IconSet/Color/Global.png }
+  - { name: 国内流量, type: select, include-all: true, proxies: [DIRECT], icon: https://github.com/Koolson/Qure/raw/master/IconSet/Color/China.png }
+  - { name: 漏网之鱼, type: select, include-all: true, empty-fallback: REJECT, icon: https://github.com/Koolson/Qure/raw/master/IconSet/Color/Final.png }
+
+# 规则路由
+rules:
+  # 本地/私有
+  - RULE-SET,Private,DIRECT
+  - RULE-SET,PrivateIP,DIRECT,no-resolve
+  # 国外流量
+  - RULE-SET,Proxy,国外流量
+  - RULE-SET,ProxyIP,国外流量,no-resolve
+  # 国内流量
+  - RULE-SET,China,国内流量
+  - RULE-SET,ChinaIP,国内流量,no-resolve
+  # 兜底规则
+  - MATCH,漏网之鱼
+
+# 规则集提供者
+rule-providers:
+  Private:    { <<: *rule-set-domain, url: https://github.com/666OS/rules/raw/release/mihomo/domain/Private.mrs }
+  Proxy:      { <<: *rule-set-domain, url: https://github.com/666OS/rules/raw/release/mihomo/domain/Proxy.mrs }
+  China:      { <<: *rule-set-domain, url: https://github.com/666OS/rules/raw/release/mihomo/domain/China.mrs }
+  PrivateIP:  { <<: *rule-set-ipcidr, url: https://github.com/666OS/rules/raw/release/mihomo/ip/Private.mrs }
+  ProxyIP:    { <<: *rule-set-ipcidr, url: https://github.com/666OS/rules/raw/release/mihomo/ip/Proxy.mrs }
+  ChinaIP:    { <<: *rule-set-ipcidr, url: https://github.com/666OS/rules/raw/release/mihomo/ip/China.mrs }
