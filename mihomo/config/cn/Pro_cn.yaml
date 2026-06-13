@@ -8,7 +8,7 @@
 # ||      ╚═════╝  ╚═════╝  ╚═════╝      ||
 # ||                                     ||
 # >>=====================================<<
-# Pro 中文版 v2.0.1 by YYDS666 (2026-06-13)
+# Pro 中文版 v2.0.2 by YYDS666 (2026-06-14)
 # 项目: https://github.com/666OS/YYDS | 频道: https://t.me/Pinched666
 # 请在 proxy-providers 中添加您的订阅链接，或在 proxies 中添加自定义节点
 
@@ -20,12 +20,12 @@ x-url-test:     &url-test     { type: url-test, url: "https://www.gstatic.com/ge
 x-load-balance: &load-balance { type: load-balance, url: "https://www.gstatic.com/generate_204", interval: 300, empty-fallback: REJECT, include-all: true, hidden: true, strategy: consistent-hashing }
 x-fallback:     &fallback     { type: fallback, url: "https://www.gstatic.com/generate_204", interval: 300, empty-fallback: REJECT }
 
-x-filter-hk:    &filter-hk    "(?i)港|hk|hongkong|hong kong"
-x-filter-tw:    &filter-tw    "(?i)台|tw|taiwan|taipei"
-x-filter-jp:    &filter-jp    "(?i)日|jp|japan|tokyo"
-x-filter-sg:    &filter-sg    "(?i)新|sg|singapore"
-x-filter-kr:    &filter-kr    "(?i)韩|kr|korea|seoul"
-x-filter-us:    &filter-us    "(?i)美|us|usa|america|united states"
+x-filter-hk:    &filter-hk    "(?i)港|hk|hongkong|hong kong|🇭🇰"
+x-filter-tw:    &filter-tw    "(?i)台|tw|taiwan|taipei|🇹🇼|🇼🇸"
+x-filter-jp:    &filter-jp    "(?i)日|jp|japan|tokyo|🇯🇵"
+x-filter-sg:    &filter-sg    "(?i)新|sg|singapore|🇸🇬"
+x-filter-kr:    &filter-kr    "(?i)韩|kr|korea|seoul|🇰🇷"
+x-filter-us:    &filter-us    "(?i)美|us|usa|america|united states|🇺🇸"
 
 x-oversea:      &oversea      [故障转移, 全球手动, 香港策略, 台湾策略, 日本策略, 狮城策略, 韩国策略, 美国策略, DIRECT]
 x-direct:       &direct       [DIRECT, 故障转移, 全球手动, 香港策略, 台湾策略, 日本策略, 狮城策略, 韩国策略, 美国策略]

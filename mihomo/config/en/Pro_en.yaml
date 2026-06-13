@@ -8,7 +8,7 @@
 # ||      ╚═════╝  ╚═════╝  ╚═════╝      ||
 # ||                                     ||
 # >>=====================================<<
-# Pro_en Edition v2.0.1 by YYDS666 (2026-06-13)
+# Pro_en Edition v2.0.2 by YYDS666 (2026-06-14)
 # Repo: https://github.com/666OS/YYDS | Channel: https://t.me/Pinched666
 # Add your subscription links in proxy-providers, or insert custom nodes under proxies
 
@@ -19,12 +19,12 @@ x-url-test:     &url-test     { type: url-test, url: "https://www.gstatic.com/ge
 x-load-balance: &load-balance { type: load-balance, url: "https://www.gstatic.com/generate_204", interval: 300, empty-fallback: REJECT, include-all: true, hidden: true, strategy: consistent-hashing }
 x-fallback:     &fallback     { type: fallback, url: "https://www.gstatic.com/generate_204", interval: 300, empty-fallback: REJECT }
 
-x-filter-hk:    &filter-hk    "(?i)港|hk|hongkong|hong kong"
-x-filter-tw:    &filter-tw    "(?i)台|tw|taiwan|taipei"
-x-filter-jp:    &filter-jp    "(?i)日|jp|japan|tokyo"
-x-filter-sg:    &filter-sg    "(?i)新|sg|singapore"
-x-filter-kr:    &filter-kr    "(?i)韩|kr|korea|seoul"
-x-filter-us:    &filter-us    "(?i)美|us|usa|america|united states"
+x-filter-hk:    &filter-hk    "(?i)港|hk|hongkong|hong kong|🇭🇰"
+x-filter-tw:    &filter-tw    "(?i)台|tw|taiwan|taipei|🇹🇼|🇼🇸"
+x-filter-jp:    &filter-jp    "(?i)日|jp|japan|tokyo|🇯🇵"
+x-filter-sg:    &filter-sg    "(?i)新|sg|singapore|🇸🇬"
+x-filter-kr:    &filter-kr    "(?i)韩|kr|korea|seoul|🇰🇷"
+x-filter-us:    &filter-us    "(?i)美|us|usa|america|united states|🇺🇸"
 
 x-oversea:      &oversea      [FALLBACK, MANUAL, HK, TW, JP, SG, KR, US, DIRECT]
 x-direct:       &direct       [DIRECT, FALLBACK, MANUAL, HK, TW, JP, SG, KR, US]
