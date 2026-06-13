@@ -135,7 +135,7 @@ proxy-groups:
 # 规则路由
 rules:
   # guard
-  - AND,((NETWORK,UDP),(DST-PORT,443),(NOT,(GEOIP,CN,no-resolve))),REJECT
+  - AND,((NETWORK,UDP),(DST-PORT,443),(NOT,((GEOIP,CN,no-resolve)))),REJECT
   # 本地/私有
   - RULE-SET,Private,DIRECT
   - RULE-SET,PrivateIP,DIRECT,no-resolve

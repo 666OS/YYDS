@@ -95,7 +95,7 @@ proxy-groups:
 
 rules:
   # guard
-  - AND,((NETWORK,UDP),(DST-PORT,443),(NOT,(GEOIP,CN,no-resolve))),REJECT
+  - AND,((NETWORK,UDP),(DST-PORT,443),(NOT,((GEOIP,CN,no-resolve)))),REJECT
   # local
   - RULE-SET,Private,DIRECT
   - RULE-SET,PrivateIP,DIRECT,no-resolve

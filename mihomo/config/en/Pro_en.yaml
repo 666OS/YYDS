@@ -159,7 +159,7 @@ rules:
   # guard
   - RULE-SET,Tracking,GUARD
   - RULE-SET,Advertising,GUARD
-  - AND,((NETWORK,UDP),(DST-PORT,443),(NOT,(GEOIP,CN,no-resolve))),GUARD
+  - AND,((NETWORK,UDP),(DST-PORT,443),(NOT,((GEOIP,CN,no-resolve)))),GUARD
   
   # local
   - RULE-SET,Private,DIRECT

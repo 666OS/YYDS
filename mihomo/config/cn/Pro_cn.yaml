@@ -162,7 +162,7 @@ rules:
   # 广告拦截
   - RULE-SET,Tracking,广告拦截
   - RULE-SET,Advertising,广告拦截
-  - AND,((NETWORK,UDP),(DST-PORT,443),(NOT,(GEOIP,CN,no-resolve))),广告拦截
+  - AND,((NETWORK,UDP),(DST-PORT,443),(NOT,((GEOIP,CN,no-resolve)))),广告拦截
   
   # 本地/私有
   - RULE-SET,Private,DIRECT
