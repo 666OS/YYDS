@@ -8,7 +8,7 @@
 # ||      ╚═════╝  ╚═════╝  ╚═════╝      ||
 # ||                                     ||
 # >>=====================================<<
-# Lite 中文版 v2.0.0 by YYDS666 (2026-05-25)
+# Lite 中文版 v2.0.1 by YYDS666 (2026-06-13)
 # 项目: https://github.com/666OS/YYDS | 频道: https://t.me/Pinched666
 # 请在 proxy-providers 中添加您的订阅链接，或在 proxies 中添加自定义节点
 
@@ -113,7 +113,7 @@ proxy-groups:
   - { name: 人工智能, type: select, proxies: *us-first, icon: https://github.com/Koolson/Qure/raw/master/IconSet/Color/AI.png }
   - { name: 开发服务, type: select, proxies: *us-first, icon: https://github.com/Koolson/Qure/raw/master/IconSet/Color/GitHub.png }
   - { name: 国际媒体, type: select, proxies: *us-first, icon: https://github.com/Koolson/Qure/raw/master/IconSet/Color/Streaming.png }
-  - { name: 苹果服务, type: select, proxies: *us-first, icon: https://github.com/Koolson/Qure/raw/master/IconSet/Color/Apple_1.png }
+  - { name: 苹果服务, type: select, proxies: *direct, icon: https://github.com/Koolson/Qure/raw/master/IconSet/Color/Apple_1.png }
   - { name: 国外流量, type: select, proxies: *oversea, icon: https://github.com/Koolson/Qure/raw/master/IconSet/Color/Global.png }
   - { name: 国内流量, type: select, proxies: *direct, icon: https://github.com/Koolson/Qure/raw/master/IconSet/Color/China.png }
   - { name: 漏网之鱼, type: select, proxies: *oversea, icon: https://github.com/Koolson/Qure/raw/master/IconSet/Color/Final.png }
@@ -134,6 +134,8 @@ proxy-groups:
 
 # 规则路由
 rules:
+  # guard
+  - AND,((NETWORK,UDP),(DST-PORT,443),(NOT,(GEOIP,CN,no-resolve))),REJECT
   # 本地/私有
   - RULE-SET,Private,DIRECT
   - RULE-SET,PrivateIP,DIRECT,no-resolve

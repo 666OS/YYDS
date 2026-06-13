@@ -8,7 +8,7 @@
 # ||      ╚═════╝  ╚═════╝  ╚═════╝      ||
 # ||                                     ||
 # >>=====================================<<
-# Pro 中文版 v2.0.0 by YYDS666 (2026-05-25)
+# Pro 中文版 v2.0.1 by YYDS666 (2026-06-13)
 # 项目: https://github.com/666OS/YYDS | 频道: https://t.me/Pinched666
 # 请在 proxy-providers 中添加您的订阅链接，或在 proxies 中添加自定义节点
 
@@ -120,9 +120,9 @@ proxy-groups:
   - { name: 游戏平台, type: select, proxies: *us-first, icon: https://github.com/Koolson/Qure/raw/master/IconSet/Color/Game.png }
   - { name: 货币平台, type: select, proxies: *jp-first, icon: https://github.com/Koolson/Qure/raw/master/IconSet/Color/Cryptocurrency_3.png }
   - { name: 谷歌服务, type: select, proxies: *us-first, icon: https://github.com/Koolson/Qure/raw/master/IconSet/Color/Google_Search.png }
-  - { name: 微软服务, type: select, proxies: *us-first, icon: https://github.com/Koolson/Qure/raw/master/IconSet/Color/Microsoft.png }
   - { name: 脸书服务, type: select, proxies: *us-first, icon: https://github.com/Koolson/Qure/raw/master/IconSet/Color/Facebook.png }
-  - { name: 苹果服务, type: select, proxies: *us-first, icon: https://github.com/Koolson/Qure/raw/master/IconSet/Color/Apple_1.png }
+  - { name: 微软服务, type: select, proxies: *us-first, icon: https://github.com/Koolson/Qure/raw/master/IconSet/Color/Microsoft.png }
+  - { name: 苹果服务, type: select, proxies: *direct, icon: https://github.com/Koolson/Qure/raw/master/IconSet/Color/Apple_1.png }
   - { name: 国外流量, type: select, proxies: *oversea, icon: https://github.com/Koolson/Qure/raw/master/IconSet/Color/Global.png }
   - { name: 国内流量, type: select, proxies: *direct, icon: https://github.com/Koolson/Qure/raw/master/IconSet/Color/China.png }
   - { name: 漏网之鱼, type: select, proxies: *oversea, icon: https://github.com/Koolson/Qure/raw/master/IconSet/Color/Final.png }
@@ -162,7 +162,7 @@ rules:
   # 广告拦截
   - RULE-SET,Tracking,广告拦截
   - RULE-SET,Advertising,广告拦截
-  - AND,((DST-PORT,443),(NETWORK,UDP),(NOT,((GEOIP,CN,no-resolve)))),广告拦截
+  - AND,((NETWORK,UDP),(DST-PORT,443),(NOT,(GEOIP,CN,no-resolve))),广告拦截
   
   # 本地/私有
   - RULE-SET,Private,DIRECT

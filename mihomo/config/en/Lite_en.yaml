@@ -8,7 +8,7 @@
 # ||      ╚═════╝  ╚═════╝  ╚═════╝      ||
 # ||                                     ||
 # >>=====================================<<
-# Lite_en Edition v2.0.0 by YYDS666 (2026-05-25)
+# Lite_en Edition v2.0.1 by YYDS666 (2026-06-13)
 # Repo: https://github.com/666OS/YYDS | Channel: https://t.me/Pinched666
 # Add your subscription links in proxy-providers, or insert custom nodes under proxies
 
@@ -111,7 +111,7 @@ proxy-groups:
   - { name: AI,        type: select, proxies: *us-first, icon: https://github.com/Koolson/Qure/raw/master/IconSet/Color/AI.png }
   - { name: DEV,       type: select, proxies: *us-first, icon: https://github.com/Koolson/Qure/raw/master/IconSet/Color/GitHub.png }
   - { name: STREAMING, type: select, proxies: *us-first, icon: https://github.com/Koolson/Qure/raw/master/IconSet/Color/Streaming.png }
-  - { name: APPLE,     type: select, proxies: *us-first, icon: https://github.com/Koolson/Qure/raw/master/IconSet/Color/Apple_1.png }
+  - { name: APPLE,     type: select, proxies: *direct, icon: https://github.com/Koolson/Qure/raw/master/IconSet/Color/Apple_1.png }
   - { name: OUTCN,     type: select, proxies: *oversea, icon: https://github.com/Koolson/Qure/raw/master/IconSet/Color/Global.png }
   - { name: CN,        type: select, proxies: *direct, icon: https://github.com/Koolson/Qure/raw/master/IconSet/Color/China.png }
   - { name: MATCH,     type: select, proxies: *oversea, icon: https://github.com/Koolson/Qure/raw/master/IconSet/Color/Final.png }
@@ -132,7 +132,7 @@ proxy-groups:
 
 rules:
   # guard
-  - AND,((DST-PORT,443),(NETWORK,UDP),(NOT,((GEOIP,CN,no-resolve)))),REJECT
+  - AND,((NETWORK,UDP),(DST-PORT,443),(NOT,(GEOIP,CN,no-resolve))),REJECT
   # local
   - RULE-SET,Private,DIRECT
   - RULE-SET,PrivateIP,DIRECT,no-resolve
