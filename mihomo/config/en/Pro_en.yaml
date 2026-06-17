@@ -8,7 +8,7 @@
 # ||      ╚═════╝  ╚═════╝  ╚═════╝      ||
 # ||                                     ||
 # >>=====================================<<
-# Pro_en Edition v2.0.2 by YYDS666 (2026-06-14)
+# Pro_en Edition v2.0.3 by YYDS666 (2026-06-16)
 # Repo: https://github.com/666OS/YYDS | Channel: https://t.me/Pinched666
 # Add your subscription links in proxy-providers, or insert custom nodes under proxies
 
@@ -28,10 +28,10 @@ x-filter-us:    &filter-us    "(?i)美|us|usa|america|united states|🇺🇸"
 
 x-oversea:      &oversea      [FALLBACK, MANUAL, HK, TW, JP, SG, KR, US, DIRECT]
 x-direct:       &direct       [DIRECT, FALLBACK, MANUAL, HK, TW, JP, SG, KR, US]
-x-us-first:     &us-first     [US, FALLBACK, MANUAL, HK, TW, JP, SG, KR]
-x-hk-first:     &hk-first     [HK, FALLBACK, MANUAL, TW, JP, SG, KR, US]
-x-sg-first:     &sg-first     [SG, FALLBACK, MANUAL, HK, TW, JP, KR, US]
-x-jp-first:     &jp-first     [JP, FALLBACK, MANUAL, HK, TW, SG, KR, US]
+x-us-first:     &us-first     [US, FALLBACK, MANUAL, HK, TW, JP, SG, KR, DIRECT]
+x-hk-first:     &hk-first     [HK, FALLBACK, MANUAL, TW, JP, SG, KR, US, DIRECT]
+x-sg-first:     &sg-first     [SG, FALLBACK, MANUAL, HK, TW, JP, KR, US, DIRECT]
+x-jp-first:     &jp-first     [JP, FALLBACK, MANUAL, HK, TW, SG, KR, US, DIRECT]
 
 x-rule-set-domain: &rule-set-domain { type: http, behavior: domain, format: mrs, interval: 86400 }
 x-rule-set-ipcidr: &rule-set-ipcidr { type: http, behavior: ipcidr, format: mrs, interval: 86400 }

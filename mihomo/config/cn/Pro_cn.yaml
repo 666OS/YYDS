@@ -8,7 +8,7 @@
 # ||      ╚═════╝  ╚═════╝  ╚═════╝      ||
 # ||                                     ||
 # >>=====================================<<
-# Pro 中文版 v2.0.2 by YYDS666 (2026-06-14)
+# Pro 中文版 v2.0.3 by YYDS666 (2026-06-16)
 # 项目: https://github.com/666OS/YYDS | 频道: https://t.me/Pinched666
 # 请在 proxy-providers 中添加您的订阅链接，或在 proxies 中添加自定义节点
 
@@ -29,10 +29,10 @@ x-filter-us:    &filter-us    "(?i)美|us|usa|america|united states|🇺🇸"
 
 x-oversea:      &oversea      [故障转移, 全球手动, 香港策略, 台湾策略, 日本策略, 狮城策略, 韩国策略, 美国策略, DIRECT]
 x-direct:       &direct       [DIRECT, 故障转移, 全球手动, 香港策略, 台湾策略, 日本策略, 狮城策略, 韩国策略, 美国策略]
-x-us-first:     &us-first     [美国策略, 故障转移, 全球手动, 香港策略, 台湾策略, 日本策略, 狮城策略, 韩国策略]
-x-hk-first:     &hk-first     [香港策略, 故障转移, 全球手动, 台湾策略, 日本策略, 狮城策略, 韩国策略, 美国策略]
-x-sg-first:     &sg-first     [狮城策略, 故障转移, 全球手动, 香港策略, 台湾策略, 日本策略, 韩国策略, 美国策略]
-x-jp-first:     &jp-first     [日本策略, 故障转移, 全球手动, 香港策略, 台湾策略, 狮城策略, 韩国策略, 美国策略]
+x-us-first:     &us-first     [美国策略, 故障转移, 全球手动, 香港策略, 台湾策略, 日本策略, 狮城策略, 韩国策略, DIRECT]
+x-hk-first:     &hk-first     [香港策略, 故障转移, 全球手动, 台湾策略, 日本策略, 狮城策略, 韩国策略, 美国策略, DIRECT]
+x-sg-first:     &sg-first     [狮城策略, 故障转移, 全球手动, 香港策略, 台湾策略, 日本策略, 韩国策略, 美国策略, DIRECT]
+x-jp-first:     &jp-first     [日本策略, 故障转移, 全球手动, 香港策略, 台湾策略, 狮城策略, 韩国策略, 美国策略, DIRECT]
 
 x-rule-set-domain: &rule-set-domain { type: http, behavior: domain, format: mrs, interval: 86400 }
 x-rule-set-ipcidr: &rule-set-ipcidr { type: http, behavior: ipcidr, format: mrs, interval: 86400 }
